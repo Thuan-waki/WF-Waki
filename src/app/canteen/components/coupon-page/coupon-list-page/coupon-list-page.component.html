@@ -1,0 +1,13 @@
+<app-coupon-list
+    [coupons]="coupons"
+    [currentUserRoles]="currentUserRoles"
+    [isAdmin]="isAdmin"
+    [canteenOptions]="canteenOptions"
+    [isLoading]="isLoading"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [recordCount]="recordCount"
+    (filter)="getCoupons($event)"
+    (export)="exportToExcel()"
+    (newCoupon)="newCoupon()"
+    (editCoupon)="editCoupon($event)"></app-coupon-list>

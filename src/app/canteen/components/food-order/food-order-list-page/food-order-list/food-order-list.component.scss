@@ -1,0 +1,82 @@
+.ng-select {
+    width: 250px;
+}
+
+.WALK_IN_FOOD_ORDER {
+    color: #FDD641;
+}
+
+.walk-in-order {
+    background-color: #FDD641;
+    border-color: #FDD641;
+    color: white;
+}
+
+.walk-in-order-outline {
+    color: #FDD641;
+    border-color: #FDD641;
+
+    &:hover {
+        background-color: #FDD641;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem #FDD641;
+    }
+}
+
+.APP_FOOD_ORDER {
+    color: #E47CD6;
+}
+
+.app-order {
+    background-color: #E47CD6;
+    border-color: #E47CD6;
+    color: white;
+}
+
+.app-order-outline {
+    color: #E47CD6;
+    border-color: #E47CD6;
+
+    &:hover {
+        background-color: #E47CD6;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem #E47CD6;
+    }
+}
+
+.RETURN_ORDER {
+    color: #A2B5FF;
+}
+
+.return-order {
+    background-color: #A2B5FF;
+    border-color: #A2B5FF;
+    color: white;
+}
+
+.return-order-outline {
+    color: #A2B5FF;
+    border-color: #A2B5FF;
+
+    &:hover {
+        background-color: #A2B5FF;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem #A2B5FF;
+    }
+}
+
+.col-food-items {
+    &:hover {
+        color: blue;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,12 @@
+<app-adult-form
+    [form]="form"
+    [parent]="parent"
+    [isLoading]="isLoading"
+    [isEditing]="isEditing"
+    [shouldDisableSaveButton]="shouldDisableSaveButton"
+    [cardStatus]="cardStatus"
+    [isTogglingCardStatus]="isTogglingCardStatus"
+    (save)="save()"
+    (exit)="goToParentList()"
+    (editChild)="goToChildForm($event)"
+    (toggleCardStatus)="toggleCardStatus()">

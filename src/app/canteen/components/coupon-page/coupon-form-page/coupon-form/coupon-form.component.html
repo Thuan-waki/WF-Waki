@@ -1,0 +1,132 @@
+<div
+    *ngIf="isLoading || !form"
+    class="spinner-border mt-5"
+    style="width: 3rem; height: 3rem;">
+</div>
+<ng-container *ngIf="!isLoading">
+    <form
+        *ngIf="form"
+        [formGroup]="form">
+        <div class="col-8">
+            <div class="row">
+                <div class="col-8">
+                    <form formGroupName="translations">
+                        <div class="row">
+                            <div class="form-group col-6 mb-2">
+                                <label for="couponName" translate>Coupon Name in Arabic</label> *
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    formControlName="ar">
+                            </div>
+                            <div class="form-group col-6 mb-2">
+                                <label for="couponName" translate>Coupon Name in English</label> *
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    formControlName="en">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="form-group col-4 mb-2">
+                    <label for="couponName" translate>Validity in Days</label> *
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="validityInDays">
+                </div>
+                <div class="form-group col-4">
+                    <label for="country" translate>Credit Available</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        formControlName="creditAvail">
+                </div>
+                <div class="form-group col-4">
+                    <label for="country" translate>Coupon Price</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        formControlName="couponPrice">
+                </div>
+                <div class="form-group col-4">
+                    <label for="Save Amount" translate>Save Amount</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="saveAmount">
+                </div>
+            </div>
+            <div class="col-12 mt-4">
+                <div class=" d-flex flex-column align-items-center">
+                    <div class="col-6">
+                        <div class="form-check">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="redeemForOnlineOrder"
+                                formControlName="redeemForOnlineOrder">
+                            <label
+                                for="redeemForOnlineOrder"
+                                class="form-check-label"
+                                translate>
+                                Redeem for Online Order
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="redeemForWalkinOrder"
+                                formControlName="redeemForWalkinOrder">
+                            <label
+                                for="redeemForWalkinOrder"
+                                class="form-check-label"
+                                translate>
+                                Redeem for Walkin Order
+                            </label>
+                        </div>
+                        <div class="form-check mt-3">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="forSepecificSchools"
+                                formControlName="forSpecificSchools">
+                            <label
+                                for="forSepecificSchools"
+                                class="form-check-label"
+                                translate>
+                                For Specific Schools
+                            </label>
+                        </div>
+                        <h6
+                            *ngIf="form?.get('forSpecificSchools')?.value"
+                            class="mt-2"
+                            translate>
+                            Schools:
+                        </h6>
+                        <select
+                            *ngIf="form?.get('forSpecificSchools')?.value"
+                            class="form-select"
+                            size="6"
+                            multiple
+                            formControlName="onlyForSchools">
+                            <ng-container *ngFor="let school of schoolOptions">
+                                <option [value]="school.value">{{ school.label }}</option>
+                            </ng-container>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="d-flex justify-content-center gap-5">
+                    <app-save-button
+                        (click)="save.emit()"
+                        [disabled]="shouldDisableSaveButton"></app-save-button>
+                    <app-exit-button (click)="exit.emit()"></app-exit-button>
+                </div>
+            </div>
+        </div>
+    </form>
+</ng-container>

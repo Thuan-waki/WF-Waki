@@ -1,0 +1,7 @@
+<app-food-item-form
+    [foodItem]="foodItem"
+    [isEditing]="isEditing"
+    [isLoading]="isLoading"
+    (save)="save($event)"
+    (exit)="exit()"
+    (currentImage)="setCurrentImage($event)"></app-food-item-form>

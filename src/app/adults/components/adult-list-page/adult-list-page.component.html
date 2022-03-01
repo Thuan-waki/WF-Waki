@@ -1,0 +1,10 @@
+<app-adult-list
+    [parents]="parents"
+    [isLoading]="isLoading"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [recordCount]="recordCount"
+    (filter)="getParents($event)"
+    (editParent)="editParent($event)"
+    (export)="exportToExcel()"
+    (save)="save($event)"></app-adult-list>

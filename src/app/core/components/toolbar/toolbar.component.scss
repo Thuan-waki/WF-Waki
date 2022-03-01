@@ -1,0 +1,67 @@
+@import '../../../../assets/scss/variables';
+
+.toolbar-wrapper {
+    background-color: #F5F5F5;
+    height: 60px;
+    display: flex;
+    flex: 0 0 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    .toolbar-menu-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .dropdown {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+
+        .fa-bell {
+            font-size: 30px;
+        }
+
+        ul {
+            padding: 0;
+
+            li {
+                cursor: pointer;
+                padding: 0;
+
+                a {
+                    padding: 1rem;
+                }
+            }
+
+            hr {
+                margin: 0;
+            }
+        }
+    }
+}
+
+.full-width {
+    width: 100vw;
+}
+
+.remaining-width {
+    margin-left: 220px;
+    width: calc(100vw - 220px) !important;
+}
+
+.side-bar-toggler-button {
+    padding: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+.remaining-rtl-width {
+    margin-right: 220px;
+    width: calc(100vw - 220px) !important;
+}

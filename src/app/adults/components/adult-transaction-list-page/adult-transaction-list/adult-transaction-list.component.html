@@ -1,0 +1,211 @@
+<form
+    *ngIf="form"
+    [formGroup]="form">
+    <div class="col-12 text-center">
+        <h4 translate>Transactions</h4>
+    </div>
+    <div class="col-12 mt-4">
+        <div class="d-flex justify-content-between">
+            <div class="flex-grow-1">
+                <form [formGroup]="form">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="d-flex align-items-center h-100">
+                                <label for="search" translate>Filter</label>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="input-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    formControlName="search">
+                                <button
+                                    class="btn btn-outline-primary"
+                                    type="button"
+                                    (click)="form.get('search')?.setValue(''); form.get('search')?.updateValueAndValidity()"
+                                    translate>
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="d-flex flex-row justify-content-between gap-2">
+                                <div class="input-group">
+                                    <span class="input-group-text" translate>From:</span>
+                                    <input
+                                        type="date"
+                                        class="form-control text-end"
+                                        onkeydown="return false"
+                                        formControlName="fromDate"
+                                        (change)="filterRecord()">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text" translate>To:</span>
+                                    <input
+                                        type="date"
+                                        class="form-control text-end"
+                                        onkeydown="return false"
+                                        formControlName="toDate"
+                                        (change)="filterRecord()">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-auto">
+                            <div class="d-flex align-items-center h-100">
+                                <label for="school" translate>Adult</label>
+                            </div>
+                        </div>
+                        <div class="col flex-grow-1">
+                            <div class="input-group w-75">
+                                <ng-select
+                                    [items]="adultOptions"
+                                    bindLabel="label"
+                                    bindValue="value"
+                                    class="w-100"
+                                    [placeholder]="'Select Adult' | translate"
+                                    formControlName="adult"
+                                    (change)="filterRecord()"></ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <app-export-button (click)="export.emit()"></app-export-button>
+        </div>
+    </div>
+    <div class="filter-section row">
+        <div class="col-12 mt-3">
+            <div class="d-flex justify-content-between gap-2">
+                <button
+                    type="button"
+                    class="btn flex-fill"
+                    [ngClass]="typeFilter.includes(transactionTypes.Fund) ? 'btn-light funding-button' : 'btn-outline-light funding-button-outline'"
+                    (click)="toggleTypeFilter(transactionTypes.Fund)" translate>
+                    Funds
+                </button>
+                <button
+                    type="button"
+                    class="btn flex-fill"
+                    [ngClass]="typeFilter.includes(transactionTypes.TransferBetweenUsers) ? 'btn-light transfer-between-user' : 'btn-outline-light transfer-between-user-outline'"
+                    (click)="toggleTypeFilter(transactionTypes.TransferBetweenUsers)" translate>
+                    Transfers Between Users
+                </button>
+                <button
+                    type="button"
+                    class="btn flex-fill"
+                    [ngClass]="typeFilter.includes(transactionTypes.Refund) ? 'btn-light refunding-button' : 'btn-outline-light refunding-button-outline'"
+                    (click)="toggleTypeFilter(transactionTypes.Refund)" translate>
+                    Refunds
+                </button>
+                <button
+                    type="button"
+                    class="btn flex-fill"
+                    [ngClass]="typeFilter.includes(transactionTypes.AppOrder) ? 'btn-light online-order' : 'online-order-outline'"
+                    (click)="toggleTypeFilter(transactionTypes.AppOrder)" translate>
+                    Online Orders
+                </button>
+                <button
+                    type="button"
+                    class="btn flex-fill"
+                    [ngClass]="typeFilter.includes(transactionTypes.WalkInOrder) ? 'btn-light walk-in-order' : 'btn-outline-light walk-in-order-outline'"
+                    (click)="toggleTypeFilter(transactionTypes.WalkInOrder)" translate>
+                    Walk-in Orders
+                </button>
+                <button
+                    type="button"
+                    class="btn flex-fill"
+                    [ngClass]="typeFilter.includes(transactionTypes.ReturnOrder) ? 'btn-light return' : 'btn-outline-light return-outline'"
+                    (click)="toggleTypeFilter(transactionTypes.ReturnOrder)" translate>
+                    Returns
+                </button>
+                <button
+                    type="button"
+                    class="btn flex-fill"
+                    [ngClass]="typeFilter.includes(transactionTypes.CardOrder) ? 'btn-light card-order' : 'btn-outline-light card-order-outline'"
+                    (click)="toggleTypeFilter(transactionTypes.CardOrder)" translate>
+                    Cards Orders
+                </button>
+                <button
+                    type="button"
+                    class="btn flex-fill"
+                    [ngClass]="typeFilter.includes(transactionTypes.CouponPurchase) ? 'btn-light coupon' : 'btn-outline-light coupon-outline'"
+                    (click)="toggleTypeFilter(transactionTypes.CouponPurchase)" translate>
+                    Coupons Orders
+                </button>
+                <button
+                    type="button"
+                    class="btn flex-fill"
+                    [ngClass]="typeFilter.includes(transactionTypes.ADULT_VAT) ? 'btn-light adult-vat-button' : 'btn-outline-light adult-vat-button-outline'"
+                    (click)="toggleTypeFilter(transactionTypes.ADULT_VAT)" translate>
+                    VAT
+                </button>
+            </div>
+        </div>
+    </div>
+    <ng-container *ngIf="!transactions.length && !isLoading">
+        <h6 class="mt-5" translate>No Transaction Data</h6>
+    </ng-container>
+    <div
+        *ngIf="isLoading"
+        class="spinner-border mt-5"
+        style="width: 3rem; height: 3rem;">
+    </div>
+    <ng-container *ngIf="transactions.length > 0 && !isLoading">
+        <div class="table-section mt-2">
+            <table class="table">
+                <tbody>
+                    <ng-container *ngFor="let transaction of transactions">
+                        <tr class="{{ transaction.trType }}">
+                            <td>{{ transaction.transactionId }}</td>
+                            <td>
+                                <div class="d-flex flex-column text-end">
+                                    <span>
+                                        {{ getDateAndTime(transaction.trDate).date }}
+                                    </span>
+                                    <span>
+                                        {{ getDateAndTime(transaction.trDate).time }}
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex flex-column">
+                                    <span translate>{{ transaction.trType | transactionType }}</span>
+                                    <span *ngIf="transaction.trType === transactionTypes.CouponPurchase">{{ transaction.couponId?.couponName }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span
+                                    class="d-flex flex-column"
+                                    [innerHtml]="getTransactionDescriptionText(transaction)"></span>
+                            </td>
+                            <td class>
+                                <div class="d-flex flex-column">
+                                    <span>
+                                        {{ generateFromText(transaction) }}
+                                    </span>
+                                    <span>
+                                        {{ generateToText(transaction) }}
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="text-end">{{ transaction.amount | wakiCurrency }}</td>
+                            <td class="text-end">{{ transaction.balance | wakiCurrency}}</td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+            <div class="col-12">
+                <div class="d-flex justify-content-end">
+                    <app-pagination
+                        [currentPage]="currentPage"
+                        [maxPage]="maxPage"
+                        [infoText]="infoText"
+                        [pageOptionsShown]="3"
+                        (goToPage)="goToPage($event)"></app-pagination>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</form>

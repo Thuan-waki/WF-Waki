@@ -1,0 +1,8 @@
+<app-adult-transaction-list
+    [transactions]="transactions || []"
+    [recordCount]="recordCount || 0"
+    [isLoading]="isLoading"
+    [maxPage]="maxPage"
+    [adultOptions]="adultOptions"
+    (filter)="getTransactions($event)"
+    (export)="exportToExcel()"></app-adult-transaction-list>

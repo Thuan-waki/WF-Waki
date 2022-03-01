@@ -1,0 +1,8 @@
+<app-transaction-list
+    [transactions]="(transactions$ | async) || []"
+    [recordCount]="recordCount"
+    [schoolOptions]="schoolOptions"
+    [canteenOptions]="canteenOptions"
+    [form]="form"
+    [isLoading]="isLoading"
+    (filter)="onPageChanged($event)"></app-transaction-list>

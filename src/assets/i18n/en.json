@@ -1,0 +1,41 @@
+{
+	"English": "English",
+    "Arabic": "Arabic",
+
+    "Profile": "Profile",
+	"Login": "Login",
+	"Logout": "Logout",
+    "Help Center": "Help Center",
+    "Export": "Export",
+    "Filter": "Filter",
+    "Clear": "Clear",
+
+    "Home": "Home",
+    "Schools": "Schools",
+    "Canteens": "Canteens",
+    "Adults": "Adults",
+    "Dependents": "Dependents",
+    "Business Users": "Business Users",
+    "Admins": "Admins",
+    "Users": "Users",
+    "Logs": "Logs",
+
+    "Subscriptions": "Subscriptions",
+    "Transactions": "Transactions",
+    "Transfer Request": "Transfer Request",
+    "Students": "Students",
+    "Classes": "Classes",
+    "Attendance": "Attendance",
+    "Canteen Sales": "Canteen Sales",
+    "Fees": "Fees",
+    "Food Orders": "Food Orders",
+    "Food Menu": "Food Menu",
+    "Food Items": "Food Items",
+    "Coupons Order": "Coupons Order",
+    "Coupons": "Coupons",
+    "Refund Request": "Refund Request",
+    "Card Store": "Card Store",
+    "Card Orders": "Card Orders",    
+    "Card Designs": "Card Designs"
+
+}

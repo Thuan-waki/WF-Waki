@@ -1,0 +1,123 @@
+<div class="row">
+    <div class="col-12 text-center">
+        <h4 translate>Transfer Requests</h4>
+    </div>
+    <div class="col-12">
+        <div class="d-flex justify-content-between">
+            <div class="flex-grow-1">
+                <form [formGroup]="form">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="d-flex align-items-center h-100">
+                                <label for="search" translate>Filter</label>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="input-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    formControlName="search">
+                                <button
+                                    class="btn btn-outline-primary"
+                                    type="button"
+                                    (click)="form.get('search')?.setValue(''); form.get('search')?.updateValueAndValidity()"
+                                    translate>
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="d-flex flex-row justify-content-between gap-2">
+                                <div class="input-group">
+                                    <span class="input-group-text" translate>From:</span>
+                                    <input
+                                        type="date"
+                                        class="form-control text-end"
+                                        onkeydown="return false"
+                                        formControlName="fromDate"
+                                        (change)="filterRecord()">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text" translate>To:</span>
+                                    <input
+                                        type="date"
+                                        class="form-control text-end"
+                                        onkeydown="return false"
+                                        formControlName="toDate"
+                                        (change)="filterRecord()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <app-export-button (click)="export.emit()"></app-export-button>
+        </div>
+    </div>
+    <div class="col-12">
+        <ng-container *ngIf="!transferRequests.length && !isLoading">
+            <h6 class="mt-5" translate>No Transaction Data</h6>
+        </ng-container>
+        <div
+            *ngIf="isLoading"
+            class="spinner-border mt-5"
+            style="width: 3rem; height: 3rem;">
+        </div>
+        <ng-container *ngIf="transferRequests.length > 0 && !isLoading">
+            <div class="table-section">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th translate class="col-1">Request ID</th>
+                            <th translate class="col-1 text-end">Date</th>
+                            <th translate class="col-2">Canteen Bank Name</th>
+                            <th translate class="col-2">Canteen Account Number</th>
+                            <th translate class="col-1">IBAN</th>
+                            <th translate class="col-1 text-end">Amount</th>
+                            <th translate class="col">Canteen Name</th>
+                            <th translate class="col">Canteen Address</th>
+                            <th translate class="col-1 text center">Status</th>
+                            <th translate *ngIf="isAdmin" class="col-1 text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let request of transferRequests">
+                            <tr>
+                                <td class="align-middle col-1">{{ request.requestId }}</td>
+                                <td class="align-middle col-1 text-end">{{ request.rqDate | wakiDate }}</td>
+                                <td class="align-middle col-2">{{ request.canteen?.bankAccount?.bank?.translations | translation }}</td>
+                                <td class="align-middle col-2">{{ request.canteen?.bankAccount?.accountNo || '' }}</td>
+                                <td class="align-middle col-1">{{ request.canteen?.bankAccount?.IBAN || '' }}</td>
+                                <td class="align-middle col-1 text-end">{{ request.amount | wakiCurrency }}</td>
+                                <td class="align-middle col">{{ request.canteen?.bankAccount?.accountName || ''}}</td>
+                                <td class="align-middle col-2">{{ request.canteen?.address || ''}}</td>
+                                <td class="align-middle col-1" translate>{{ request.rqStatus }}</td>
+                                <td *ngIf="isAdmin" class="align-middle col-1">
+                                    <div *ngIf="request.rqStatus === 'PENDING'" class="d-flex justify-content-center">
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-secondary"
+                                            (click)="approve(request)">
+                                            Transfer
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <div class="col-12">
+                    <div class="d-flex justify-content-end">
+                        <app-pagination
+                            [currentPage]="currentPage"
+                            [maxPage]="maxPage"
+                            [infoText]="infoText"
+                            [pageOptionsShown]="3"
+                            (goToPage)="goToPage($event)"></app-pagination>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

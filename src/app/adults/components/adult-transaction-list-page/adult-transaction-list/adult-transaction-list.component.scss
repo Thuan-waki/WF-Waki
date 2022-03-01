@@ -1,0 +1,225 @@
+@import '../../../../../assets/scss/variables';
+
+.badge {
+    font-size: 0.9em;
+}
+
+.bg-secondary {
+    color: black;
+}
+
+.FUNDING {
+    color: #FB8989;
+}
+
+.funding-button {
+    background-color: #FB8989;
+    border-color: #FB8989;
+    color: white;
+}
+
+.funding-button-outline {
+    color: #FB8989;
+    border-color: #FB8989;
+
+    &:hover {
+        background-color: #FB8989;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem #FB8989;
+    }
+}
+
+.TRANSFER_BETWEEN_USERS {
+    color: $primary;
+}
+
+.transfer-between-user {
+    background-color: $primary;
+    border-color: $primary;
+    color: white;
+}
+
+.transfer-between-user-outline {
+    color: $primary;
+    border-color: $primary;
+
+    &:hover {
+        background-color: $primary;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem $primary;
+    }
+}
+
+.COUPON_PURCHASE {
+    color: #13C3D0;
+}
+
+.coupon {
+    background-color: #13C3D0;
+    border-color: #13C3D0;
+    color: white;
+}
+
+.coupon-outline {
+    color: #13C3D0;
+    border-color: #13C3D0;
+
+    &:hover {
+        background-color: #13C3D0;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem #13C3D0;
+    }
+}
+
+.CARD_ORDER {
+    color: #7CE489;
+}
+
+.card-order {
+    background-color: #7CE489;
+    border-color: #7CE489;
+    color: white;
+}
+
+.card-order-outline {
+    color: #7CE489;
+    border-color: #7CE489;
+
+    &:hover {
+        background-color: #7CE489;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem #7CE489;
+    }
+}
+
+.RETURN_ORDER {
+    color: #A2B5FF;
+}
+
+.return {
+    background-color: #A2B5FF;
+    border-color: #A2B5FF;
+    color: white;
+}
+
+.return-outline {
+    color: #A2B5FF;
+    border-color: #A2B5FF;
+
+    &:hover {
+        background-color: #A2B5FF;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem #A2B5FF;
+    }
+}
+
+.WALK_IN_FOOD_ORDER {
+    color: #FDD641;
+}
+
+.walk-in-order {
+    background-color: #FDD641;
+    border-color: #FDD641;
+    color: white;
+}
+
+.walk-in-order-outline {
+    color: #FDD641;
+    border-color: #FDD641;
+
+    &:hover {
+        background-color: #FDD641;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem #FDD641;
+    }
+}
+
+.APP_FOOD_ORDER {
+    color: #E47CD6;
+}
+
+.online-order {
+    background-color: #E47CD6;
+    border-color: #E47CD6;
+    color: white;
+}
+
+.online-order-outline {
+    color: #E47CD6;
+    border-color: #E47CD6;
+
+    &:hover {
+        background-color: #E47CD6;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem #E47CD6;
+    }
+}
+
+.REFUNDING {
+    color: $refund;
+}
+
+.refunding-button {
+    background-color: $refund;
+    border-color: $refund;
+    color: white;
+}
+
+.refunding-button-outline {
+    color: $refund;
+    border-color: $refund;
+
+    &:hover {
+        background-color: $refund;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem $refund;
+    }
+}
+
+.ADULT_VAT {
+    color: $vat;
+}
+
+.adult-vat-button {
+    background-color: $vat;
+    border-color: $vat;
+    color: white;
+}
+
+.adult-vat-button-outline {
+    color: $vat;
+    border-color: $vat;
+
+    &:hover {
+        background-color: $vat;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem $vat;
+    }
+}

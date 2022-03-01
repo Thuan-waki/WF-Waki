@@ -1,0 +1,379 @@
+<div
+    *ngIf="isLoading || !form"
+    class="spinner-border mt-5"
+    style="width: 3rem; height: 3rem;">
+</div>
+<ng-container *ngIf="!isLoading">
+    <form
+        *ngIf="form"
+        [formGroup]="form">
+        <form formGroupName="translations">
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="en" translate>School Name in Arabic</label> *
+                    <input
+                        type="text"
+                        dir="rtl"
+                        class="form-control"
+                        formControlName="ar">
+                </div>
+                <div class="form-group col-6">
+                    <label for="en" translate>School Name in English</label> *
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="en">
+                </div>
+            </div>
+        </form>
+        <form formGroupName="officialNameTranslations">
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="en" translate>Full School Name in Arabic</label> *
+                    <input
+                        type="text"
+                        dir="rtl"
+                        class="form-control"
+                        formControlName="ar">
+                </div>
+                <div class="form-group col-6">
+                    <label for="en" translate>Full School Name in English</label> *
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="en">
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="form-group col-lg-6">
+                <label for="schoolId" translate>School ID</label> *
+                <input
+                    type="text"
+                    class="form-control"
+                    [placeholder]="'School Registration Code' | translate"
+                    formControlName="schoolRegistrationCode">
+            </div>
+            <div class="form-group col-6">
+                <label for="vat" translate>VAT #</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    formControlName="vat">
+            </div>
+            <div class="form-group col-12">
+                <label for="address" translate>Address</label> *
+                <input
+                    type="text"
+                    class="form-control"
+                    formControlName="address">
+            </div>
+            <div formGroupName="streetAddress">
+                <div class="row">
+                    <div class="form-group col-3">
+                        <label for="unitNo" translate>Unit Number</label> *
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="unitNo">
+                        <app-input-required-error-message [control]="form.get('unitNo') || undefined"></app-input-required-error-message>
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="buildingNo" translate>Building Number</label> *
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="buildingNo">
+                        <app-input-required-error-message [control]="form.get('buildingNo') || undefined"></app-input-required-error-message>
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="street" translate>Street Name</label> *
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="street">
+                        <app-input-required-error-message [control]="form.get('street') || undefined"></app-input-required-error-message>
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="district" translate>District</label> *
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="district">
+                        <app-input-required-error-message [control]="form.get('district') || undefined"></app-input-required-error-message>
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="zipCode" translate>Zip Code</label> *
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="zipCode">
+                        <app-input-required-error-message [control]="form.get('zipCode') || undefined"></app-input-required-error-message>
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="additional" translate>Addional Number</label> *
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="additional">
+                        <app-input-required-error-message [control]="form.get('additional') || undefined"></app-input-required-error-message>
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="country" translate>Country</label> *
+                        <ng-select
+                            [items]="countryOptions"
+                            [clearable]="false"
+                            bindLabel="label"
+                            bindValue="value"
+                            formControlName="country"></ng-select>
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="city" translate>City</label> *
+                        <ng-select
+                            [items]="cityOptions"
+                            [clearable]="false"
+                            bindLabel="label"
+                            bindValue="value"
+                            formControlName="city"></ng-select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <label for="phone" translate>Phone Number</label> *
+                <input
+                    type="text"
+                    class="form-control"
+                    formControlName="phone">
+            </div>
+            <div class="form-group col-4">
+                <label for="mobileNo" translate>Mobile Number</label> *
+                <input
+                    type="text"
+                    class="form-control"
+                    formControlName="mobileNo">
+            </div>
+            <div class="form-group col-4">
+                <label for="email" translate>Email</label> *
+                <input
+                    type="text"
+                    class="form-control"
+                    formControlName="email">
+            </div>
+            <div class="form-group col-4">
+                <label for="studentCount" translate># of Students</label>
+                <input
+                    type="text"
+                    class="form-control text-end"
+                    formControlName="studentCount">
+            </div>
+            <div class="form-group col-4">
+                <label for="currentAttendanceSubscriptionStarts" translate>Starts At</label> *
+                <input
+                    type="text"
+                    class="form-control text-end"
+                    formControlName="currentAttendanceSubscriptionStarts">
+            </div>
+            <div class="form-group col-4">
+                <label for="currentAttendanceSubscriptionEnds" translate>Ends At</label> *
+                <input
+                    type="text"
+                    class="form-control text-end"
+                    formControlName="currentAttendanceSubscriptionEnds">
+            </div>
+        </div>
+        <div class="row justify-content-center gap-5 mb-3">
+            <div class="school-type">
+                <form formGroupName="schoolType">
+                    <h6 translate>School Type</h6>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="public"
+                            formControlName="public">
+                        <label
+                            class="form-check-label"
+                            for="public" translate>
+                            Public
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="national"
+                            formControlName="national">
+                        <label
+                            class="form-check-label"
+                            for="national" translate>
+                            National
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="international"
+                            formControlName="international">
+                        <label
+                            class="form-check-label"
+                            for="international" translate>
+                            International
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="quranic"
+                            formControlName="quranic">
+                        <label
+                            class="form-check-label"
+                            for="quranic" translate>
+                            Quranic
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="technical"
+                            formControlName="technical">
+                        <label
+                            class="form-check-label"
+                            for="technical" translate>
+                            Technical
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="school-level">
+                <form formGroupName="schoolLevel">
+                    <h6 translate>School Level</h6>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="nursery"
+                            formControlName="nursery">
+                        <label
+                            class="form-check-label"
+                            for="nursery" translate>
+                            Nursery
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="kindergarten"
+                            formControlName="kindergarten">
+                        <label
+                            class="form-check-label"
+                            for="kindergarten" translate>
+                            Kindergarten
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="elementary"
+                            formControlName="elementary">
+                        <label
+                            class="form-check-label"
+                            for="elementary" translate>
+                            Elementary
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="intermediate"
+                            formControlName="intermediate">
+                        <label
+                            class="form-check-label"
+                            for="intermediate" translate>
+                            Intermediate
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="secondary"
+                            formControlName="secondary">
+                        <label
+                            class="form-check-label"
+                            for="secondary" translate>
+                            Secondary
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <form formGroupName="canteens">
+            <div class="row border border-dark p-2">
+                <div class="d-flex flex-column">
+                    <h5 translate>Canteen</h5>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="canteenId" translate>Canteen ID</label> *
+                            <input
+                                type="text"
+                                class="form-control"
+                                formControlName="canteenId">
+                        </div>
+                        <div class="form-group col">
+                            <label for="canteenName" translate>Canteen Name</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                [value]="canteen?.translations | translation"
+                                disabled>
+                        </div>
+                        <div class="form-group col">
+                            <label for="canteenEmail" translate>Canteen Email</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                [value]="canteen?.email || ''"
+                                disabled>
+                        </div>
+                        <div class="form-group col">
+                            <label for="canteenMobile" translate>Canteen Mobile No</label> *
+                            <input
+                                type="text"
+                                class="form-control"
+                                [value]="canteen?.mobileNo || ''"
+                                disabled>
+                        </div>
+                        <div class="form-group col">
+                            <label for="canteenPhoneNo" translate>Canteen Phone No</label> *
+                            <input
+                                type="text"
+                                class="form-control"
+                                [value]="canteen?.phone || ''"
+                                disabled>
+                        </div>
+                    </div>
+                </div>
+                <button
+                    type="button"
+                    class="btn btn-outline-primary btn-search"
+                    (click)="lookupCanteen.emit()" translate>
+                    Search
+                </button>
+            </div>
+        </form>
+        <div class="row mt-5">
+            <div class="d-flex justify-content-center gap-5">
+                <app-save-button
+                    (click)="save.emit()"
+                    [disabled]="shouldDisableSaveButton"></app-save-button>
+                <app-exit-button (click)="exit.emit()"></app-exit-button>
+            </div>
+        </div>
+    </form>
+</ng-container>

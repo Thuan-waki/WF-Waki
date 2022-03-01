@@ -1,0 +1,7 @@
+<app-card-form
+    [card]="card"
+    [isLoading]="isLoading"
+    [isEditing]="isEditing"
+    (save)="save($event)"
+    (exit)="goToCardStore()"
+    (currentImage)="setCurrentImage($event)"></app-card-form>

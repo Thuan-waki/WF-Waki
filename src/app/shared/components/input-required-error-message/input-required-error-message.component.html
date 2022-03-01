@@ -1,0 +1,3 @@
+<ng-container *ngIf="control && control.invalid && (control.dirty || control.touched)">
+    <label *ngIf="control.errors?.required" class="text-danger" translate>{{ message }}</label>
+</ng-container>

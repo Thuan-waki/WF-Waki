@@ -1,0 +1,170 @@
+<div class="modal-header">
+    <h5><span translate>Class Regulation for</span> {{ className }}</h5>
+    <button
+        type="button"
+        class="btn btn-danger fa fa-times"
+        (click)="close()"></button>
+</div>
+<div class="card-body p-3">
+    <div
+        *ngIf="isLoading"
+        class="spinner-border"
+        style="width: 3rem; height: 3rem;">
+    </div>
+    <form
+        *ngIf="form"
+        [formGroup]="form">
+        <div class="col-12">
+            <div class="form-group row">
+                <div class="col-6">
+                    <div class="input-group d-flex flex-column">
+                        <label for="fromDate" translate>From Date</label>
+                        <input
+                            type="date"
+                            class="form-control text-end w-100"
+                            onkeydown="return false"
+                            [min]="minDate"
+                            [max]="form?.get('toDate')?.value"
+                            formControlName="fromDate">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group d-flex flex-column">
+                        <label for="toDate" translate>To Date</label>
+                        <input
+                            type="date"
+                            class="form-control text-end w-100"
+                            onkeydown="return false"
+                            [min]="form?.get('fromDate')?.value"
+                            formControlName="toDate">
+                    </div>
+                </div>
+                <div class="col-12 mt-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" formControlName="sunday">
+                        <label class="form-check-label" for="sunday" translate>Sunday</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" formControlName="monday">
+                        <label class="form-check-label" for="monday" translate>Monday</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" formControlName="tuesday">
+                        <label class="form-check-label" for="tuesday" translate>Tuesday</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" formControlName="wednesday">
+                        <label class="form-check-label" for="wednesday" translate>Wednesday</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" formControlName="thursday">
+                        <label class="form-check-label" for="thursday" translate>Thursday</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" formControlName="friday">
+                        <label class="form-check-label" for="friday" translate>Friday</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" formControlName="saturday">
+                        <label class="form-check-label" for="saturday" translate>Saturday</label>
+                    </div>
+                </div>
+                <div class="col-6 mt-3">
+                    <label for="checkIn" translate>Check In</label>
+                    <input
+                        type="time"
+                        class="form-control text-end"
+                        step="1"
+                        formControlName="checkIn">
+                </div>
+                <div class="col-6 mt-3">
+                    <label for="checkOut" translate>Check Out</label>
+                    <input
+                        type="time"
+                        class="form-control text-end"
+                        step="1"
+                        formControlName="checkOut">
+                </div>
+                <div class="col-12">
+                    <small *ngIf="form?.get('checkOut')?.errors?.invalidTimeRange" class="text-danger" translate>Check Out Time must be later than Check In Time</small>
+                </div>
+                <div class="col-6 mt-3">
+                    <label for="ciAllowedTime" translate>Check In Allowance</label>
+                    <ng-select
+                        [items]="regulationOptions"
+                        [clearable]="false"
+                        bindLabel="label"
+                        bindValue="value"
+                        class="w-100"
+                        formControlName="ciAllowedTime"></ng-select>
+                </div>
+                <div class="col-6 mt-3">
+                    <label for="coAllowedTime" translate>Check Out Allowance</label>
+                    <ng-select
+                        [items]="regulationOptions"
+                        [clearable]="false"
+                        bindLabel="label"
+                        bindValue="value"
+                        class="w-100"
+                        formControlName="coAllowedTime"></ng-select>
+                </div>
+                <div class="col-6 mt-3">
+                    <label for="minCheckInTime" translate>No Check In Before</label>
+                    <ng-select
+                        [items]="regulationOptions"
+                        [clearable]="false"
+                        bindLabel="label"
+                        bindValue="value"
+                        class="w-100"
+                        formControlName="minCheckInTime"></ng-select>
+                </div>
+                <div class="col-6 mt-3">
+                    <label for="maxCheckOutTime" translate>No Check Out After</label>
+                    <ng-select
+                        [items]="regulationOptions"
+                        [clearable]="false"
+                        bindLabel="label"
+                        bindValue="value"
+                        class="w-100"
+                        formControlName="maxCheckOutTime"></ng-select>
+                </div>
+                <div class="col-6 mt-3">
+                    <label for="absentTime" translate>Absent Time</label>
+                    <input
+                        type="time"
+                        class="form-control text-end"
+                        step="1"
+                        formControlName="absentTime">
+                </div>
+                <div class="col-12">
+                    <small *ngIf="form?.get('absentTime')?.errors?.invalidAbsentTime" class="text-danger" translate>Absent Time must be between Check In and Check Out with Allowance</small>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button
+        type="button"
+        class="btn btn-outline-secondary"
+        (click)="close()" translate>
+        Cancel
+    </button>
+    <button
+        type="button"
+        class="btn btn-primary"
+        (click)="onSaveClick()"
+        [disabled]="shouldDisableSaveButton">
+        <ng-container *ngIf="!isSaving; else saving">
+            <span
+                class="fa fa-check me-2"></span>
+            <span *ngIf="!isSaving" translate>Save</span>
+        </ng-container>
+        <ng-template #saving>
+            <span
+                *ngIf="isSaving"
+                class="spinner-grow spinner-grow-sm me-2"></span>
+            <span *ngIf="isSaving" translate>Saving...</span>
+        </ng-template>
+    </button>
+</div>

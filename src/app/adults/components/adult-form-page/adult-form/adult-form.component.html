@@ -1,0 +1,213 @@
+<div
+    *ngIf="isLoading || !form"
+    class="spinner-border mt-5"
+    style="width: 3rem; height: 3rem;">
+</div>
+<ng-container *ngIf="!isLoading">
+    <form
+        *ngIf="form"
+        [formGroup]="form">
+        <div class="row">
+            <div class="col-2 img-thumbnail">
+                <img
+                    *ngIf="parent?.user?.profilePic"
+                    [src]="imageUrl + parent?.user?.profilePic">
+                <img
+                    *ngIf="!parent?.user?.profilePic"
+                    [src]="'assets/images/avatar.jpg'">
+            </div>
+            <div class="col-10">
+                <form formGroupName="translations">
+                    <div class="row">
+                        <div class="form-group col-12 col-sm-6">
+                            <label for="ar" translate>Adult Name in Arabic</label> *
+                            <input
+                                type="text"
+                                class="form-control"
+                                formControlName="ar">
+                            <app-input-required-error-message [control]="translations.get('ar') || undefined"></app-input-required-error-message>
+                        </div>
+                        <div class="form-group col-12 col-sm-6">
+                            <label for="en" translate>Adult Name in English</label> *
+                            <input
+                                type="text"
+                                class="form-control"
+                                formControlName="en">
+                            <app-input-required-error-message [control]="translations.get('en') || undefined"></app-input-required-error-message>
+                        </div>
+                    </div>
+                </form>
+                <div class="row mt-2">
+                    <div class="form-group col-3">
+                        <label for="nationalId" translate>National ID</label> *
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="nationalId">
+                        <app-input-required-error-message [control]="form.get('nationalId') || undefined"></app-input-required-error-message>
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="mobileNo" translate>
+                            Mobile Number
+                            <span
+                                *ngIf="parent?.user?.mobileNoVerificationStatus"
+                                [ngClass]="parent?.user?.mobileNoVerificationStatus === 'VERIFIED' ? 'ms-1 text-success fa fa-check' : 'ms-1 text-danger fa fa-times'"></span>
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="mobileNo">
+                        <app-input-required-error-message [control]="form.get('mobileNo') || undefined"></app-input-required-error-message>
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="email" translate>
+                            Email
+                            <span
+                                *ngIf="parent?.user?.emailVerificationStatus"
+                                [ngClass]="parent?.user?.emailVerificationStatus === 'VERIFIED' ? 'ms-1 text-success fa fa-check' : 'ms-1 text-danger fa fa-times'"></span>
+                        </label> *
+                        <input
+                            type="email"
+                            class="form-control"
+                            formControlName="email">
+                        <app-input-required-error-message [control]="form.get('email') || undefined"></app-input-required-error-message>
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="gender" translate>Gender</label> *
+                        <ng-select
+                            [items]="genderOptions"
+                            [clearable]="false"
+                            bindLabel="label"
+                            bindValue="value"
+                            formControlName="gender"></ng-select>
+                    </div>
+                    <div class="form-group col-6 mt-2">
+                        <label for="cardSerialNo" translate>Card Serial Number</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="cardSerialNo">
+                    </div>
+                    <div class="form-group col-6 mt-2">
+                        <label for="cardId" translate>Card UID</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="cardId">
+                    </div>
+                    <div class="form-group col-4 mt-2">
+                        <label for="noOfChildren" translate># of Dependents</label>
+                        <input
+                            type="number"
+                            class="form-control text-end"
+                            [placeholder]="'# of Children' | translate"
+                            formControlName="noOfChildren">
+                    </div>
+                    <div class="form-group col-4 mt-2">
+                        <label for="maxAmount" translate>Max Amount</label>
+                        <input
+                            type="number"
+                            class="form-control text-end"
+                            formControlName="maxAmount">
+                    </div>
+                    <div class="form-group col-4 mt-2">
+                        <label for="availableAmount" translate>Available Amount</label>
+                        <input
+                            type="number"
+                            class="form-control text-end"
+                            formControlName="availableAmount">
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 ps-0">
+                <div
+                    *ngIf="parent?.children && parent?.children?.length"
+                    class="col-12 mt-3 card p-2">
+                    <h5 translate>Dependents</h5>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label translate>Dependent Name</label>
+                        </div>
+                        <div class="form-group col">
+                            <label translate>Card Serial Number</label>
+                        </div>
+                        <div class="form-group col">
+                            <label translate>Email</label>
+                        </div>
+                        <div class="form-group col">
+                            <label translate>School</label>
+                        </div>
+                        <div class="form-group col-1 text-center">
+                            <label translate>Actions</label>
+                        </div>
+                    </div>
+                    <div
+                        class="row mb-1"
+                        *ngFor="let child of parent?.children">
+                        <div class="form-group col">
+                            <input
+                                type="text"
+                                class="form-control"
+                                [value]="child.user?.translations | translation"
+                                disabled>
+                        </div>
+                        <div class="form-group col">
+                            <input
+                                type="text"
+                                class="form-control"
+                                [value]="child.user?.cardSerialNo || ''"
+                                disabled>
+                        </div>
+                        <div class="form-group col">
+                            <input
+                                type="text"
+                                class="form-control"
+                                [value]="child.user?.email"
+                                disabled>
+                        </div>
+                        <div class="form-group col">
+                            <input
+                                type="text"
+                                class="form-control"
+                                [value]="child.school?.translations | translation"
+                                disabled>
+                        </div>
+                        <div class="form-group col-1">
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <button
+                                    type="button"
+                                    class="btn btn-sm btn-secondary fa fa-edit fw-lighter"
+                                    (click)="editChild.emit(child._id)">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="d-flex justify-content-center gap-5">
+                        <app-save-button
+                            (click)="save.emit()"
+                            [disabled]="shouldDisableSaveButton"></app-save-button>
+                        <app-exit-button (click)="exit.emit()"></app-exit-button>
+                        <button
+                            *ngIf="cardStatus"
+                            type="button"
+                            [ngClass]="cardStatus === 'ACTIVE' ? 'btn btn-danger' : 'btn btn-success'"
+                            (click)="toggleCardStatus.emit(cardStatus)"
+                            [disabled]="isTogglingCardStatus || !cardStatus">
+                            <ng-container *ngIf="!isTogglingCardStatus; else toggling">
+                                {{ (cardStatus === 'ACTIVE' ? 'Deactivate Card' : 'Activate Card') | translate }}
+                            </ng-container>
+                            <ng-template #toggling>
+                                <span class="spinner-grow spinner-grow-sm me-2"></span>
+                                <span>
+                                    {{ (cardStatus === 'ACTIVE' ? 'Deactivating' : 'Activating') | translate }}
+                                </span>
+                            </ng-template>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</ng-container>

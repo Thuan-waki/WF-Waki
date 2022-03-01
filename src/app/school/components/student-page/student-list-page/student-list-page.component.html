@@ -1,0 +1,12 @@
+<app-student-list
+    [students]="students"
+    [schoolOptions]="schoolOptions"
+    [isLoading]="isLoading"
+    [isAdmin]="isAdmin"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [recordCount]="recordCount"
+    (filter)="getStudents($event)"
+    (export)="exportToExcel()"
+    (newStudent)="newStudent()"
+    (editStudent)="editStudent($event)"></app-student-list>

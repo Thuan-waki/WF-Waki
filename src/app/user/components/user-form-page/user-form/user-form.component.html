@@ -1,0 +1,248 @@
+<form
+    *ngIf="form"
+    [formGroup]="form">
+    <div class="col-12 col-sm-8">
+        <div class="row">
+            <form formGroupName="translations">
+                <div class="row">
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="fullName" translate>Name in English</label> *
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="en">
+                    </div>
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="fullName" translate>Name in Arabic</label> *
+                        <input
+                            type="text"
+                            dir="rtl"
+                            class="form-control"
+                            formControlName="ar">
+                    </div>
+                </div>
+            </form>
+            <div class="form-group col-12 col-sm-6">
+                <label for="email" translate>Email</label> *
+                <input
+                    type="email"
+                    class="form-control"
+                    formControlName="email">
+            </div>
+            <div class="form-group col-12 col-sm-6">
+                <label for="mobileNo" translate>Mobile Number</label> *
+                <input
+                    type="text"
+                    class="form-control"
+                    formControlName="mobileNo">
+            </div>
+            <ng-container *ngIf="!isEditing">
+                <div class="form-group col-12 col-sm-6">
+                    <label for="password" translate>Password</label> *
+                    <input
+                        type="password"
+                        class="form-control"
+                        formControlName="password">
+                </div>
+                <div class="form-group col-12 col-sm-6">
+                    <label for="confirmPassword" translate>Confirm Password</label> *
+                    <input
+                        type="password"
+                        class="form-control"
+                        formControlName="confirmPassword">
+                    <small
+                        *ngIf="form.get('confirmPassword')?.errors?.mustMatch"
+                        class="text-danger" 
+                        translate>
+                        Password Confirmation doesn't match Password
+                    </small>
+                </div>
+            </ng-container>
+        </div>
+        <div class="col-12">
+            <div class="d-flex flex-row justify-content-center gap-5 w-100">
+                <div
+                    *ngIf="userFormMode === userRoles.SUPER_SCHOOL_USER"
+                    class="d-flex flex-column">
+                    <h6 translate>Attendance</h6>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="viewAttendance"
+                            [disabled]="shouldDisableCheckbox(userPermissions.CAN_VIEW_ATTENDANCE)">
+                        <label
+                            for="viewAttendance"
+                            class="form-check-label"
+                            translate>
+                            View Attendance
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="editAttendance"
+                            [disabled]="shouldDisableCheckbox(userPermissions.CAN_EDIT_ATTENDANCE)">
+                        <label
+                            for="editAttendance"
+                            class="form-check-label"
+                            translate>
+                            Edit Attendance
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="attendanceAppUser">
+                        <label
+                            for="attendanceAppUser"
+                            class="form-check-label"
+                            translate>
+                            Attendance App User
+                        </label>
+                    </div>
+                </div>
+                <div
+                    *ngIf="userFormMode === userRoles.SUPER_CANTEEN_USER"
+                    class="d-flex flex-column">
+                    <h6 translate>Canteen</h6>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="viewCanteen"
+                            [disabled]="shouldDisableCheckbox(userPermissions.CAN_VIEW_CANTEEN)">
+                        <label
+                            for="viewCanteen"
+                            class="form-check-label" translate>
+                            View Canteen
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="editCanteen"
+                            [disabled]="shouldDisableCheckbox(userPermissions.CAN_EDIT_CANTEEN)">
+                        <label
+                            for="editCanteen"
+                            class="form-check-label" translate>
+                            Edit Canteen
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="canteenAppUser">
+                        <label
+                            for="canteenAppUser"
+                            class="form-check-label" translate>
+                            Canteen App User
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngIf="userFormMode === userRoles.WAKI_ADMIN && userRoleBeingEdited !== userRoles.WAKI_ADMIN">
+                <div class="d-flex flex-row justify-content-center gap-5 w-100 mt-3">
+                    <div class="form-check d-flex align-items-center">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            name="superUser"
+                            id="schoolSuperUser"
+                            [checked]="isSchoolSuperUserChecked"
+                            (change)="onSchoolOrCanteenSuperUserRadioChange(userRoles.SUPER_SCHOOL_USER)">
+                        <label
+                            class="form-check-label"
+                            for="schoolSuperUser" translate>
+                            School Super User
+                        </label>
+                    </div>
+                    <div class="form-check d-flex align-items-center">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            name="superUser"
+                            id="canteenSuperUser"
+                            [checked]="isCanteenSuperUserChecked"
+                            (change)="onSchoolOrCanteenSuperUserRadioChange(userRoles.SUPER_CANTEEN_USER)">
+                        <label
+                            class="form-check-label"
+                            for="canteenSuperUser" translate>
+                            Canteen Super User
+                        </label>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center w-100 mt-2">
+                    <div
+                        *ngIf="isSchoolSuperUserChecked"
+                        class="input-group w-50">
+                        <span class="input-group-text" translate>School ID:</span>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="schoolOrCanteenId">
+                        <span
+                            *ngIf="!isLookingForSchool && school"
+                            class="input-group-text d-flex fa fa-check bg-success text-white"></span>
+                        <span
+                            *ngIf="!isLookingForSchool && !school"
+                            class="input-group-text d-flex fa fa-times bg-danger text-white"></span>
+                        <span
+                            *ngIf="isLookingForSchool"
+                            class="input-group-text d-flex align-items-center h-100 px-2">
+                            <span class="spinner-grow spinner-grow-sm"></span>
+                        </span>
+                    </div>
+                    <div
+                        *ngIf="isCanteenSuperUserChecked"
+                        class="input-group w-50">
+                        <span class="input-group-text" translate>Canteen ID:</span>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="schoolOrCanteenId">
+                        <span
+                            *ngIf="!isLookingForCanteen && canteen"
+                            class="input-group-text d-flex fa fa-check bg-success text-white"></span>
+                        <span
+                            *ngIf="!isLookingForCanteen && !canteen"
+                            class="input-group-text d-flex fa fa-times bg-danger text-white"></span>
+                        <span
+                            *ngIf="isLookingForCanteen"
+                            class="input-group-text d-flex align-items-center h-100 px-2">
+                            <span class="spinner-grow spinner-grow-sm me-2"></span>
+                        </span>
+                    </div>
+                </div>
+            </ng-container>
+            <div
+                *ngIf="userFormMode === userRoles.WAKI_SUPER_ADMIN"
+                class="d-flex justify-content-center w-100 mt-2">
+                <div class="form-check">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="superUser"
+                        (change)="onSuperUserCheckboxClick($event)">
+                    <label
+                        for="superUser"
+                        class="form-check-label" translate>
+                        Super User
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="d-flex justify-content-center gap-5">
+                <app-save-button
+                    (click)="onSaveClick()"
+                    [disabled]="shouldDisableSaveButton"></app-save-button>
+                <app-exit-button (click)="exit.emit()"></app-exit-button>
+            </div>
+        </div>
+    </div>
+</form>

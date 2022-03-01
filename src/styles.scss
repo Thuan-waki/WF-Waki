@@ -1,0 +1,121 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/scss/variables";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "./assets/scss/font";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "./assets/scss/variables.rtl";
+
+* {
+    font-family: "Dubai-Reguler", sans-serif;
+}
+
+html,
+body {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    -webkit-font-smoothing: auto;
+    -moz-osx-font-smoothing: auto;
+    overflow-x: hidden;
+    font-family: "Dubai-Reguler", sans-serif;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-size: 0.875rem;
+    
+    &[dir='rtl'] {
+        font-size: 0.875rem;
+        font-family: "Dubai-Reguler", sans-serif !important;
+    }
+}
+
+.bold {
+    font-family: "Dubai-Bold", sans-serif;
+}
+
+.card {
+    border: 1px solid grey;
+    background-color: #f8f9fa;
+    padding: 2rem;
+}
+
+h4,
+h5,
+h6 {
+    font-weight: normal;
+    color: $primary;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+    height: 38px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+
+.btn-secondary,
+.btn-outline-secondary {
+    color: $primary;
+}
+
+.modal-scroll {
+    overflow-y: auto;
+    overflow-x: scroll;
+}
+
+.modal-body {
+    -webkit-overflow-scrolling: touch;
+}
+
+.multiselect-item-checkbox input[type="checkbox"]:checked+div:before {
+    background-color: $primary !important;
+}
+
+.multiselect-item-checkbox input[type="checkbox"]+div:before {
+    border-color: $primary !important;
+}
+
+.selected-item-container {
+    .selected-item {
+        background-color: $primary !important;
+        border-color: $primary !important;
+    }
+}
+
+.btn-underline {
+    &-success {
+        color: $success;
+        min-width: 54px;
+
+        &:hover {
+            color: $success;
+            border-radius: 3px;
+            border: 1px solid $success;
+        }
+    }
+
+    &-danger {
+        color: $danger;
+        min-width: 54px;
+
+        &:hover {
+            color: $danger;
+            border-radius: 3px;
+            border: 1px solid $danger;
+        }
+    }
+}

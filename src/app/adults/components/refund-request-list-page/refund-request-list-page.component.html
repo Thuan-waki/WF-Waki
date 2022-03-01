@@ -1,0 +1,8 @@
+<app-refund-request-list
+    [refundRequests]="refundRequests"
+    [isLoading]="isLoading"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [recordCount]="recordCount"
+    (filter)="getRefundRequests($event)"
+    (export)="exportToExcel()"></app-refund-request-list>

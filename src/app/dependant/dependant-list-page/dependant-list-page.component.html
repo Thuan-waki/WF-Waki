@@ -1,0 +1,11 @@
+<app-dependant-list
+    [dependants]="dependants"
+    [schoolOptions]="schoolOptions"
+    [isLoading]="isLoading"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [recordCount]="recordCount"
+    (filter)="getStudents($event)"
+    (editDependant)="editDependent($event)"
+    (deleteDependant)="deleteDependent($event)"
+    (export)="exportToExcel()"></app-dependant-list>

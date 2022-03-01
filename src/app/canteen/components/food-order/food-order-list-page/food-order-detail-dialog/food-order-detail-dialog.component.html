@@ -1,0 +1,176 @@
+<div class="modal-scroll">
+    <div class="modal-header">
+        <div class="d-flex flex-column">
+            <h5>{{ orderId }}</h5>
+            <h6>{{ foodOrder.invoice?.invoiceNo }}</h6>
+        </div>
+        <button
+            type="button"
+            class="btn btn-danger fa fa-times"
+            (click)="close()"></button>
+    </div>
+    <div class="modal-body p-3">
+        <!-- Orders -->
+        <ng-container *ngIf="items && items.length && !isReturnOrder">
+            <h6 translate>Orders</h6>
+            <div class="table-section">
+                <table class="table m-0">
+                    <thead>
+                        <tr>
+                            <th translate class="col">Item</th>
+                            <th translate class="col text-end">Price</th>
+                            <th translate class="col">Customizations</th>
+                            <th translate class="col text-end">Customizations Price</th>
+                            <th translate class="col text-end">Unit Price</th>
+                            <th translate class="col text-end">Discount</th>
+                            <th translate class="col text-end">After Discount</th>
+                            <th translate class="col text-end">Quantity</th>
+                            <th translate class="col text-end">Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let item of items">
+                            <tr>
+                                <td class="col">{{ item.food.translations | translation }}</td>
+                                <td class="col text-end">{{ item.foodPrice | wakiCurrency: '' }}</td>
+                                <td
+                                    class="col"
+                                    [innerHtml]="generateCustomizations(item.selectedCustomizations)"></td>
+                                <td class="col text-end">
+                                    {{ calculateCustomizationTotalPrice(item.selectedCustomizations) | wakiCurrency: '' }}
+                                </td>
+                                <td class="col text-end">
+                                    {{ item.foodPrice + calculateCustomizationTotalPrice(item.selectedCustomizations) | wakiCurrency: '' }}
+                                </td>
+                                <td class="col text-end">
+                                    {{ (item.food?.appliedCouponDiscountAmount ? item.food.appliedCouponDiscountAmount / item.quantity : 0) | wakiCurrency: '' }}
+                                </td>
+                                <td class="col text-end">
+                                    {{ item.foodPrice + calculateCustomizationTotalPrice(item.selectedCustomizations) - (item.food?.appliedCouponDiscountAmount || 0) | wakiCurrency: '' }}
+                                </td>
+                                <td class="col text-end">{{ item.quantity }}</td>
+                                <td class="col text-end">
+                                    {{ item.quantity * item.foodPrice + calculateCustomizationTotalPrice(item.selectedCustomizations) - (item.food?.appliedCouponDiscountAmount || 0) | wakiCurrency: '' }}
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </ng-container>
+        <!-- Returned Orders -->
+        <ng-container *ngIf="returnItems && returnItems.length && isReturnOrder">
+            <h6 translate>Returned Orders</h6>
+            <div class="table-section">
+                <table class="table m-0">
+                    <thead>
+                        <tr>
+                            <th translate class="col">Item</th>
+                            <th translate class="col text-end">Price</th>
+                            <th translate class="col">Customizations</th>
+                            <th translate class="col text-end">Customizations Price</th>
+                            <th translate class="col text-end">Unit Price</th>
+                            <th translate class="col text-end">Discount</th>
+                            <th translate class="col text-end">After Discount</th>
+                            <th translate class="col text-end">Quantity</th>
+                            <th translate class="col text-end">Total Price</th>
+                            <th translate class="col">Order ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let item of returnItems">
+                            <tr>
+                                <td class="col">{{ item.food.translations | translation }}</td>
+                                <td class="col text-end">{{ item.foodPrice | wakiCurrency: '' }}</td>
+                                <td
+                                    class="col"
+                                    [innerHtml]="generateCustomizations(item.selectedCustomizations)"></td>
+                                <td class="col text-end">
+                                    {{ calculateCustomizationTotalPrice(item.selectedCustomizations) | wakiCurrency: '' }}
+                                </td>
+                                <td class="col text-end">
+                                    {{ item.foodPrice + calculateCustomizationTotalPrice(item.selectedCustomizations) | wakiCurrency: '' }}
+                                </td>
+                                <td class="col text-end">
+                                    {{ (item.food?.appliedCouponDiscountAmount ? item.food.appliedCouponDiscountAmount / item.quantity : 0) | wakiCurrency: '' }}
+                                </td>
+                                <td class="col text-end">
+                                    {{ item.foodPrice + calculateCustomizationTotalPrice(item.selectedCustomizations) - (item.food?.appliedCouponDiscountAmount || 0) | wakiCurrency: '' }}
+                                </td>
+                                <td class="col text-end">{{ item.quantity }}</td>
+                                <td class="col text-end">
+                                    {{ item.quantity * item.foodPrice + calculateCustomizationTotalPrice(item.selectedCustomizations) - (item.food?.appliedCouponDiscountAmount || 0) }}
+                                </td>
+                                <td class="col text-end">{{ item.fromOrder?.orderId }}</td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </ng-container>
+        <div class="row">
+            <div class="col-8"></div>
+            <div class="col">
+                <div class="table-section">
+                    <table class="table m-0">
+                        <tbody>
+                            <tr>
+                                <td class="col-6 text-end" translate>Subtotal</td>
+                                <td class="col-6 text-end">
+                                    {{ foodOrder.subTotal  | wakiCurrency: '' }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-6 text-end" translate>Discount</td>
+                                <td class="col-6 text-end">
+                                    {{ (foodOrder.coupon ? (foodOrder.isPartialCoveredByCoupon ? (foodOrder.totalAmount - foodOrder.partialBalanceAmount) : foodOrder.totalAmount) : '')  | wakiCurrency: '' }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-6 text-end">VAT (15%)</td>
+                                <td class="col-6 text-end">
+                                    {{ foodOrder.vatAmount | wakiCurrency: ''}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-6 text-end" translate>Total</td>
+                                <td class="col-6 text-end">
+                                    {{ (foodOrder.coupon ? (foodOrder.partialBalanceAmount || 0) : foodOrder.totalAmount) | wakiCurrency: '' }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end w-100 gap-3 mt-3">
+            <button
+                class="btn btn-primary"
+                [disabled]="isSendingEmail"
+                (click)="emailInvoice()">
+                <ng-container *ngIf="!isSendingEmail; else sendingEmail">{{'Email' | translate}}</ng-container>
+                <ng-template #sendingEmail>
+                    <span class="spinner-grow spinner-grow-sm me-2"></span>
+                    <span translate>Sending</span>
+                </ng-template>
+            </button>
+            <button
+                class="btn btn-secondary"
+                [disabled]="isDownloading"
+                (click)="getInvoice()">
+                <ng-container *ngIf="!isDownloading; else downloading">{{'Print' | translate}}</ng-container>
+                <ng-template #downloading>
+                    <span class="spinner-grow spinner-grow-sm me-2"></span>
+                    <span translate>Printing</span>
+                </ng-template>
+            </button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button
+            class="btn btn-outline-primary"
+            (click)="close()" translate>
+            Close
+        </button>
+    </div>
+</div>

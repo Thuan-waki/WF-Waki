@@ -1,0 +1,43 @@
+@import '../../../../assets/scss/variables';
+
+.toolbar-wrapper {
+    height: 60px;
+    background-color: $primary;
+    position: fixed;
+    width: 100vw;
+
+    .toolbar-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        width: 100vw;
+    }
+
+    .toolbar-menu-container {
+        display: flex;
+        flex-direction: row;
+        font-size: 18px;
+
+        .dropdown {
+            ul {
+                padding: 0;
+
+                li {
+                    cursor: pointer;
+                    padding: 0;
+
+                    a {
+                        padding: 1rem;
+                    }
+                }
+
+                hr {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}

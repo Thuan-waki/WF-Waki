@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+        "target": "https://api.waki.sa",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

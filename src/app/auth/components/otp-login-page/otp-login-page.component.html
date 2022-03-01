@@ -1,0 +1,10 @@
+<div class="login-container m-auto">
+    <div class="login-form-container">
+        <app-otp-login-form
+            [form]="form"
+            [disableVerifyButton]="!FormIsValid"
+            [isLoading]="isLoading"
+            [error]="error"
+            (verify)="onVerify()"></app-otp-login-form>
+    </div>
+</div>

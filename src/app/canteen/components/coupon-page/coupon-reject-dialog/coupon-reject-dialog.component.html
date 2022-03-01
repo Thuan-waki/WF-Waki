@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <h5 translate>Reject Coupon</h5>
+    <button
+        type="button"
+        class="btn btn-danger fa fa-times"
+        (click)="close()"></button>
+</div>
+<div class="card-body p3">
+    <h5>Reject {{ coupon.couponName }}?</h5>
+</div>
+<div class="modal-footer">
+    <button
+        type="button"
+        class="btn btn-outline-secondary"
+        (click)="close()"
+        translate>
+        Cancel
+    </button>
+    <button
+        type="button"
+        class="btn btn-danger"
+        (click)="reject()"
+        [disabled]="isLoading">
+        <span
+            *ngIf="!isLoading"
+            class="fa fa-check me-2"></span>
+        <span *ngIf="!isLoading" translate>Reject</span>
+        <span
+            *ngIf="isLoading"
+            class="spinner-grow spinner-grow-sm me-2"></span>
+        <span *ngIf="isLoading" translate>Rejecting...</span>
+    </button>
+</div>

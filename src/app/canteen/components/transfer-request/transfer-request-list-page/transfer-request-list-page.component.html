@@ -1,0 +1,9 @@
+<app-transfer-request-list
+    [transferRequests]="transferRequests"
+    [isLoading]="isLoading"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [recordCount]="recordCount"
+    [isAdmin]="isAdmin"
+    (filter)="getTransferRequests($event)"
+    (export)="exportToExcel()"></app-transfer-request-list>

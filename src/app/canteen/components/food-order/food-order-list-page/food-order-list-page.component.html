@@ -1,0 +1,18 @@
+<app-food-order-list
+    [foodOrders]="foodOrders"
+    [schools]="schools"
+    [canteenOptions]="canteenOptions"
+    [selectedCanteenId]="canteenId"
+    [isLoading]="isLoading"
+    [isAdmin]="isAdmin"
+    [isCanteenUser]="isCanteenUser"
+    [recordCount]="recordCount"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [hasPaidOrder]="hasPaidOrder"
+    (filter)="getFoodOrders($event)"
+    (export)="exportToExcel()"
+    (markAllDelivered)="markAllDelivered($event)"
+    (markAllRejected)="markAllRejected($event)"
+    (markAsDelivered)="markAsDelivered($event)"
+    (markAsRejected)="markAsRejected($event)"></app-food-order-list>

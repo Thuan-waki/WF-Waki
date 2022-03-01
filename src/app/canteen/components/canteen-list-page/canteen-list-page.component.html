@@ -1,0 +1,11 @@
+<app-canteen-list
+    [canteens]="canteens"
+    [isSuperAdmin]="isSuperAdmin"
+    [isLoading]="isLoading"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [recordCount]="recordCount"
+    (filter)="getCanteens($event)"
+    (newCanteen)="newCanteen()"
+    (editCanteen)="editCanteen($event)"
+    (export)="exportToExcel()"></app-canteen-list>

@@ -1,0 +1,120 @@
+<div class="row">
+    <div class="col-12 text-center">
+        <h4 translate>Dependents</h4>
+    </div>
+    <div class="col-12">
+        <div class="d-flex justify-content-between">
+            <div class="flex-grow-1">
+                <form [formGroup]="form">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="d-flex align-items-center h-100">
+                                <label for="search" translate>Filter</label>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="input-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    formControlName="search">
+                                <button
+                                    class="btn btn-outline-primary"
+                                    type="button"
+                                    (click)="form.get('search')?.setValue(''); form.get('search')?.updateValueAndValidity()"
+                                    translate>
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                        <div class="ms-5 col-auto">
+                            <div class="d-flex align-items-center h-100">
+                                <label for="school" translate>School</label>
+                            </div>
+                        </div>
+                        <div class="col flex-grow-1">
+                            <div class="input-group w-75">
+                                <ng-select
+                                    [items]="schoolOptions"
+                                    bindLabel="label"
+                                    bindValue="value"
+                                    class="w-100"
+                                    [placeholder]="'Select School' | translate"
+                                    formControlName="school"
+                                    (change)="filterRecord()"></ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex gap-5">
+                <app-export-button (click)="export.emit()"></app-export-button>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mt-3">
+        <ng-container *ngIf="!dependants.length && !isLoading">
+            <h6 class="mt-5" translate>No Student Data</h6>
+        </ng-container>
+        <div
+            *ngIf="isLoading"
+            class="spinner-border mt-5"
+            style="width: 3rem; height: 3rem;">
+        </div>
+        <ng-container *ngIf="dependants.length > 0 && !isLoading">
+            <div class="table-section">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th translate class="col-1">National ID</th>
+                            <th translate class="col">Dependent Name</th>
+                            <th translate class="col-1">Date of Birth</th>
+                            <th translate class="col-1">Gender</th>
+                            <th translate class="col-1">Email</th>
+                            <th translate class="col-2">School</th>
+                            <th translate class="col-2">Adult Name</th>
+                            <th translate class="col-1 text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let dependant of dependants; let i = index">
+                            <tr>
+                                <td class="align-middle col-1">{{ dependant.nationalId }}</td>
+                                <td class="align-middle col">{{ dependant.translations | translation }}</td>
+                                <td class="align-middle col">{{ dependant.dob | wakiDate }}</td>
+                                <td class="align-middle col-1" translate>{{ dependant.sex | genderPipe }}</td>
+                                <td class="align-middle col-1">{{ dependant.user?.email || '' }}</td>
+                                <td class="align-middle col-2">{{ dependant.school?.translations | translation }}</td>
+                                <td class="align-middle col">{{ dependant.adult?.translations | translation }}</td>
+                                <td class="align-middle col-1 text-center">
+                                    <div class="d-flex justify-content-around">
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-secondary fa fa-edit fw-lighter"
+                                            (click)="editDependant.emit(dependant._id)">
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-outline-danger fa fa-trash fw-lighter">
+                                            <!-- (click)="deleteDependant.emit(dependant._id)"> -->
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <div class="col-12">
+                    <div class="d-flex justify-content-end">
+                        <app-pagination
+                            [currentPage]="currentPage"
+                            [maxPage]="maxPage"
+                            [infoText]="infoText"
+                            [pageOptionsShown]="3"
+                            (goToPage)="goToPage($event)"></app-pagination>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<form
+    *ngIf="form"
+    [formGroup]="form"
+    (submit)="signUp.emit()">
+    <div class="container">
+        <div class="form-group">
+            <div class="row">
+                <form formGroupName="translations">
+                    <div class="col-12 mt-3">
+                        <label for="en">Full Name (English)*</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="en">
+                    </div>
+                    <small
+                        *ngIf="translations?.get('en')?.errors?.required"
+                        class="text-danger">
+                        Required
+                    </small>
+                    <div class="col-12 mt-3">
+                        <label for="ar">Full Name (Arabic)*</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="ar">
+                    </div>
+                    <small
+                        *ngIf="translations?.get('ar')?.errors?.required"
+                        class="text-danger">
+                        Required
+                    </small>
+                </form>
+                <div class="col-12 mt-3">
+                    <label for="email">Email*</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="email">
+                    <small
+                        *ngIf="form.get('email')?.errors?.required"
+                        class="text-danger">
+                        Required
+                    </small>
+                </div>
+                <div class="col-12 mt-3">
+                    <label for="password">Password*</label>
+                    <input
+                        type="password"
+                        class="form-control"
+                        formControlName="password">
+                    <small
+                        *ngIf="form.get('password')?.errors?.required"
+                        class="text-danger">
+                        Required
+                    </small>
+                </div>
+                <div class="col-12 mt-3">
+                    <label for="confirmPassword">Confirm Password*</label>
+                    <input
+                        type="password"
+                        class="form-control"
+                        formControlName="confirmPassword">
+                    <small
+                        *ngIf="form.get('confirmPassword')?.errors?.mustMatch"
+                        class="text-danger">
+                        Password Confirmation doesn't match Password
+                    </small>
+                    <small
+                        *ngIf="form.get('confirmPassword')?.errors?.required"
+                        class="text-danger">
+                        Required
+                    </small>
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                    <button
+                        class="btn btn-outline-primary"
+                        (click)="cancel.emit()">
+                        Cancel
+                    </button>
+                    <button
+                        class="btn btn-primary"
+                        [disabled]="shouldDisableSignUpButton"
+                        (click)="signUp.emit()">
+                        Sign Up
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

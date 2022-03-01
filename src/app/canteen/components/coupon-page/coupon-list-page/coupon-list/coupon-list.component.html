@@ -1,0 +1,169 @@
+<div class="row">
+    <div class="col-12 text-center">
+        <h4 translate>Coupons</h4>
+    </div>
+    <div class="col-12">
+        <div class="d-flex justify-content-between">
+            <div class="flex-grow-1">
+                <form [formGroup]="form">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="d-flex align-items-center h-100">
+                                <label for="search" translate>Filter</label>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="input-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    formControlName="search">
+                                <button
+                                    class="btn btn-outline-primary"
+                                    type="button"
+                                    (click)="form.get('search')?.setValue(''); form.get('search')?.updateValueAndValidity()"
+                                    translate>
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                        <div
+                            *ngIf="isAdmin"
+                            class="form-group col-12 col-sm-3">
+                            <ng-select
+                                class="h-100"
+                                [items]="canteenOptions"
+                                [clearable]="true"
+                                bindLabel="label"
+                                bindValue="value"
+                                [placeholder]="'Select Canteen' | translate"
+                                formControlName="canteen"
+                                (change)="filterRecord()"></ng-select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex gap-5">
+                <app-add-button
+                    [text]="'Add New Coupon'"
+                    (click)="newCoupon.emit()"></app-add-button>
+                <app-export-button (click)="export.emit()"></app-export-button>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mt-3">
+        <ng-container *ngIf="!coupons.length && !isLoading">
+            <h6 class="mt-5" translate>No Coupon Data</h6>
+        </ng-container>
+        <div
+            *ngIf="isLoading"
+            class="spinner-border mt-5"
+            style="width: 3rem; height: 3rem;">
+        </div>
+        <ng-container *ngIf="coupons.length > 0 && !isLoading">
+            <div class="table-section">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th translate class="col">Coupon Name</th>
+                            <th translate class="col">School</th>
+                            <th translate class="col">Canteen</th>
+                            <th translate class="col">Uses</th>
+                            <th translate class="col text-end">Total Credit</th>
+                            <th translate class="col text-end">Save</th>
+                            <th translate class="col text-end">Cost</th>
+                            <th translate class="col text-center">Period</th>
+                            <th translate class="col text-end">Fee</th>
+                            <th translate class="col text-center"># of Uses</th>
+                            <th translate class="col text-center">Status</th>
+                            <th translate class="col text-center">Published</th>
+                            <th translate class="col text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let coupon of coupons; let i = index">
+                            <tr>
+                                <td class="align-middle col">{{ coupon.couponName }}</td>
+                                <td class="align-middle col">
+                                    {{ coupon.forSpecificSchools| yesNoBoolean }}
+                                </td>
+                                <td class="align-middle col">{{ coupon.canteen?.translations | translation }}</td>
+                                <td class="align-middle col">
+                                    <span
+                                        *ngIf="coupon.redeemForOnlineOrder && coupon.redeemForWalkinOrder"
+                                        class="d-flex flex-column">
+                                        <span translate>Online Order</span>
+                                        <span translate>Walk in</span>
+                                    </span>
+                                    <span *ngIf="coupon.redeemForOnlineOrder && !coupon.redeemForWalkinOrder" translate>Online Order</span>
+                                    <span *ngIf="!coupon.redeemForOnlineOrder && coupon.redeemForWalkinOrder" translate>Walk in</span>
+                                </td>
+                                <td class="align-middle col text-end">{{ coupon.creditAvail | wakiCurrency }}</td>
+                                <td class="align-middle col text-end">{{ coupon.saveAmount | wakiCurrency }}</td>
+                                <td class="align-middle col text-end">{{ coupon.couponPrice | wakiCurrency}}</td>
+                                <td class="align-middle col text-center">{{ coupon.validityInDays + ' days' }}</td>
+                                <td class="align-middle col text-end">
+                                    {{ coupon.wakiFeePercentage ? coupon.wakiFeePercentage + '%' : '' }}
+                                </td>
+                                <td
+                                    class="align-middle col text-center coupon-order-link"
+                                    (click)="goToCouponOrder(coupon._id)">
+                                    {{ coupon.noOfRedeemed }}
+                                </td>
+                                <td class="align-middle col text-center">{{ coupon.status | couponStatus }}</td>
+                                <td class="align-middle col text-center">{{ coupon.isPublished | yesNoBoolean }}</td>
+                                <td class="align-middle col text-center">
+                                    <div class="d-flex justify-content-around gap-2">
+                                        <button
+                                            *ngIf="coupon.status === 'PENDING' && (currentUserRoles.includes(userRoles.WAKI_SUPER_ADMIN) || currentUserRoles.includes(userRoles.WAKI_ADMIN))"
+                                            type="button"
+                                            class="btn btn-sm btn-success p-2 fa fa-check text-white"
+                                            (click)="approve(coupon)">
+                                        </button>
+                                        <button
+                                            *ngIf="coupon.status === 'PENDING' && (currentUserRoles.includes(userRoles.WAKI_SUPER_ADMIN) || currentUserRoles.includes(userRoles.WAKI_ADMIN))"
+                                            type="button"
+                                            class="btn btn-sm btn-outline-danger p-2 fa fa-ban"
+                                            (click)="reject(coupon)">
+                                        </button>
+                                        <button
+                                            *ngIf="coupon.status === 'APPROVED' && coupon.isPublished"
+                                            type="button"
+                                            class="btn btn-sm btn-outline-danger"
+                                            (click)="publishOrUnpublish(coupon)"
+                                            translate>
+                                            Unpublish
+                                        </button>
+                                        <button
+                                            *ngIf="coupon.status === 'APPROVED' && !coupon.isPublished"
+                                            type="button"
+                                            class="btn btn-sm btn-outline-success"
+                                            (click)="publishOrUnpublish(coupon)"
+                                            translate>
+                                            Publish
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-secondary fa fa-edit fw-ligter"
+                                            (click)="editCoupon.emit(coupon._id)">
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <div class="col-12">
+                    <div class="d-flex justify-content-end">
+                        <app-pagination
+                            [currentPage]="currentPage"
+                            [maxPage]="maxPage"
+                            [infoText]="infoText"
+                            [pageOptionsShown]="3"
+                            (goToPage)="goToPage($event)"></app-pagination>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

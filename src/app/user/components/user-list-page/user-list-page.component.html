@@ -1,0 +1,9 @@
+<app-user-list
+    [users]="users"
+    [isLoading]="isLoading"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [recordCount]="recordCount"
+    (filter)="getUsers($event)"
+    (newUser)="newUser()"
+    (editUser)="editUser($event)"></app-user-list>

@@ -1,0 +1,8 @@
+<button
+    class="btn btn-primary px-4"
+    [disabled]="disabled"
+    (click)="save.emit()"
+    translate>
+    <fa-icon *ngIf="showIcon" [icon]="icon"></fa-icon>
+    {{ text }}
+</button>

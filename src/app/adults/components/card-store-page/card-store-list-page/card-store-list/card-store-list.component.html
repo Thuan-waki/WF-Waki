@@ -1,0 +1,83 @@
+<div class="row">
+    <div class="col-12 text-center">
+        <h4 translate>Card Store</h4>
+    </div>
+    <div class="col-12 mt-4">
+        <div class="d-flex justify-content-between">
+            <div class="flex-grow-1">
+            </div>
+            <div class="d-flex gap-5">
+                <app-add-button [text]="'Add Card Item'" (click)="newStoreItem.emit()"></app-add-button>
+                <app-export-button (click)="export.emit()"></app-export-button>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mt-3">
+        <ng-container *ngIf="!storeItems.length && !isLoading">
+            <h6 class="mt-5" translate>No Card Store Data</h6>
+        </ng-container>
+        <div *ngIf="isLoading" class="spinner-border mt-5" style="width: 3rem; height: 3rem;">
+        </div>
+        <ng-container *ngIf="storeItems.length > 0 && !isLoading">
+            <div class="table-section">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th translate class="col">Photo</th>
+                            <th translate class="col">Theme</th>
+                            <th translate class="col">Type</th>
+                            <th translate class="col text-end">Price</th>
+                            <th translate class="col text-end">Quantity</th>
+                            <th translate class="col text-center"># of Orders</th>
+                            <th translate class="col text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let item of storeItems">
+                            <tr>
+                                <td class="align-middle col">
+                                    <div class=" d-flex h-100">
+                                        <img
+                                            *ngIf="item.image"
+                                            width="50"
+                                            height="50"
+                                            [src]="imageServerUrl + item.image">
+                                        <div *ngIf="!item.image" translate>(No Photo)</div>
+                                    </div>
+                                </td>
+                                <td class="align-middle col">{{ item.theme || item.color }}</td>
+                                <td class="align-middle col">{{ item.type }}</td>
+                                <td class="align-middle col text-end">{{ item.pricePerItem }}</td>
+                                <td class="align-middle col text-end">{{ item.availableQuantity }}</td>
+                                <td class="align-middle col text-center">{{ item.totalNoOfPurchases }}</td>
+                                <td class="align-middle col text-center">
+                                    <div class="d-flex justify-content-center gap-3">
+                                        <button type="button" (click)="goToEditStoreItem.emit(item._id)"
+                                            class="btn btn-sm btn-secondary fa fa-edit fw-lighter">
+                                        </button>
+                                        <a type="button"
+                                            (click)="item.isPublished = !item.isPublished; updateStoreItem.emit(item)"
+                                            class="btn btn-sm btn-underline-{{ item.isPublished ? 'success' : 'danger' }}"
+                                            translate>
+                                            {{item.isPublished ? 'Show' : 'Hide'}}
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <div class="col-12">
+                    <div class="d-flex justify-content-end">
+                        <app-pagination
+                            [currentPage]="currentPage"
+                            [maxPage]="maxPage"
+                            [infoText]="infoText"
+                            [pageOptionsShown]="3"
+                            (goToPage)="goToPage($event)"></app-pagination>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

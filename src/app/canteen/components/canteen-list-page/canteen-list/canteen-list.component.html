@@ -1,0 +1,110 @@
+<div class="row">
+    <div class="col-12 text-center">
+        <h4 translate>Canteens</h4>
+    </div>
+    <div class="col-12">
+        <div class="d-flex justify-content-between">
+            <div class="flex-grow-1">
+                <form [formGroup]="form">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="d-flex align-items-center h-100">
+                                <label for="search" translate>Filter</label>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="input-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    formControlName="search">
+                                <button
+                                    class="btn btn-outline-primary"
+                                    type="button"
+                                    (click)="form.get('search')?.setValue(''); form.get('search')?.updateValueAndValidity()"
+                                    translate>
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex gap-5">
+                <app-add-button [text]="'Add New Canteen'" (click)="newCanteen.emit()"></app-add-button>
+                <app-export-button (click)="export.emit()"></app-export-button>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mt-3">
+        <ng-container *ngIf="!canteens.length && !isLoading">
+            <h6 class="mt-5" translate>No Canteen Data</h6>
+        </ng-container>
+        <div
+            *ngIf="isLoading"
+            class="spinner-border mt-5"
+            style="width: 3rem; height: 3rem;">
+        </div>
+        <ng-container *ngIf="canteens.length > 0 && !isLoading">
+            <div class="table-section">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="col-1" translate>No.</th>
+                            <th class="col" translate>Canteen</th>
+                            <th class="col-1" translate>Canteen ID</th>
+                            <th class="col-1" translate>Canteen VAT</th>
+                            <th class="col-2" translate>School</th>
+                            <th class="col-1" translate>Email</th>
+                            <th class="col-1" translate>Mobile No.</th>
+                            <th class="col-1" translate>Phone No.</th>
+                            <th class="col-1 text-center" translate>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let canteen of canteens; let i = index">
+                            <tr>
+                                <td class="align-middle col-1">{{ (i + 1) + ((currentPage - 1) * pageSize) }}</td>
+                                <td class="align-middle col">{{ canteen.translations | translation }}</td>
+                                <td class="align-middle col-1">{{ canteen.canteenId}}</td>
+                                <td class="align-middle col-1">
+                                    {{ canteen.vat }}
+                                </td>
+                                <td class="align-middle col-2">
+                                    {{ canteen.schools | translation }}
+                                </td>
+                                <td class="align-middle col-1">{{ canteen.email }}</td>
+                                <td class="align-middle col-1">{{ canteen.mobileNo }}</td>
+                                <td class="align-middle col-1">{{ canteen.phone }}</td>
+                                <td class="align-middle col-1 text-center">
+                                    <div class="d-flex justify-content-around gap-2">
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-secondary fa fa-edit fw-lighter"
+                                            (click)="editCanteen.emit(canteen._id)">
+                                        </button>
+                                        <button
+                                            *ngIf="isSuperAdmin"
+                                            type="button"
+                                            class="btn btn-sm btn-danger fa fa-trash fw-lighter">
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <div class="col-12">
+                    <div class="d-flex justify-content-end">
+                        <app-pagination
+                            [currentPage]="currentPage"
+                            [maxPage]="maxPage"
+                            [infoText]="infoText"
+                            [pageOptionsShown]="3"
+                            (goToPage)="goToPage($event)"></app-pagination>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

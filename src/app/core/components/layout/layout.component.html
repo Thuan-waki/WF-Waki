@@ -1,0 +1,17 @@
+<div class="d-flex h-100">
+    <div class="sidebar">
+        <app-sidebar *ngIf="showSidebar"></app-sidebar>
+    </div>
+    <div class="d-flex flex-column">
+        <app-toolbar
+            [showSidebar]="showSidebar"
+            [username]="translationName"
+            (toggleSidebar)="toggleSidebar()"
+            (logout)="logout()"></app-toolbar>
+        <div
+            class="content-wrapper p-5"
+            [ngClass]="contentClass">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

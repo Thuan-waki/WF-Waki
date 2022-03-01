@@ -1,0 +1,182 @@
+<div class="row">
+    <div class="col-12 text-center">
+        <h4 translate>Coupon Orders</h4>
+    </div>
+    <div class="col-12 mt-4">
+        <div class="d-flex justify-content-between">
+            <div class="flex-grow-1 mb-4">
+                <form [formGroup]="form">
+                    <div class="row pe-2">
+                        <div class="form-group col-12 col-sm-3">
+                            <div class="input-group">
+                                <label class="input-group-text" translate>Filter</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    formControlName="search">
+                            </div>
+                        </div>
+                        <div
+                            class="col-12 col-sm-4 ps-1 pe-0"
+                            [class.ms-3]="!isAdmin">
+                            <div class="d-flex flex-row justify-content-between gap-2">
+                                <div class="input-group">
+                                    <span class="input-group-text" translate>From:</span>
+                                    <input
+                                        type="date"
+                                        class="form-control text-end"
+                                        onkeydown="return false"
+                                        formControlName="fromDate"
+                                        (change)="filterRecord()">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text" translate>To:</span>
+                                    <input
+                                        type="date"
+                                        class="form-control text-end"
+                                        onkeydown="return false"
+                                        formControlName="toDate"
+                                        (change)="filterRecord()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3 pe-2" *ngIf="isAdmin">
+                        <div class="form-group col-12 col-sm-3">
+                            <ng-select
+                                class="h-100"
+                                [items]="schoolOptions"
+                                [clearable]="true"
+                                bindLabel="label"
+                                bindValue="value"
+                                [placeholder]="'Select School' | translate"
+                                formControlName="school"
+                                (change)="filterRecord()"></ng-select>
+                        </div>
+                        <div class="form-group col-12 col-sm-3">
+                            <ng-select
+                                class="h-100"
+                                [items]="canteenOptions"
+                                [clearable]="true"
+                                bindLabel="label"
+                                bindValue="value"
+                                [placeholder]="'Select Canteen' | translate"
+                                formControlName="canteen"
+                                (change)="filterRecord()"></ng-select>
+                        </div>
+                        <div class="form-group col-12 col-sm-3">
+                            <ng-select
+                                class="h-100"
+                                [items]="studentOptions"
+                                [clearable]="true"
+                                bindLabel="label"
+                                bindValue="value"
+                                [placeholder]="'Select Student' | translate"
+                                formControlName="student"
+                                (change)="filterRecord()"></ng-select>
+                        </div>
+                        <div class="form-group col-12 col-sm-3">
+                            <ng-select
+                                class="h-100"
+                                [items]="couponOptions"
+                                [clearable]="true"
+                                bindLabel="label"
+                                bindValue="value"
+                                [placeholder]="'Select Coupon' | translate"
+                                formControlName="coupon"
+                                (change)="filterRecord()"></ng-select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <app-export-button (click)="export.emit()"></app-export-button>
+        </div>
+    </div>
+    <div class="col-12 mt-3">
+        <ng-container *ngIf="!couponOrders.length && !isLoading">
+            <h6 class="mt-5" translate>No Coupon Orders</h6>
+        </ng-container>
+        <div
+            *ngIf="isLoading"
+            class="spinner-border mt-5"
+            style="width: 3rem; height: 3rem;">
+        </div>
+        <ng-container *ngIf="couponOrders.length > 0 && !isLoading">
+            <div class="table-section">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th translate class="col">Order ID</th>
+                            <th translate class="col">Invoice No.</th>
+                            <th translate class="col text-end">Date</th>
+                            <th translate class="col">Coupon Name</th>
+                            <th translate class="col text-end">Time</th>
+                            <th translate class="col">Adult</th>
+                            <th translate class="col">Dependent</th>
+                            <th translate class="col text-end">Subtotal</th>
+                            <th translate class="col text-end">VAT</th>
+                            <th translate class="col text-end">Amount</th>
+                            <th translate class="col text-center">Expired</th>
+                            <th translate class="col-2 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let order of couponOrders; let i = index">
+                            <tr>
+                                <td class="align-middle col">{{ order.orderId }}</td>
+                                <td class="col">{{ order.invoice?.invoiceNo }}</td>
+                                <td class="align-middle col text-end">
+                                    {{ getDateAndTime(order.orderDate).date }}
+                                </td>
+                                <td class="align-middle col">{{ order.coupon?.couponName }}</td>
+                                <td class="align-middle col text-end">
+                                    {{ getDateAndTime(order.orderDate).time }}
+                                </td>
+                                <td class="align-middle col">
+                                    {{ order.orderedByParent?.translations | translation }}
+                                </td>
+                                <td class="align-middle col">
+                                    {{ order.student?.translations | translation }}
+                                </td>
+                                <td class="align-middle col text-end">
+                                    <span *ngIf="order.subTotal">{{ order.subTotal | wakiCurrency }}</span>
+                                </td>
+                                <td class="align-middle col text-end">
+                                    <span *ngIf="order.vatAmount">{{ order.vatAmount| wakiCurrency }}</span>
+                                </td>
+                                <td class="align-middle col text-end">{{ order.totalAmount| wakiCurrency}}</td>
+                                <td class="align-middle col text-center">
+                                    {{ order.isCouponExpired| yesNoBoolean}}
+                                </td>
+                                <td class="align-middle col-2 text-center">
+                                    <div class="d-flex justify-content-center gap-3">
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-secondary fa fa-envelope fw-lighter"
+                                            (click)="email.emit(order.invoice?.invoiceNo)">
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-secondary fa fa-download"
+                                            (click)="download.emit(order.invoice?.invoiceNo)">
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <div class="col-12">
+                    <div class="d-flex justify-content-end">
+                        <app-pagination
+                            [currentPage]="currentPage"
+                            [maxPage]="maxPage"
+                            [infoText]="infoText"
+                            [pageOptionsShown]="3"
+                            (goToPage)="goToPage($event)"></app-pagination>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

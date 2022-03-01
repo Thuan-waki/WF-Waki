@@ -1,0 +1,42 @@
+<ng-container *ngIf="!selectedFoodItems.length">
+    <h6 translate>No Food Item Selected</h6>
+</ng-container>
+<ng-container *ngIf="selectedFoodItems.length">
+    <div class="table-section">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th translate class="col-1 text-center">Action</th>
+                    <th translate class="col-2 text-center">Picture</th>
+                    <th translate class="col">Name</th>
+                    <th translate class="col-2 text-end">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let foodItem of selectedFoodItems">
+                    <tr>
+                        <td class="col-1 align-middle text-center">
+                            <div class="d-flex justify-content-around">
+                                <button type="button" class="btn btn-danger fa fa-trash"
+                                    (click)="remove.emit(foodItem)"></button>
+                            </div>
+                        </td>
+                        <td class="col-2 align-middle">
+                            <div class=" d-flex justify-content-center h-100">
+                                <img *ngIf="foodItem.image"
+                                    width="50"
+                                    height="50"
+                                    [src]="imageServerUrl + foodItem.image">
+                                    <div *ngIf="!foodItem.image">(<span translate>No Image</span>)</div>
+                            </div>
+                        </td>
+                        <td class="col align-middle">{{ foodItem.translations | translation }}</td>
+                        <td class="col-2 align-middle text-end">
+                            {{ foodItem.pricePerItem | wakiCurrency }}
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</ng-container>

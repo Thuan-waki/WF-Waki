@@ -1,0 +1,10 @@
+<app-school-list
+    [schools]="schools"
+    [isLoading]="isLoading"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [recordCount]="recordCount"
+    (filter)="getSchools($event)"
+    (export)="exportToExcel()"
+    (newSchool)="newSchool()"
+    (editSchool)="editSchool($event)"></app-school-list>

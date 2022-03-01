@@ -1,0 +1,7 @@
+<app-device-list
+    [isAdmin]="isAdmin"
+    [devices]="devices"
+    [schoolOptions]="schoolOptions"
+    [isLoading]="isLoading"
+    (getDevices)="getDevices($event)"
+    (export)="exportToExcel($event)"></app-device-list>

@@ -1,0 +1,12 @@
+<app-school-form
+    [form]="form"
+    [school]="school"
+    [canteen]="canteen"
+    [countries]="countries"
+    [cities]="cities"
+    [isLoading]="isLoading"
+    [isEditing]="isEditing"
+    [shouldDisableSaveButton]="shouldDisableSaveButton"
+    (save)="save()"
+    (exit)="goToSchoolList()"
+    (lookupCanteen)="lookupCanteen()"></app-school-form>

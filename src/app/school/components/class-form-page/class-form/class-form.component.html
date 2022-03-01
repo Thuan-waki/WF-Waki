@@ -1,0 +1,41 @@
+<div class="col-6 mb-4 text-center ustify-content-center gap-5">
+    <h5 translate>{{isEditing ? 'Edit' : 'Create'}} Class</h5>
+</div>
+<div
+    *ngIf="isLoading || !form"
+    class="spinner-border mt-5"
+    style="width: 3rem; height: 3rem;">
+</div>
+<ng-container *ngIf="!isLoading">
+    <form
+        *ngIf="form"
+        [formGroup]="form">
+        <div class="col-6">
+            <div class="form-group col-12">
+                <label for="grade" translate>Grade</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    formControlName="grade">
+            </div>
+            <div class="form-group col-12 mt-3">
+                <label for="schoolId" translate>School</label>
+                <ng-select
+                    [items]="schoolOptions"
+                    [clearable]="false"
+                    bindLabel="label"
+                    bindValue="value"
+                    [placeholder]="'Select School' | translate"
+                    formControlName="schoolId"></ng-select>
+            </div>
+            <div class="row mt-5">
+                <div class="d-flex justify-content-center gap-5">
+                    <app-save-button
+                        (click)="save.emit()"
+                        [disabled]="shouldDisableSaveButton"></app-save-button>
+                    <app-exit-button (click)="exit.emit()"></app-exit-button>
+                </div>
+            </div>
+        </div>
+    </form>
+</ng-container>

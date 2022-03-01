@@ -1,0 +1,55 @@
+$primary: #544d7e;
+$secondary: #ffd740;
+$success: #0b9b23;
+$danger: #de0e0e;
+$warning: orange;
+$info: #0e76de;
+$light: #f5f5f5;
+$dark: #070707;
+
+$pending-color: #e47cd6;
+$rejected-color: #fdd641;
+$delivered-color: #a2b5ff;
+$green: #93de3c;
+$pink: #f1abc9;
+
+$checkin-color: #0b9b23;
+$checkout-color: #0e76de;
+$absent-color: $danger;
+$late-color: #e4f394;
+$early-color: #e7baf0;
+$export-color: $primary;
+
+$online-order: $pink;
+$walkin-order: $secondary;
+$return-color: #a2b5ff;
+$transfer-color: #b3b3b3;
+$fee-color: #000000;
+
+$paid-color: #e47cd6;
+$rejected-color: #fdd641;
+$delivered-color: #a2b5ff;
+
+$vat: #000000;
+$fund: #FB8989;
+$refund: #B3B3B3;
+
+
+$theme-colors: (
+    primary: $primary,
+    secondary: $secondary,
+    success: $success,
+    danger: $danger,
+    warning: $warning,
+    info: $info,
+    light: $light,
+    dark: $dark
+);
+
+input {
+    border-radius: 3px;
+}
+
+button {
+    border-radius: 3px;
+}

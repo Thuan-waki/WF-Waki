@@ -1,0 +1,21 @@
+<div class="login-container m-auto">
+    <div class="login-form-container">
+        <app-login-form
+            [form]="form"
+            [disableLoginButton]="!FormIsValid"
+            [error]="alert"
+            [isLoading]="isLoading"
+            (login)="onLogin()"
+            (goToForgotPassword)="goToForgotPassword()"></app-login-form>
+        <div
+            *ngIf='!isProduction'
+            class="mt-3 text-center">
+            <button
+                class="btn btn-secondary"
+                (click)="showSignUpInfo()"
+                translate>
+                Create New Account
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,206 @@
+<form
+    *ngIf="form"
+    [formGroup]="form">
+    <div class="col-12 text-center">
+        <h4 translate>Canteen Transactions</h4>
+    </div>
+    <div class="filter-section row mt-4">
+        <div class="form-group col-12 col-sm-3">
+            <div class="input-group">
+                <label class="input-group-text" translate>Filter</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    formControlName="search">
+                <button
+                    class="btn btn-outline-primary"
+                    type="button"
+                    (click)="form.get('search')?.setValue(''); form.get('search')?.updateValueAndValidity()"
+                    translate>
+                    Clear
+                </button>
+            </div>
+        </div>
+        <div class="form-group col-12 col-sm-3">
+            <ng-select
+                class="h-100"
+                [items]="schoolOptions"
+                [clearable]="true"
+                bindLabel="label"
+                bindValue="id"
+                [placeholder]="'Select School' | translate"
+                formControlName="school"
+                (change)="filterRecord()"></ng-select>
+        </div>
+        <div
+            *ngIf="isAdmin"
+            class="form-group col-12 col-sm-3">
+            <ng-select
+                class="h-100"
+                [items]="canteenOptions"
+                [clearable]="true"
+                bindLabel="label"
+                bindValue="value"
+                [placeholder]="'Select Canteen' | translate"
+                formControlName="canteen"
+                (change)="filterRecord()"></ng-select>
+        </div>
+        <div class="col-12 col-sm-3">
+            <div class="d-flex flex-row justify-content-between gap-2">
+                <div class="input-group">
+                    <span class="input-group-text" translate>From:</span>
+                    <input
+                        type="date"
+                        class="form-control text-end"
+                        onkeydown="return false"
+                        formControlName="fromDate"
+                        (change)="filterRecord()">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text" translate>To:</span>
+                    <input
+                        type="date"
+                        class="form-control text-end"
+                        onkeydown="return false"
+                        formControlName="toDate"
+                        (change)="filterRecord()">
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mt-3">
+            <div class="d-flex justify-content-between gap-2">
+                <button
+                    type="button"
+                    class="btn flex-fill"
+                    [ngClass]="typeFilter.includes(transactionTypes.AppOrder) ? 'btn-light app-order' : 'btn-outline-light app-order-outline'"
+                    (click)="toggleTypeFilter(transactionTypes.AppOrder)"
+                    translate>
+                    Online Orders
+                </button>
+                <button
+                    type="button"
+                    class="btn flex-fill"
+                    [ngClass]="typeFilter.includes(transactionTypes.WalkInOrder) ? 'btn-light walk-in-order' : 'btn-outline-light walk-in-order-outline'"
+                    (click)="toggleTypeFilter(transactionTypes.WalkInOrder)"
+                    translate>
+                    Walk-in Orders
+                </button>
+                <button
+                    type="button"
+                    class="btn flex-fill"
+                    [ngClass]="typeFilter.includes(transactionTypes.ReturnOrder) ? 'btn-light return-order' : 'btn-outline-light return-order-outline'"
+                    (click)="toggleTypeFilter(transactionTypes.ReturnOrder)"
+                    translate>
+                    Returns
+                </button>
+                <button
+                    type="button"
+                    class="btn flex-fill"
+                    [ngClass]="typeFilter.includes(transactionTypes.CouponPurchase) ? 'btn-light coupon-purchase' : 'btn-outline-light coupon-purchase-outline'"
+                    (click)="toggleTypeFilter(transactionTypes.CouponPurchase)"
+                    translate>
+                    Coupons Orders
+                </button>
+                <button
+                    type="button"
+                    class="btn flex-fill"
+                    [ngClass]="typeFilter.includes(transactionTypes.TransferToCanteen) ? 'btn-light transfer-to-canteen' : 'btn-outline-light transfer-to-canteen-outline'"
+                    (click)="toggleTypeFilter(transactionTypes.TransferToCanteen)"
+                    translate>
+                    Transfers
+                </button>
+                <button
+                    type="button"
+                    class="btn flex-fill"
+                    [ngClass]="typeFilter.includes(transactionTypes.WakiCouponFee) ? 'btn-light waki-coupon-fee' : 'btn-outline-light waki-coupon-fee-outline'"
+                    (click)="toggleTypeFilter(transactionTypes.WakiCouponFee)"
+                    translate>
+                    Coupons Fees
+                </button>
+                <button
+                    type="button"
+                    class="btn flex-fill"
+                    [ngClass]="typeFilter.includes(transactionTypes.TransactionFee) ? 'btn-light transfer-fee' : 'btn-outline-light transfer-fee-outline'"
+                    (click)="toggleTypeFilter(transactionTypes.TransactionFee)"
+                    translate>
+                    Transactions Fees
+                </button>
+                <button
+                    type="button"
+                    class="btn flex-fill"
+                    [ngClass]="typeFilter.includes(transactionTypes.VAT) ? 'btn-light vat-button' : 'btn-outline-light vat-button-outline'"
+                    (click)="toggleTypeFilter(transactionTypes.VAT)"
+                    translate>
+                    VAT
+                </button>
+            </div>
+        </div>
+    </div>
+    <ng-container *ngIf="!transactions.length && !isLoading">
+        <h6 class="mt-5" translate>No Transaction Data</h6>
+    </ng-container>
+    <div
+        *ngIf="isLoading"
+        class="spinner-border mt-5"
+        style="width: \rem; height: 3rem;">
+    </div>
+    <ng-container *ngIf="transactions.length > 0 && !isLoading">
+        <div class="d-flex justify-content-between align-items-center my-3">
+            <label translate>The transaction fee calculates the online orders based on the delivery date, not the order date.</label>
+            <app-export-button (click)="exportToExcel()"></app-export-button>
+        </div>
+        <div class="table-section">
+            <table class="table">
+                <tbody>
+                    <ng-container *ngFor="let transaction of transactions">
+                        <tr class="{{ transaction.trType }}">
+                            <th>{{ transaction.transactionId }}</th>
+                            <td>
+                                <div class="d-flex flex-column text-end">
+                                    <span>
+                                        {{ getDateAndTime(transaction.trDate).date }}
+                                    </span>
+                                    <span>
+                                        {{ getDateAndTime(transaction.trDate).time }}
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex flex-column">
+                                    <span translate>{{ transaction.trType | transactionType }}</span>
+                                    <span 
+                                        *ngIf="transaction.trType === transactionTypes.CouponPurchase">
+                                        {{ transaction.couponId?.couponName }}
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <span [innerHtml]="getTransactionDescriptionText(transaction)"></span>
+                            </td>
+                            <td>
+                                <div class="d-flex flex-column">
+                                    <span [innerHtml]="generateFromText(transaction)"></span>
+                                    <div
+                                        class="d-flex flex-column"
+                                        [innerHtml]="generateToText(transaction)"></div>
+                                </div>
+                            </td>
+                            <td class="text-end">{{ transaction.amount | wakiCurrency }}</td>
+                            <td class="text-end">{{ transaction.balance | wakiCurrency}}</td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+            <div class="col-12">
+                <div class="d-flex justify-content-end">
+                    <app-pagination
+                        [currentPage]="currentPage"
+                        [maxPage]="maxPage"
+                        [infoText]="infoText"
+                        [pageOptionsShown]="3"
+                        (goToPage)="goToPage($event)"></app-pagination>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</form>

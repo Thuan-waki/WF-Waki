@@ -1,0 +1,66 @@
+<ng-container *ngIf="form && form.controls.length">
+    <ng-container *ngFor="let control of form.controls; let i = index">
+        <form
+            *ngIf="form"
+            [formGroup]="customization(i)">
+            <div class="card mt-2">
+                <div class="row">
+                    <div class="col-8">
+                        <form formGroupName="translations">
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="name" translate>Customization Name in English</label> *
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        formControlName="en"
+                                        [placeholder]="'Customization Name in English' | translate">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="name" translate>Customization Name in Arabic</label> *
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        formControlName="ar"
+                                        [placeholder]="'Customization Name in Arabic' | translate">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="name" translate>Customization Type</label> *
+                        <ng-select
+                            [items]="typeSelect"
+                            [clearable]="false"
+                            bindLabel="label"
+                            bindValue="value"
+                            formControlName="customizationType"></ng-select>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex align-items-end pb-1 h-100">
+                            <button
+                                type="button"
+                                class="btn btn-outline-danger fa fa-minus"
+                                (click)="remove.emit(i)"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="d-flex justify-content-between">
+                        <h6 translate>Customization Options</h6>
+                        <app-add-button
+                            [text]="'Add New Customization Option'"
+                            [customClass]="'btn btn-outline-primary'"
+                            (click)="addCustomizationOption.emit(i)"></app-add-button>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <app-food-item-customization-option-form
+                        [form]="options(i)"
+                        (add)="addCustomizationOption.emit(i)"
+                        (remove)="emitRemoveOption(i, $event)"></app-food-item-customization-option-form>
+                </div>
+            </div>
+        </form>
+    </ng-container>
+</ng-container>
