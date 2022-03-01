@@ -1,0 +1,197 @@
+<form
+    *ngIf="form"
+    [formGroup]="form">
+    <div class="row mt-4">
+        <form formGroupName="translations">
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="ar" translate>Dependent Name in Arabic</label> *
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="ar">
+                </div>
+                <div class="form-group col-6">
+                    <label for="en" translate>Dependent Name in English</label> *
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="en">
+                </div>
+            </div>
+        </form>
+        <div class="form-group col-3">
+            <label for="nationalId" translate>Student ID</label>
+            <input
+                type="text"
+                class="form-control"
+                formControlName="studentId">
+        </div>
+        <div class="form-group col-3">
+            <label for="nationalId" translate>National ID</label> *
+            <input
+                type="text"
+                class="form-control"
+                formControlName="nationalId">
+        </div>
+        <div class="form-group col-3">
+            <label for="phoneNo" translate>Mobile Number</label>
+            <input
+                type="text"
+                class="form-control"
+                formControlName="mobileNo">
+        </div>
+        <div class="form-group col-3">
+            <label for="email" translate>Email</label>
+            <input
+                type="text"
+                class="form-control"
+                formControlName="email">
+        </div>
+        <div class="form-group col-6">
+            <label for="sex" translate>Gender</label> *
+            <ng-select
+                [items]="genderOptions"
+                [clearable]="false"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="sex"></ng-select>
+        </div>
+        <div class="form-group col-6">
+            <label for="dob" translate>Date of Birth</label> *
+            <div class="input-group">
+                <input
+                    type="date"
+                    class="form-control text-end"
+                    onkeydown="return false"
+                    formControlName="dob">
+                <span class="input-group-text fa fa-calendar"></span>
+            </div>
+        </div>
+        <div class="form-group col-4">
+            <label for="cardSerialNo" translate>Card Serial Number</label>
+            <input
+                type="text"
+                class="form-control"
+                formControlName="cardSerialNo">
+        </div>
+        <div class="form-group col-4">
+            <label for="cardId" translate>Card UID</label>
+            <input
+                type="text"
+                class="form-control"
+                formControlName="cardId">
+        </div>
+        <div class="form-group col-4">
+            <label for="dailayLimit" translate>Daily Limit</label>
+            <input
+                type="number"
+                class="form-control"
+                min="0"
+                step=".01"
+                formControlName="dailyLimit">
+        </div>
+        <div class="form-group col-4">
+            <label for="school" translate>School</label>
+            <ng-select
+                [items]="schoolOptions"
+                bindLabel="label"
+                bindValue="value"
+                class="w-100"
+                [placeholder]="'Select School' | translate"
+                formControlName="school"></ng-select>
+        </div>
+        <div class="form-group col-4">
+            <label for="school" translate>Class</label>
+            <ng-select
+                [items]="gradeOptions"
+                bindLabel="label"
+                bindValue="value"
+                class="w-100"
+                [placeholder]="'Select Class' | translate"
+                formControlName="class"></ng-select>
+        </div>
+        <div class="form-group col-4">
+            <label for="class" translate>Section</label>
+            <input
+                type="text"
+                class="form-control"
+                formControlName="section">
+        </div>
+    </div>
+    <div
+        *ngIf="parent"
+        class="row mt-3 card p-2">
+        <h5 translate>Adult</h5>
+        <div class="row">
+            <div class="form-group col">
+                <label for="parentName" translate>Adult Name in English</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    [value]="parent?.user?.translations?.en"
+                    disabled>
+            </div>
+            <div class="form-group col">
+                <label
+                    class="text-end"
+                    for="parentName" translate>
+                    Adult Name in Arabic
+                </label>
+                <input
+                    type="text"
+                    class="form-control text-end"
+                    [value]="parent?.user?.translations?.ar"
+                    disabled>
+            </div>
+            <div class="form-group col">
+                <label for="mobileNo" translate>Mobile Number</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    [value]="parent?.user?.mobileNo"
+                    disabled>
+            </div>
+            <div class="form-group col">
+                <label for="parentMobileNo" translate>Email</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    [value]="parent?.user?.email"
+                    disabled>
+            </div>
+            <div class="form-group col">
+                <label for="currenBalance" translate>Current Balance</label>
+                <input
+                    type="text"
+                    class="form-control text-end"
+                    [value]="parent?.user?.currentBalance | wakiCurrency"
+                    disabled>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="d-flex justify-content-center gap-5">
+            <app-save-button
+                (click)="save.emit()"
+                [disabled]="shouldDisableSaveButton"></app-save-button>
+            <app-exit-button (click)="exit.emit()"></app-exit-button>
+            <button
+                *ngIf="cardStatus"
+                type="button"
+                [ngClass]="cardStatus === 'ACTIVE' ? 'btn btn-danger' : 'btn btn-success'"
+                (click)="toggleCardStatus.emit(cardStatus)"
+                [disabled]="isTogglingCardStatus || !cardStatus">
+                <ng-container *ngIf="!isTogglingCardStatus; else toggling">
+                    {{ (cardStatus === 'ACTIVE' ? 'Deactivate Card' : 'Activate Card') | translate}}
+                </ng-container>
+                <ng-template #toggling>
+                    <span class="spinner-grow spinner-grow-sm me-2"></span>
+                    <span translate>
+                        {{ (cardStatus === 'ACTIVE' ? 'Deactivating' : 'Activating') | translate}}
+                    </span>
+                </ng-template>
+            </button>
+        </div>
+    </div>
+</form>

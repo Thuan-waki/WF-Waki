@@ -1,0 +1,160 @@
+<div class="row">
+    <div class="col-12 text-center">
+        <h4 translate>Canteen Sales</h4>
+    </div>
+    <div class="col-12 mt-4">
+        <div class="d-flex justify-content-between">
+            <div class="flex-grow-1">
+                <form [formGroup]="form">
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    [placeholder]="'searching' | translate"
+                                    formControlName="search">
+                                <button
+                                    class="btn btn-outline-primary"
+                                    type="button"
+                                    (click)="form.get('search')?.setValue(''); form.get('search')?.updateValueAndValidity()"
+                                    translate>
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                        <div
+                            *ngIf="isAdmin"
+                            class="col">
+                            <ng-select
+                                [items]="schoolOptions"
+                                bindLabel="label"
+                                bindValue="value"
+                                class="auto-grow"
+                                [placeholder]="'Select School' | translate"
+                                formControlName="school"
+                                (change)="onSchoolChange()"></ng-select>
+                        </div>
+                        <div class="form-group col">
+                            <ng-select
+                                class="h-100"
+                                [items]="canteenOptions"
+                                [clearable]="true"
+                                bindLabel="label"
+                                bindValue="value"
+                                [placeholder]="'Select Canteen' | translate"
+                                formControlName="canteen"
+                                (change)="filterRecord()"></ng-select>
+                        </div>
+                    </div>
+                    <div class="row mt-3 justify-content-between">
+                        <div class="col-auto">
+                            <div class="d-flex flex-row justify-content-between gap-2">
+                                <div class="input-group">
+                                    <span class="input-group-text" translate>Order From:</span>
+                                    <input
+                                        type="date"
+                                        class="form-control text-end"
+                                        onkeydown="return false"
+                                        formControlName="orderFromDate"
+                                        (change)="filterRecord()">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text" translate>Order To:</span>
+                                    <input
+                                        type="date"
+                                        class="form-control text-end"
+                                        onkeydown="return false"
+                                        formControlName="orderToDate"
+                                        (change)="filterRecord()">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="d-flex flex-row justify-content-between gap-2">
+                                <div class="input-group">
+                                    <span class="input-group-text" translate>Delivery From:</span>
+                                    <input
+                                        type="date"
+                                        class="form-control text-end"
+                                        onkeydown="return false"
+                                        formControlName="fromDate"
+                                        (change)="filterRecord()">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text" translate>Delivery To:</span>
+                                    <input
+                                        type="date"
+                                        class="form-control text-end"
+                                        onkeydown="return false"
+                                        formControlName="toDate"
+                                        (change)="filterRecord()">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <app-export-button (click)="export.emit()"></app-export-button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mt-3">
+        <ng-container *ngIf="!foodOrders?.length && !isLoading">
+            <h6 class="mt-5" translate>No Food Order Data</h6>
+        </ng-container>
+        <div
+            *ngIf="isLoading"
+            class="spinner-border mt-5"
+            style="width: 3rem; height: 3rem;">
+        </div>
+        <ng-container *ngIf="foodOrders?.length  && !isLoading">
+            <div class="table-section">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th translate class="col">Order ID</th>
+                            <th translate class="col">Invoice No.</th>
+                            <th translate class="col text-end">Order Date</th>
+                            <th translate class="col text-end">Delivery Date</th>
+                            <th translate class="col">Student Name</th>
+                            <th translate class="col">Class & Section</th>
+                            <th translate class="col text-end">Sub Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let order of foodOrders">
+                            <tr>
+                                <td class="col">{{ order.orderId }}</td>
+                                <td class="col">{{ order.invoice?.invoiceNo }}</td>
+                                <td class="col text-end">{{ order.createdAt | wakiDate }}</td>
+                                <td class="col text-end">{{ order.orderDate | wakiDate }}</td>
+                                <td class="col">
+                                    {{ order.student?.translations | translation }}
+                                </td>
+                                <td class="col">
+                                    <div class="d-flex flex-column">
+                                        <span>{{ order.student?.grade?.grade || '' }}</span>
+                                        <span>{{ order.student?.section || '' }}</span>
+                                    </div>
+                                </td>
+                                <td class="col text-end">{{ order.orderStatus === 'RETURNED' ? '-' : ''}}{{ order.subTotal | wakiCurrency }}</td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <div class="col-12">
+                    <div class="d-flex justify-content-end">
+                        <app-pagination
+                            [currentPage]="currentPage"
+                            [maxPage]="maxPage"
+                            [infoText]="infoText"
+                            [pageOptionsShown]="3"
+                            (goToPage)="goToPage($event)"></app-pagination>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

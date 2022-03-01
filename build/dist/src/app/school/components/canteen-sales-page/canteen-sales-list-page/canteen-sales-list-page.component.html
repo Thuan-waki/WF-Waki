@@ -1,0 +1,14 @@
+<app-canteen-sales-list
+    [foodOrders]="foodOrders"
+    [isLoading]="isLoading"
+    [isAdmin]="isAdmin"
+    [schoolOptions]="schoolOptions"
+    [canteenOptions]="canteenOptions"
+    [recordCount]="recordCount"
+    [selectedSchoolId]="selectedSchoolId"
+    [selectedCanteenId]="selectedCanteenId"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    (filter)="getFoodOrders($event)"
+    (export)="exportToExcel()"
+    (schoolChange)="schoolChange($event)"></app-canteen-sales-list>

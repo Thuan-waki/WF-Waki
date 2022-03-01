@@ -1,0 +1,91 @@
+<form [formGroup]="form">
+    <div class="row">
+        <form formGroupName="translations">
+            <div class="row">
+                <div class="form-group col-12 col-sm-6">
+                    <label for="name" translate>Menu Name in English</label> *
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="en">
+                </div>
+                <div class="form-group col-12 col-sm-6">
+                    <label for="name" translate>Menu Name in Arabic</label> *
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="ar">
+                </div>
+            </div>
+        </form>
+        <div class="col-12 mt-3">
+            <div class="row">
+                <div class="form-group col-12 col-sm-6">
+                    <ng-multiselect-dropdown
+                        [placeholder]="'Schools' | translate"
+                        [settings]="dropdownSettings"
+                        [data]="schoolOptions"
+                        [formControl]="schools">
+                    </ng-multiselect-dropdown>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="d-flex flex-column">
+                        <div class="form-check">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="isPublishedForAdultApp"
+                                formControlName="isPublishedForAdultApp"
+                                checked>
+                            <label
+                                class="form-check-label"
+                                for="isPublishedForAdultApp"
+                                translate>
+                                Published for WAKI app
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="isPublishedForBusinessApp"
+                                formControlName="isPublishedForBusinessApp"
+                                checked>
+                            <label
+                                class="form-check-label"
+                                for="isPublishedForBusinessApp"
+                                translate>
+                                Published for WAKI Business app
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><hr><br>
+    <div class="row px-5">
+        <div class="col-12 mb-2">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 translate>Food Items</h5>
+                <app-add-button
+                    [customClass]="'btn btn-outline-primary'"
+                    [text]="'Choose Food Items'"
+                    (click)="selectFoodItem()"></app-add-button>
+            </div>
+        </div>
+        <app-canteen-menu-food-item-pick-list
+            [selectedFoodItems]="selectedFoodItems"
+            [selectMode]="false"
+            (remove)="removeSelectedFood($event)"></app-canteen-menu-food-item-pick-list>
+    </div>
+    <div class="row mt-5">
+        <div class="text-danger text-center mb-2" *ngIf="errorMessage.length">{{ errorMessage }}</div>
+        <div class="d-flex justify-content-center gap-5">
+            <app-save-button
+                (click)="saveChanges()"
+                [disabled]="shouldDisableSaveButton"></app-save-button>
+            <app-exit-button (click)="exit.emit()"></app-exit-button>
+        </div>
+    </div>
+</form>

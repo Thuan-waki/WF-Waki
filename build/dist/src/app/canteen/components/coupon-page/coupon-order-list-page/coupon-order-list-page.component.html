@@ -1,0 +1,15 @@
+<app-coupon-order-list
+    [couponOrders]="couponOrders"
+    [schoolOptions]="schoolOptions"
+    [canteenOptions]="canteenOptions"
+    [studentOptions]="studentOptions"
+    [couponOptions]="couponOptions"
+    [isAdmin]="isAdmin"
+    [isLoading]="isLoading"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [recordCount]="recordCount"
+    (filter)="getCouponOrders($event)"
+    (export)="exportToExcel()"
+    (email)="email($event)"
+    (download)="download($event)"></app-coupon-order-list>

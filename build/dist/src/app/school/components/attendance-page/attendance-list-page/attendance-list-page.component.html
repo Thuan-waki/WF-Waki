@@ -1,0 +1,10 @@
+<app-attendance-list
+    [attendances]="attendances"
+    [schoolOptions]="schoolOptions"
+    [isLoading]="isLoading"
+    [isAdmin]="isAdmin"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [recordCount]="recordCount"
+    (filter)="getAttendances($event)"
+    (export)="exportToExcel($event)"></app-attendance-list>

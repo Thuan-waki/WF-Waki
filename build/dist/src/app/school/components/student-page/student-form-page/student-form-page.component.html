@@ -1,0 +1,16 @@
+<h5 class="col-12 text-center" translate>
+    {{ isEditing ? 'Edit' : 'Create' }} Student
+</h5>
+<app-student-form
+    [form]="form || undefined"
+    [parent]="parent"
+    [isLoading]="isLoading"
+    [isEditing]="isEditing"
+    [shouldDisableSaveButton]="shouldDisableSaveButton"
+    [cardStatus]="cardStatus"
+    [isTogglingCardStatus]="isTogglingCardStatus"
+    [schoolOptions]="schoolOptions"
+    [gradeOptions]="gradeOptions"
+    (save)="save()"
+    (exit)="goToStudentList()"
+    (toggleCardStatus)="toggleCardStatus()"></app-student-form>

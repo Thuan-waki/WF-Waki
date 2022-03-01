@@ -1,0 +1,229 @@
+@import '../../../../../../assets/scss/variables';
+
+.balance-section {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+}
+
+.form-group.hidden {
+    width: 0;
+    margin: 0;
+    border: none;
+    padding: 0;
+}
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+}
+.custom-day.focused {
+    background-color: #e6e6e6;
+}
+.custom-day.range,
+.custom-day:hover {
+    background-color: rgb(2, 117, 216);
+    color: white;
+}
+.custom-day.faded {
+    background-color: rgba(2, 117, 216, 0.5);
+}
+
+button {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.WALK_IN_FOOD_ORDER {
+    color: #FDD641;
+}
+
+.walk-in-order {
+    background-color: #FDD641;
+    border-color: #FDD641;
+    color: white;
+}
+
+.walk-in-order-outline {
+    color: #FDD641;
+    border-color: #FDD641;
+
+    &:hover {
+        background-color: #FDD641;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem #FDD641;
+    }
+}
+
+.APP_FOOD_ORDER {
+    color: #E47CD6;
+}
+
+.app-order {
+    background-color: #E47CD6;
+    border-color: #E47CD6;
+    color: white;
+}
+
+.app-order-outline {
+    color: #E47CD6;
+    border-color: #E47CD6;
+
+    &:hover {
+        background-color: #E47CD6;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem #E47CD6;
+    }
+}
+
+.RETURN_ORDER {
+    color: #A2B5FF;
+}
+
+.return-order {
+    background-color: #A2B5FF;
+    border-color: #A2B5FF;
+    color: white;
+}
+
+.return-order-outline {
+    color: #A2B5FF;
+    border-color: #A2B5FF;
+
+    &:hover {
+        background-color: #A2B5FF;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem #A2B5FF;
+    }
+}
+
+.COUPON_PURCHASE {
+    color: #13C3D0;
+}
+
+.coupon-purchase {
+    background-color: #13C3D0;
+    border-color: #13C3D0;
+    color: white;
+}
+
+.coupon-purchase-outline {
+    color: #13C3D0;
+    border-color: #13C3D0;
+
+    &:hover {
+        background-color: #13C3D0;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem #13C3D0;
+    }
+}
+
+.TRANSFER_TO_CANTEEN {
+    color: #B3B3B3;
+}
+
+.transfer-to-canteen {
+    background-color: #B3B3B3;
+    border-color: #B3B3B3;
+    color: white;
+}
+
+.transfer-to-canteen-outline {
+    color: #B3B3B3;
+    border-color: #B3B3B3;
+
+    &:hover {
+        background-color: #B3B3B3;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem #B3B3B3;
+    }
+}
+
+.WAKI_COUPON_FEE {
+    color: #0B9B3F;
+}
+
+.waki-coupon-fee {
+    background-color: #0B9B3F;
+    border-color: #0B9B3F;
+    color: white;
+}
+
+.waki-coupon-fee-outline {
+    color: #0B9B3F;
+    border-color: #0B9B3F;
+
+    &:hover {
+        background-color: #0B9B3F;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem #0B9B3F;
+    }
+}
+
+.TRANSFER_FEE {
+    color: #F08A5D;
+}
+
+.transfer-fee {
+    background-color: #F08A5D;
+    border-color: #F08A5D;
+    color: white;
+}
+
+.transfer-fee-outline {
+    color: #F08A5D;
+    border-color: #F08A5D;
+
+    &:hover {
+        background-color: #F08A5D;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem #F08A5D;
+    }
+}
+
+.VAT {
+    color: #000000;
+}
+
+.vat-button {
+    background-color: #000000;
+    border-color: #000000;
+    color: white;
+}
+
+.vat-button-outline {
+    color: #000000;
+    border-color: #000000;
+
+    &:hover {
+        background-color: #000000;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.35rem #000000;
+    }
+}

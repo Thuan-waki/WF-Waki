@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <h5 translate>Approve Card Request</h5>
+    <button
+        type="button"
+        class="btn btn-danger fa fa-times"
+        (click)="close()"></button>
+</div>
+<div class="card-body p3">
+    <form [formGroup]="form">
+        <div class="form-group col-12">
+            <label for="cardId" translate>Card UID</label>
+            <input
+                type="text"
+                class="form-control mt-2"
+                [placeholder]="'Enter Card UID' | translate"
+                formControlName="cardId">
+        </div>
+        <div class="form-group col-12 mt-3">
+            <label for="cardSerialNo" translate>Card Serial Number</label>
+            <input
+                type="text"
+                class="form-control mt-2"
+                [placeholder]="'Enter Card Serial Number' | translate"
+                formControlName="cardSerialNo">
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button
+        type="button"
+        class="btn btn-outline-secondary"
+        (click)="close()" 
+        translate>
+        Cancel
+    </button>
+    <button
+        type="button"
+        class="btn btn-primary"
+        (click)="approve()"
+        [disabled]="isLoading || shouldDisableApproveButton">
+        <span
+            *ngIf="!isLoading"
+            class="fa fa-check me-2"></span>
+        <span *ngIf="!isLoading" translate>Approve</span>
+        <span
+            *ngIf="isLoading"
+            class="spinner-grow spinner-grow-sm me-2"></span>
+        <span *ngIf="isLoading" translate>Approving...</span>
+    </button>
+</div>

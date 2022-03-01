@@ -1,0 +1,2541 @@
+{
+	"info": {
+		"_postman_id": "ebd35a88-4d55-46bb-b683-c4a14a591de4",
+		"name": "WAKI-APIs-v2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Parent",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"fullName\": \"Parent 1\",\n   \"email\": \"gaurav@gmail.com\",\n   \"mobileNo\": \"+919033328363\",\n   \"password\": \"9033328362\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/parents/signup",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Student",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"studentName\": \"Dummy1 Student\",\n    \"translations\": {\n        \"en\": \"Dummy1 Student\",\n        \"ar\": \"اول1 الاخر\"\n    },\n    \"nationalId\": \"NIDS056\",\n    \"dob\": \"1993-10-25\",\n    \"sex\": \"MALE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/parents/students",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "School Lookup",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/parents/schools",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"schools"
+							],
+							"query": [
+								{
+									"key": "schoolRegistrationCode",
+									"value": "SCH0001",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Grades/Classes",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/parents/schools/5f6c94a3e67aae5089ac8c85/grades",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"schools",
+								"5f6c94a3e67aae5089ac8c85",
+								"grades"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "My Students",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/parents/students",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a student",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/parents/students/6017d4196bf5337bfd473997",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"students",
+								"6017d4196bf5337bfd473997"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Preferences",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/parents/preferences",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"preferences"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Preferences",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"notificationWhenStudentArrives\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/parents/preferences",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"preferences"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Store items",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/parents/store-items",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"store-items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order card",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"storeItem\": \"60ef02d2cd4f60215f38c27e\",\n    \"student\": \"60dff8243960043f9f3c1829\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/parents/card-orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"card-orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update student",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dailyLimit\" : 12,\n    \"school\": \"5f6c94a3e67aae5089ac8c85\",\n    \"cardStatus\": \"INACTIVE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/parents/students/6017d4196bf5337bfd473997",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"students",
+								"6017d4196bf5337bfd473997"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transactions History",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/parents/transactions?student=60dff8243960043f9f3c1829&fromDate=2021-03-01&toDate=2021-07-31",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "student",
+									"value": "60dff8243960043f9f3c1829"
+								},
+								{
+									"key": "fromDate",
+									"value": "2021-03-01"
+								},
+								{
+									"key": "toDate",
+									"value": "2021-07-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Attendance History",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/parents/students/6017d4196bf5337bfd473997/attendance?fromDate=2021-05-01&toDate=2021-07-31",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"students",
+								"6017d4196bf5337bfd473997",
+								"attendance"
+							],
+							"query": [
+								{
+									"key": "fromDate",
+									"value": "2021-05-01"
+								},
+								{
+									"key": "toDate",
+									"value": "2021-07-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Refund",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bankAccount\": {\n        \"accountNo\": \"0010101001010101\",\n        \"accountName\": \"Dummy bank account\",\n        \"IBAN\": \"MYIBAN01010101\",\n        \"bank\": \"60e8823b62c67d551502015a\"\n    },\n    \"amount\": 40.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/parents/refund-request",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"refund-request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Requests",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/parents/requests?fromDate=2021-05-01&toDate=2021-07-30",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"requests"
+							],
+							"query": [
+								{
+									"key": "student",
+									"value": "60e0b9495e59b10e1e7171e4",
+									"disabled": true
+								},
+								{
+									"key": "fromDate",
+									"value": "2021-05-01"
+								},
+								{
+									"key": "toDate",
+									"value": "2021-07-30"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dashboard",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/parents/dashboard",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"dashboard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Canteen Menu",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/parents/students/60dff8243960043f9f3c1829/canteen-menu",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"students",
+								"60dff8243960043f9f3c1829",
+								"canteen-menu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order Food",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderDate\": \"2021-07-13\",\n    \"items\": [\n        {\n            \"food\": \"60dae1d646d9d34e2a9bb7e9\",\n            \"quantity\": 2,\n            \"selectedCustomizations\": [\n               {\n                    \"customization\": \"60dae1d646d9d34e2a9bb7ea\",\n                    \"values\": [\n                        { \"option\": \"60dae1d646d9d34e2a9bb7eb\", \"price\": 10.0 }\n                    ]\n               }\n            ]\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/parents/students/60dff8243960043f9f3c1829/food-orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"students",
+								"60dff8243960043f9f3c1829",
+								"food-orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Food Orders",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/parents/food-orders?student=60dff8243960043f9f3c1829&fromDate=2021-03-01&toDate=2021-07-31",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"food-orders"
+							],
+							"query": [
+								{
+									"key": "student",
+									"value": "60dff8243960043f9f3c1829"
+								},
+								{
+									"key": "fromDate",
+									"value": "2021-03-01"
+								},
+								{
+									"key": "toDate",
+									"value": "2021-07-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/parents/reports?fromDate=2021-04-01&toDate=2021-04-31",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"reports"
+							],
+							"query": [
+								{
+									"key": "fromDate",
+									"value": "2021-04-01"
+								},
+								{
+									"key": "toDate",
+									"value": "2021-04-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Banks list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/banks",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"banks"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{authToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"fullName\": \"School User 1\",\n   \"email\": \"gbmobitech@gmail.com\",\n   \"mobileNo\": \"+919033328362\",\n   \"password\": \"9328749331‬\",\n   \"role\": \"SCHOOL_USER\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/signup",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login with Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"gaurav2@parent.com\",\n    \"password\": \"gaurav2@parent.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/login?type=EMAIL",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"login"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "EMAIL"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email verification",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"ggajjar93@gmail.com\",\n    \"verificationCode\": \"60026774\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/verify-email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"verify-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mobile No Verification",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNo\": \"+919033328362\",\n    \"verificationCode\": \"9706\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/verify-mobile-no",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"verify-mobile-no"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login with Mobile No.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNo\": \"+919033328362\",\n    \"password\": \"gaurav1@parent.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/login?type=MOBILE_NO",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"login"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "MOBILE_NO"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login OTP Verification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code == 200){",
+									"    pm.environment.set('authToken', pm.response.json().token)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"gaurav2@parent.com\",\n    \"otp\": \"3209\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/login-otp-verification",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"login-otp-verification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password Type Email Step 1",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"ggajjar93@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/forgot-password?step=1&type=EMAIL",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"forgot-password"
+							],
+							"query": [
+								{
+									"key": "step",
+									"value": "1"
+								},
+								{
+									"key": "type",
+									"value": "EMAIL"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password Type Email Step 2",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"ggajjar93@gmail.com\",\n    \"verificationCode\": \"64453379\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/forgot-password?step=2&type=EMAIL",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"forgot-password"
+							],
+							"query": [
+								{
+									"key": "step",
+									"value": "2"
+								},
+								{
+									"key": "type",
+									"value": "EMAIL"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password Type Email Step 3",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"ggajjar93@gmail.com\",\n    \"newPassword\": \"gaurav123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/forgot-password?step=3&type=EMAIL",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"forgot-password"
+							],
+							"query": [
+								{
+									"key": "step",
+									"value": "3"
+								},
+								{
+									"key": "type",
+									"value": "EMAIL"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password Type Mobile No Step 1",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNo\": \"+919033328362\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/forgot-password?step=1&type=MOBILE_NO",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"forgot-password"
+							],
+							"query": [
+								{
+									"key": "step",
+									"value": "1"
+								},
+								{
+									"key": "type",
+									"value": "MOBILE_NO"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password Type Mobile No Step 2",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNo\": \"+919033328362\",\n    \"verificationCode\": \"87492572\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/forgot-password?step=2&type=MOBILE_NO",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"forgot-password"
+							],
+							"query": [
+								{
+									"key": "step",
+									"value": "2"
+								},
+								{
+									"key": "type",
+									"value": "MOBILE_NO"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password Type Mobile No Step 3",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNo\": \"+919033328362\",\n    \"newPassword\": \"gaurav123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/forgot-password?step=3&type=MOBILE_NO",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"forgot-password"
+							],
+							"query": [
+								{
+									"key": "step",
+									"value": "3"
+								},
+								{
+									"key": "type",
+									"value": "MOBILE_NO"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "My Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"oldPassword\": \"\",\n    \"newPassword\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/change-password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update My Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/users/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transfer Money",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNo\": \"+919033328001\",\n    \"amount\": 100,\n    \"purposeOfTransfer\": \"FAMILY_AND_FRIENDS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/transfer",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order adult card",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"storeItem\": \"60ef02d2cd4f60215f38c27e\",\n    \"school\": \"5f6c94a3e67aae5089ac8c85\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/card-orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"card-orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Purpose of Transfer Types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/purpose-of-transfer-types",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"purpose-of-transfer-types"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "School",
+			"item": [
+				{
+					"name": "Save Attendance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"deviceSN\": \"D1\",\n\t\"cardOrFpId\": \"01010101010\",\n\t\"atDate\": \"2021-04-05\",\n\t\"atCheckIn\": \"2021-04-05T08:00:00.000Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/schools/60703e79e94f531c3f7fe36c/attendance",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"schools",
+								"60703e79e94f531c3f7fe36c",
+								"attendance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Attendance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/schools/60703e79e94f531c3f7fe36c/attendance",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"schools",
+								"60703e79e94f531c3f7fe36c",
+								"attendance"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{authToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Canteen",
+			"item": [
+				{
+					"name": "Add Transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"student\": \"6070429be94f531c3f7fe391\",\n    \"canteen\": null,\n    \"school\": \"60703e79e94f531c3f7fe36c\",\n\t\"trDate\": \"2021-04-10\",\n\t\"trTime\": \"12:00:00\",\n\t\"trType\": \"FUNDING\",\n\t\"amount\": 50,\n\t\"deviceSN\": \"D1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/transactions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get canteen menus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/schools/5f6c94a3e67aae5089ac8c85/canteen-menus",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"schools",
+								"5f6c94a3e67aae5089ac8c85",
+								"canteen-menus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Food Items",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Burger\",\n    \"translations\": {\n        \"en\": \"Burger\",\n        \"ar\": \"برجر\"\n    },\n    \"availableQuantity\": 10,\n    \"pricePerItem\": 20\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/canteens/60ccd2f3b6b1edd0a74647ab/food-items",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"canteens",
+								"60ccd2f3b6b1edd0a74647ab",
+								"food-items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Food items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/canteens/60ccd2f3b6b1edd0a74647ab/food-items",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"canteens",
+								"60ccd2f3b6b1edd0a74647ab",
+								"food-items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Food Customization",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n{\n    \"name\": \"Extra Cheese?\",\n    \"translations\": {\n      \"en\": \"Extra Cheese?\",\n      \"ar\": \"الجبن إضافية؟\"\n    },\n    \"customizationType\": \"SINGLE_CHOICE\",\n    \"food\": \"5fb7e06698f3af16700b5dfd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/canteens/60ccd2f3b6b1edd0a74647ab/food-customizations",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"canteens",
+								"60ccd2f3b6b1edd0a74647ab",
+								"food-customizations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Food Customizations",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n{\n    \"name\": \"Extra Cheese?\",\n    \"translations\": {\n      \"en\": \"Extra Cheese?\",\n      \"ar\": \"الجبن إضافية؟\"\n    },\n    \"customizationType\": \"SINGLE_CHOICE\",\n    \"food\": \"5fb7e06698f3af16700b5dfd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/canteens/60ccd2f3b6b1edd0a74647ab/food-customizations?food=5fb7e06698f3af16700b5dfd",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"canteens",
+								"60ccd2f3b6b1edd0a74647ab",
+								"food-customizations"
+							],
+							"query": [
+								{
+									"key": "food",
+									"value": "5fb7e06698f3af16700b5dfd"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Food Customizations Option",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Yes\",\n\t\t\"translations\": {\n\t\t\t\"en\": \"Yes\",\n\t\t\t\"ar\": \"نعم\"\n\t\t},\n\t\t\"foodCustomization\": \"60cd7c8bf2fd67db1a209130\",\n        \"hasExtraPrice\": true,\n        \"extraPrice\": 10.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/canteens/60ccd2f3b6b1edd0a74647ab/food-customizations/60cd7c8bf2fd67db1a209130/food-customization-options",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"canteens",
+								"60ccd2f3b6b1edd0a74647ab",
+								"food-customizations",
+								"60cd7c8bf2fd67db1a209130",
+								"food-customization-options"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Food Customization",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"customizationType\": \"SINGLE_CHOICE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/canteens/60ccd2f3b6b1edd0a74647ab/food-customizations/60cd7c8bf2fd67db1a209130",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"canteens",
+								"60ccd2f3b6b1edd0a74647ab",
+								"food-customizations",
+								"60cd7c8bf2fd67db1a209130"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Food Customization Option",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\t\"translations\": {\n\t\t\t\"en\": \"Yes\",\n\t\t\t\"ar\": \"نعم\"\n\t\t},\n        \"hasExtraPrice\": true,\n        \"extraPrice\": 7.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/canteens/60ccd2f3b6b1edd0a74647ab/food-customizations/60cd7c8bf2fd67db1a209130/food-customization-options/60cd83ba284d3adcd65fe846",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"canteens",
+								"60ccd2f3b6b1edd0a74647ab",
+								"food-customizations",
+								"60cd7c8bf2fd67db1a209130",
+								"food-customization-options",
+								"60cd83ba284d3adcd65fe846"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Food Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/canteens/60ccd2f3b6b1edd0a74647ab/food-orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"canteens",
+								"60ccd2f3b6b1edd0a74647ab",
+								"food-orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Return Food Order",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"returnItems\": [{\n        \"food\": \"60ed94af6d10b4a486df9e4f\",\n        \"quantity\": 2\n    }]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/canteens/60cc4d1db8733ebdf875079a/food-orders/60ed94af6d10b4a486df9e4f/return-order",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"canteens",
+								"60cc4d1db8733ebdf875079a",
+								"food-orders",
+								"60ed94af6d10b4a486df9e4f",
+								"return-order"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{authToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Add School",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"schoolRegistrationCode\": \"sch003030\",\n    \"schoolName\": \"test en\",\n    \"translations\": {\n        \"en\": \"test en\",\n        \"ar\": \"test ar\"\n    },\n    \"country\": \"Saudi Arabia\",\n    \"city\": \"Al-Abwa\",\n    \"address\": \"\",\n    \"phone\": \"4324324324324\",\n    \"mobileNo\": \"919033328362\",\n    \"email\": \"schoolmy@gmail.com\",\n    \"vat\": \"3243243243232\",\n    \"currentSubscriptionStarts\": \"2021-06-19T11:51:56.145Z\",\n    \"currentSubscriptionEnds\": \"2021-12-19T11:51:56.147Z\",\n    \"initDailyPurchase\": 0,\n    \"creditLimit\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/schools",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"schools"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update School",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNo\": \"919033328344\",\n    \"vat\": \"3243243243444\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/schools/60cdddd5628dc1e990b9383f",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"schools",
+								"60cdddd5628dc1e990b9383f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Parents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/parents",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Parents",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Abc\": \"acb\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/parents/600c2966dd4a9fbdea63621b",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"parents",
+								"600c2966dd4a9fbdea63621b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new canteen",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"translations\": {\n        \"en\": \"My Canteen\",\n        \"ar\": \"Canteen My\"\n    },\n    \"canteenId\": \"CTMY001\",\n    \"canteenName\": \"Canteen My\",\n    \"address\": \"Rajkot\",\n    \"phone\": \"+919033328364\",\n    \"mobileNo\": \"+919033328365\",\n    \"vat\": \"VAT090\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/canteens",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"canteens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Canteen Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/canteens/60ccd2f3b6b1edd0a74647ab",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"canteens",
+								"60ccd2f3b6b1edd0a74647ab"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update canteen",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"translations\": {\n        \"en\": \"My Canteen 1\",\n        \"ar\": \"Canteen My 1\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/canteens/60ccd2f3b6b1edd0a74647ab",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"canteens",
+								"60ccd2f3b6b1edd0a74647ab"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/transactions?canteen=60ccd2f3b6b1edd0a74647ab",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "canteen",
+									"value": "60ccd2f3b6b1edd0a74647ab"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transfer Requests",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/requests?requestType=CANTEEN_TRANSFER_REQUEST&user=60ccd2f3b6b1edd0a74647ab",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requests"
+							],
+							"query": [
+								{
+									"key": "requestType",
+									"value": "CANTEEN_TRANSFER_REQUEST"
+								},
+								{
+									"key": "user",
+									"value": "60ccd2f3b6b1edd0a74647ab"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get parent refund requests",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/requests?requestType=PARENT_REFUND&fromDate=2021-07-01&toDate=2021-07-31&search",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requests"
+							],
+							"query": [
+								{
+									"key": "requestType",
+									"value": "PARENT_REFUND"
+								},
+								{
+									"key": "fromDate",
+									"value": "2021-07-01"
+								},
+								{
+									"key": "toDate",
+									"value": "2021-07-31"
+								},
+								{
+									"key": "search",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get request details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/requests/43204343432523",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requests",
+								"43204343432523"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update request status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rqStatus\": \"TRANSFERRED\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/requests/60f6bc4f265a33a51c833841/update-status",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requests",
+								"60f6bc4f265a33a51c833841",
+								"update-status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Card Orders",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/card-orders?fromDate=2021-07-01&toDate=2021-07-31&search",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"card-orders"
+							],
+							"query": [
+								{
+									"key": "fromDate",
+									"value": "2021-07-01"
+								},
+								{
+									"key": "toDate",
+									"value": "2021-07-31"
+								},
+								{
+									"key": "search",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Home Page",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/admin/dashboard",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"dashboard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Approve Card Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderStatus\": \"DELIVERED\",\n    \"cardId\": \"16x10393829303\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/card-orders/60f64efad8c405672c742dc7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"card-orders",
+								"60f64efad8c405672c742dc7"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{authToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Temporary",
+			"item": [
+				{
+					"name": "Delete a user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/users/SUz8v4D5aChMgK2K/gaurav4@parent.com",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"SUz8v4D5aChMgK2K",
+								"gaurav4@parent.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get OTP",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/SUz8v4D5aChMgK2K/+919033328000",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"SUz8v4D5aChMgK2K",
+								"+919033328000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete today order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{deviceAppAuthToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/deviceapp/orders-for-today?cardId=16x0394435049852457443",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"deviceapp",
+								"orders-for-today"
+							],
+							"query": [
+								{
+									"key": "cardId",
+									"value": "16x0394435049852457443"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Test Notification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNo\": \"+919033328001\",\n    \"amount\": 100,\n    \"purposeOfTransfer\": \"FAMILY_AND_FRIENDS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/send-test-notification",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"send-test-notification"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Device App",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code == 200){",
+									"    pm.environment.set('deviceAppAuthToken', pm.response.json().token)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"newdeviceuser@attendance.com\",\n    \"password\": \"newdeviceuser@attendance.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/deviceapp/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"deviceapp",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{deviceAppAuthToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/deviceapp/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"deviceapp",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Attendance - Checkin/out",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{deviceAppAuthToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cardId\": \"16x0394435049852457443\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/deviceapp/checkin-out",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"deviceapp",
+								"checkin-out"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Orders for Today",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{deviceAppAuthToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/deviceapp/orders-for-today?cardId=16x0394435049852457443",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"deviceapp",
+								"orders-for-today"
+							],
+							"query": [
+								{
+									"key": "cardId",
+									"value": "16x0394435049852457443"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deliver/Reject Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{deviceAppAuthToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"student\": \"6017d4196bf5337bfd473997\",\n    \"orderStatus\": \"DELIVERED\" //REJECTED\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/deviceapp/food-orders/60f1852b5e4e5b46918cf136",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"deviceapp",
+								"food-orders",
+								"60f1852b5e4e5b46918cf136"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Walk-in Menu",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{deviceAppAuthToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/deviceapp/canteen-menu",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"deviceapp",
+								"canteen-menu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Walk-in Order Food",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{deviceAppAuthToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cardId\": \"16x0394435049852457443\",\n    \"items\": [\n        {\n            \"food\": \"60dae1d646d9d34e2a9bb7e9\",\n            \"quantity\": 2,\n            \"selectedCustomizations\": [\n               {\n                    \"customization\": \"60dae1d646d9d34e2a9bb7ea\",\n                    \"values\": [\n                        { \"option\": \"60dae1d646d9d34e2a9bb7eb\", \"price\": 10.0 }\n                    ]\n               }\n            ]\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/deviceapp/food-orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"deviceapp",
+								"food-orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Return Food",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{deviceAppAuthToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cardId\": \"16x0394435049852457443\",\n    \"returnItems\": [{\n        \"food\": \"60dae1d646d9d34e2a9bb7e9\",\n        \"quantity\": 2\n    }]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/deviceapp/food-orders/60f255c359291d66eabc1dd8/return-order",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"deviceapp",
+								"food-orders",
+								"60f255c359291d66eabc1dd8",
+								"return-order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

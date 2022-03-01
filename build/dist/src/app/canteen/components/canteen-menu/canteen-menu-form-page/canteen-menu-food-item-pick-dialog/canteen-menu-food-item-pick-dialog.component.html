@@ -1,0 +1,89 @@
+<div class="modal-header">
+    <h5 translate>Select Food Items</h5>
+    <button
+        type="button"
+        class="btn btn-danger fa fa-times"
+        (click)="close()"></button>
+</div>
+<div class="modal-body p-3">
+    <form [formGroup]="form">
+        <div class="form-group col-12">
+            <input
+                type="text"
+                [placeholder]="'Search Phrase' | translate"
+                class="form-control"
+                formControlName="search">
+        </div>
+    </form>
+    <ng-container *ngIf="!foodItems.length && !isLoading">
+        <h6 class="mt-4" translate>No Food Item Found</h6>
+    </ng-container>
+    <div
+        *ngIf="isLoading"
+        class="spinner-border mt-5"
+        style="width: 3rem; height: 3rem;">
+    </div>
+    <ng-container *ngIf="foodItems.length && !isLoading">
+        <div class="table-section mt-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th translate class="col-1 text-center">Action</th>
+                        <th translate class="col-3 text-center">Picture</th>
+                        <th translate class="col">Name</th>
+                        <th translate class="col-3 text-end">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let foodItem of foodItems">
+                        <tr>
+                            <td class="col-1 align-middle text-center">
+                                <div class="d-flex justify-content-around">
+                                    <div class="form-check">
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            id="enabledForParentApp"
+                                            [checked]="isSelected(foodItem)"
+                                            (change)="onFoodItemCheckBoxClick($event, foodItem)">
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="col-3 align-middle">
+                                <div class=" d-flex justify-content-center h-100">
+                                    <img
+                                        *ngIf="foodItem.image"
+                                        width="50"
+                                        height="50"
+                                        [src]="imageServerUrl + foodItem.image">
+                                    <div *ngIf="!foodItem.image">(<span translate>No Image</span>)</div>
+                                </div>
+                            </td>
+                            <td class="col align-middle">{{ foodItem.translations | translation }}</td>
+                            <td class="col-3 align-middle text-end">
+                                {{ foodItem.pricePerItem | wakiCurrency }}
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12">
+            <div class="d-flex justify-content-center">
+                <app-pagination
+                    [currentPage]="currentPage"
+                    [maxPage]="maxPage"
+                    [pageOptionsShown]="3"
+                    (goToPage)="goToPage($event)"></app-pagination>
+            </div>
+        </div>
+    </ng-container>
+</div>
+<div class="modal-footer">
+    <button
+        type="button"
+        class="btn btn-primary"
+        (click)="close()" translate>
+        Done
+    </button>
+</div>

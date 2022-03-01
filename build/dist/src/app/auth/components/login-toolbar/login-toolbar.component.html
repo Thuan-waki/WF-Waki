@@ -1,0 +1,42 @@
+<div class="toolbar-wrapper p-0">
+    <nav class="navbar navbar-light bg-primary w-100 p-0">
+        <div class="toolbar-container">
+            <a
+                href="/"
+                class="d-flex justify-content-center pl-5">
+                <img
+                    src="../../../../assets/images/logo-horizontal.png"
+                    width="120px"
+                    height="auto">
+            </a>
+            <div class="toolbar-menu-container">
+                <div class="dropdown">
+                    <a
+                        *ngIf="!isProduction"
+                        class="btn btn-outline-primary text-white"
+                        (click)="showSignUpInfo()"
+                        translate>
+                        Sign Up
+                    </a>
+                </div>
+                <div class="dropdown">
+                    <a
+                        class="btn btn-outline-primary text-white"
+                        href="https://waki.sa"
+                        translate>
+                        E-Portal
+                    </a>
+                </div>
+                <div class="dropdown">
+                    <a
+                        class="btn btn-outline-primary text-white"
+                        href="#"
+                        role="button"
+                        (click)="onChangedLanguage(trans.currentLang)">
+                        {{ currentLanguage | languageTxt }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

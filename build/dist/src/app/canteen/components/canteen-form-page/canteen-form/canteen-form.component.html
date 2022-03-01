@@ -1,0 +1,325 @@
+<div
+    *ngIf="isLoading || !form"
+    class="spinner-border mt-5"
+    style="width: 3rem; height: 3rem;">
+</div>
+<ng-container *ngIf="!isLoading">
+    <form
+        *ngIf="form"
+        [formGroup]="form">
+        <div class="col-12">
+            <form formGroupName="translations">
+                <div class="row">
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="ar" translate>Canteen Name in Arabic</label> *
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="ar"
+                            [placeholder]="'Canteen Name in Arabic' | translate">
+                        <app-input-required-error-message [control]="translations.get('ar') || undefined"></app-input-required-error-message>
+                    </div>
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="en" translate>Canteen Name in English</label> *
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="en"
+                            [placeholder]="'Canteen Name in English' | translate">
+                        <app-input-required-error-message [control]="translations.get('en') || undefined"></app-input-required-error-message>
+                    </div>
+                </div>
+            </form>
+            <form formGroupName="officialNameTranslations">
+                <div class="row">
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="ar" translate>Full Canteen Name in Arabic</label> *
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="ar"
+                            [placeholder]="'Full Canteen Name in Arabic' | translate">
+                        <app-input-required-error-message [control]="translations.get('ar') || undefined"></app-input-required-error-message>
+                    </div>
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="en" translate>Full Canteen Name in English</label> *
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="en"
+                            [placeholder]="'Full Canteen Name in English' | translate">
+                        <app-input-required-error-message [control]="translations.get('en') || undefined"></app-input-required-error-message>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="form-group col-3 mb-2">
+                    <label for="canteenId" translate>Canteen ID</label> *
+                    <input
+                        type="text"
+                        class="form-control"
+                        [placeholder]="'Canteen ID' | translate"
+                        formControlName="canteenId">
+                    <app-input-required-error-message [control]="form.get('canteenId') || undefined"></app-input-required-error-message>
+                </div>
+                <div class="form-group col-3 mb-2">
+                    <label for="vat" translate>VAT</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        [placeholder]="'VAT' | translate"
+                        formControlName="vat">
+                </div>
+                <div class="form-group col-3">
+                    <label for="vatPercentage" translate>VAT Percentage</label>
+                    <div class="input-group">
+                        <input
+                            type="number"
+                            class="form-control text-end"
+                            [placeholder]="'VAT Percentage' | translate"
+                            formControlName="vatPercentage">
+                        <label class="input-group-text">%</label>
+                    </div>
+                </div>
+                <div class="form-group col-3 mb-2">
+                    <label for="transactionFee" translate>Transaction Fee</label> *
+                    <input
+                        type="number"
+                        class="form-control text-end"
+                        [placeholder]="'Transaction Fee' | translate"
+                        formControlName="transactionFee">
+                    <app-input-required-error-message [control]="form.get('transactionFee') || undefined"></app-input-required-error-message>
+                </div>
+                <div class="form-group col-12">
+                    <label for="address" translate>Address</label> *
+                    <input
+                        type="text"
+                        class="form-control"
+                        [placeholder]="'Address' | translate"
+                        formControlName="address">
+                    <app-input-required-error-message [control]="form.get('address') || undefined"></app-input-required-error-message>
+                </div>
+                <div formGroupName="streetAddress">
+                    <div class="row">
+                        <div class="form-group col-3">
+                            <label for="unitNo" translate>Unit Number</label> *
+                            <input
+                                type="text"
+                                class="form-control"
+                                [placeholder]="'Unit Number' | translate"
+                                formControlName="unitNo">
+                            <app-input-required-error-message [control]="form.get('unitNo') || undefined"></app-input-required-error-message>
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="buildingNo" translate>Building Number</label> *
+                            <input
+                                type="text"
+                                class="form-control"
+                                [placeholder]="'Building Number' | translate"
+                                formControlName="buildingNo">
+                            <app-input-required-error-message [control]="form.get('buildingNo') || undefined"></app-input-required-error-message>
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="street" translate>Street Name</label> *
+                            <input
+                                type="text"
+                                class="form-control"
+                                [placeholder]="'Street Name' | translate"
+                                formControlName="street">
+                            <app-input-required-error-message [control]="form.get('street') || undefined"></app-input-required-error-message>
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="district" translate>District</label> *
+                            <input
+                                type="text"
+                                class="form-control"
+                                [placeholder]="'District' | translate"
+                                formControlName="district">
+                            <app-input-required-error-message [control]="form.get('district') || undefined"></app-input-required-error-message>
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="zipCode" translate>Zip Code</label> *
+                            <input
+                                type="text"
+                                class="form-control"
+                                [placeholder]="'Zip Code' | translate"
+                                formControlName="zipCode">
+                            <app-input-required-error-message [control]="form.get('zipCode') || undefined"></app-input-required-error-message>
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="additional" translate>Additional Number</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                [placeholder]="'Additional Number' | translate"
+                                formControlName="additional">
+                            <app-input-required-error-message [control]="form.get('additional') || undefined"></app-input-required-error-message>
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="country" translate>Country</label> *
+                            <ng-select
+                                [items]="countryOptions"
+                                [clearable]="false"
+                                bindLabel="label"
+                                bindValue="value"
+                                formControlName="country"></ng-select>
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="city" translate>City</label> *
+                            <ng-select
+                                [items]="cityOptions"
+                                [clearable]="false"
+                                bindLabel="label"
+                                bindValue="value"
+                                formControlName="city"></ng-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-4">
+                    <label for="phone" translate>Phone</label> *
+                    <input
+                        type="number"
+                        class="form-control"
+                        [placeholder]="'Phone' | translate"
+                        formControlName="phone">
+                    <app-input-required-error-message [control]="form.get('phone') || undefined"></app-input-required-error-message>
+                </div>
+                <div class="form-group col-4">
+                    <label for="mobileNo" translate>Mobile No</label> *
+                    <input
+                        type="text"
+                        class="form-control"
+                        [placeholder]="'Mobile No' | translate"
+                        formControlName="mobileNo">
+                    <app-input-required-error-message [control]="form.get('mobileNo') || undefined"></app-input-required-error-message>
+                </div>
+                <div class="form-group col-4">
+                    <label for="email" translate>Email</label> *
+                    <input
+                        type="text"
+                        class="form-control"
+                        [placeholder]="'Email' | translate"
+                        formControlName="email">
+                    <app-input-required-error-message [control]="form.get('email') || undefined"></app-input-required-error-message>
+                </div>
+                <div
+                    class="col-12"
+                    *ngIf="isEditing">
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <label for="numOfStudents" translate># of Students</label> *
+                            <input
+                                type="text"
+                                class="form-control text-end"
+                                [placeholder]="'# of Students' | translate"
+                                formControlName="numOfStudents">
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="currentSubscriptionStarts" translate>Starts At</label> *
+                            <input
+                                type="text"
+                                class="form-control text-end"
+                                [placeholder]="'Starts At' | translate"
+                                formControlName="currentSubscriptionStarts">
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="currentSubscriptionEnds" translate>Ends At</label> *
+                            <input
+                                type="text"
+                                class="form-control text-end"
+                                [placeholder]="'Ends At' | translate"
+                                formControlName="currentSubscriptionEnds">
+                        </div>
+                    </div>
+                </div>
+                <form formGroupName="bankAccount">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="accountNo" translate>Bank Account No</label> *
+                            <input
+                                type="text"
+                                class="form-control"
+                                [placeholder]="'Bank Account No' | translate"
+                                formControlName="accountNo">
+                            <app-input-required-error-message [control]="bankAccount.get('accountNo') || undefined"></app-input-required-error-message>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="accountName" translate>Bank Account Name</label> *
+                            <input
+                                type="text"
+                                class="form-control"
+                                [placeholder]="'Bank Account Name' | translate"
+                                formControlName="accountName">
+                            <app-input-required-error-message [control]="bankAccount.get('accountName') || undefined"></app-input-required-error-message>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="IBAN" translate>IBAN</label> *
+                            <input
+                                type="text"
+                                class="form-control"
+                                [placeholder]="'IBAN' | translate"
+                                formControlName="IBAN">
+                            <app-input-required-error-message [control]="bankAccount.get('IBAN') || undefined"></app-input-required-error-message>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="bank" translate>Bank Name</label> *
+                            <ng-select
+                                [items]="bankOptions"
+                                [clearable]="false"
+                                bindLabel="label"
+                                bindValue="value"
+                                formControlName="bank"></ng-select>
+                            <app-input-required-error-message [control]="bankAccount.get('bank') || undefined"></app-input-required-error-message>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div
+                class="card mt-3"
+                *ngIf="isEditing">
+                <div class="col-12">
+                    <h5 translate>Schools</h5>
+                </div>
+                <ng-container *ngIf="canteen?.schools && canteen?.schools?.length">
+                    <div class="col-12">
+                        <div class="table-section">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="col" translate>School ID</th>
+                                        <th class="col" translate>School Name</th>
+                                        <th class="col" translate>School Email</th>
+                                        <th class="col" translate>School Mobile No</th>
+                                        <th class="col" translate>School Phone No</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngFor="let school of canteen?.schools; let i = index">
+                                        <tr>
+                                            <td class="align-middle col">{{ school.schoolRegistrationCode }}</td>
+                                            <td class="align-middle col">{{ school.translations | translation }}</td>
+                                            <td class="align-middle col">{{ school.email }}</td>
+                                            <td class="align-middle col">{{ school.mobileNo }}</td>
+                                            <td class="align-middle col">{{ school.phone }}</td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="!canteen?.schools?.length">
+                    <h6 translate>No Schools Data</h6>
+                </ng-container>
+            </div>
+            <div class="row mt-5">
+                <div class="d-flex justify-content-center gap-5">
+                    <app-save-button
+                        (click)="save.emit()"
+                        [disabled]="shouldDisableSaveButton"></app-save-button>
+                    <app-exit-button (click)="exit.emit()"></app-exit-button>
+                </div>
+            </div>
+        </div>
+    </form>
+</ng-container>

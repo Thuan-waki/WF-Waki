@@ -1,0 +1,12 @@
+<app-card-store-list
+    [isAdmin]="isAdmin"
+    [isLoading]="isLoading"
+    [storeItems]="storeItems"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [recordCount]="recordCount"
+    (filter)="getCardStore($event)"
+    (newStoreItem)="newStoreItem()"
+    (updateStoreItem)="updateStoreItem($event)"
+    (goToEditStoreItem)="goToEditStoreItem($event)"
+    (export)="exportToExcel()"></app-card-store-list>

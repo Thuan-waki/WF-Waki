@@ -1,0 +1,11 @@
+<app-canteen-form
+    [form]="form"
+    [bankOptions]="bankOptions"
+    [isLoading]="isLoading"
+    [isEditing]="isEditing"
+    [canteen]="canteen"
+    [countries]="countries"
+    [cities]="cities"
+    [shouldDisableSaveButton]="shouldDisableSaveButton"
+    (save)="save()"
+    (exit)="goToCanteenList()">

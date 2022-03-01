@@ -1,0 +1,60 @@
+<ng-container *ngIf="form && form.controls.length">
+    <ng-container *ngFor="let control of form.controls; let i = index">
+        <form
+            *ngIf="form"
+            [formGroup]="option(i)">
+            <div class="card mt-2">
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <form formGroupName="translations">
+                            <div class="row">
+                                <div class="form-group col-12 col-sm-6">
+                                    <label for="name" translate>Option Name in English</label> *
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        formControlName="en"
+                                        [placeholder]="'Option Name in English' | translate">
+                                </div>
+                                <div class="form-group col-12 col-sm-6">
+                                    <label for="name" translate>Option Name in Arabic</label> *
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        formControlName="ar"
+                                        [placeholder]="'Option Name in Arabic' | translate">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="form-group col-12 col-sm-2">
+                        <label for="name" translate>Has Extra Price</label> *
+                        <ng-select
+                            [items]="hasExtraPriceOption"
+                            [clearable]="false"
+                            bindLabel="label"
+                            bindValue="value"
+                            formControlName="hasExtraPrice"
+                            (change)="onHasExtraPriceChange($event, i)"></ng-select>
+                    </div>
+                    <div class="form-group col-12 col-sm-3">
+                        <label for="name" translate>Extra Price</label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            formControlName="extraPrice"
+                            [placeholder]="'Extra Price' | translate">
+                    </div>
+                    <div class="col-1">
+                        <div class="d-flex align-items-end pb-1 h-100">
+                            <button
+                                type="button"
+                                class="btn btn-outline-danger fa fa-minus"
+                                (click)="remove.emit(i)"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </ng-container>
+</ng-container>

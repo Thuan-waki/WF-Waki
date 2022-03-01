@@ -1,0 +1,8 @@
+<button
+    class="btn btn-outline-secondary"
+    [disabled]="disabled"
+    (click)="cancel.emit()"
+    translate>
+    <fa-icon *ngIf="icon" [icon]="icon"></fa-icon>
+    {{ text }}
+</button>

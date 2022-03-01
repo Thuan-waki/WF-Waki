@@ -1,0 +1,8 @@
+<app-coupon-form
+    [form]="form"
+    [schoolOptions]="schoolOptions"
+    [isLoading]="isLoading"
+    [isEditing]="isEditing"
+    [shouldDisableSaveButton]="shouldDisableSaveButton"
+    (save)="save()"
+    (exit)="goToCouponList()">

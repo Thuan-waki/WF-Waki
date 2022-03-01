@@ -1,0 +1,46 @@
+<div class="sidebar-wrapper">
+    <a
+        href="/"
+        class="d-flex justify-content-center">
+        <img
+            src="../../../../../assets/images/logo-vertical.png"
+            width="150px"
+            height="auto">
+    </a>
+    <ul class="nav nav-pills flex-column mb-auto mt-4 {{menuItemClass}}">
+        <ng-container *ngFor="let menu of navMenus">
+            <li
+                *ngIf="menu.type === 'LINK'"
+                class="menu text-secondary {{menuItemClass}} py-2 "
+                [routerLink]="[menu.link]"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                translate>
+                {{ menu.label }}
+            </li>
+            <li
+                *ngIf="menu.type === 'ITEM'"
+                class="menu text-secondary {{menuItemClass}} py-2"
+                translate>
+                {{ menu.label }}
+            </li>
+            <ng-container *ngFor="let sub of menu.sub">
+                <li
+                    *ngIf="sub.type === 'LINK'"
+                    class="sub-menu text-white {{subMenuItemClass}} py-2"
+                    [routerLink]="menu.link + sub.link"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    translate>
+                    {{ sub.label }}
+                </li>
+                <li
+                    *ngIf="sub.type === 'ITEM'"
+                    class="sub-menu text-white  {{subMenuItemClass}} py-2"
+                    translate>
+                    {{ sub.label }}
+                </li>
+            </ng-container>
+        </ng-container>
+    </ul>
+</div>

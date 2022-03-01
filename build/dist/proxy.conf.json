@@ -1,0 +1,8 @@
+{
+    "/api/*": {
+        "target": "https://api.waki.me",
+        "pathRewrite": { "^/api": "" },
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

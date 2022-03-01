@@ -1,0 +1,20 @@
+.full-width,
+.remaining-width {
+    height: 100%;
+}
+
+.full-width {
+    width: 100vw;
+}
+
+.remaining-width {
+    margin-left: 220px;
+    width: calc(100vw - 220px) !important;
+}
+
+.remaining-rtl-width {
+    margin-right: 220px;
+    width: calc(100vw - 220px) !important;
+}
+
+

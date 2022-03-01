@@ -1,0 +1,12 @@
+<app-class-list
+    [grades]="grades"
+    [schoolOptions]="schoolOptions"
+    [isLoading]="isLoading"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [recordCount]="recordCount"
+    [isAdmin]="isAdmin"
+    (addClass)="addClass()"
+    (editClass)="editClass($event)"
+    (filter)="getGrades($event)"
+    (export)="exportToExcel()"></app-class-list>

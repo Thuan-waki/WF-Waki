@@ -1,0 +1,21 @@
+<div class="modal-header" [ngClass]="dialogType === DialogType.Warning ? 'bg-danger' : 'bg-primary'">
+    <h5 class="modal-title" translate>{{ title }}</h5>
+</div>
+<div class="modal-body dialog-body">
+    <p class="overflow-break-word" [innerHTML]="message"></p>
+</div>
+<div class="modal-footer">
+    <button
+        type="button"
+        class="btn btn-light cancel-btn larger-btn"
+        (click)="cancel()" translate>
+        {{ cancelButtonText }}
+    </button>
+    <button
+        type="button"
+        class="btn continue-btn larger-btn"
+		[ngClass]="dialogType === DialogType.Warning ? 'btn-danger' : 'btn-primary'"
+        (click)="continue()" translate>
+        {{ buttonText }}
+    </button>
+</div>

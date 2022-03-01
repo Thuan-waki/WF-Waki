@@ -1,0 +1,114 @@
+<div class="row">
+    <div class="col-12 text-center">
+        <h4 translate>Canteen Menus</h4>
+    </div>
+    <div class="col-12 mt-4">
+        <div class="d-flex justify-content-between gap-3">
+            <div class="flex-grow-1">
+                <form [formGroup]="form">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="input-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    [placeholder]="'searching' | translate"
+                                    formControlName="search">
+                                <button
+                                    class="btn btn-outline-primary"
+                                    type="button"
+                                    (click)="form.get('search')?.setValue(''); form.get('search')?.updateValueAndValidity()"
+                                    translate>
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                        <div
+                            *ngIf="isAdmin"
+                            class="col-auto">
+                            <ng-select
+                                [items]="schoolOptions"
+                                bindLabel="label"
+                                bindValue="value"
+                                class="auto-grow"
+                                [placeholder]="'Select School' | translate"
+                                formControlName="school"
+                                (change)="filterRecord()"></ng-select>
+                        </div>
+                        <div
+                            *ngIf="isAdmin"
+                            class="form-group col-auto">
+                            <ng-select
+                                class="h-100"
+                                [items]="canteenOptions"
+                                [clearable]="false"
+                                bindLabel="label"
+                                bindValue="value"
+                                [placeholder]="'Select Canteen' | translate"
+                                formControlName="canteen"
+                                (change)="filterRecord()"></ng-select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <app-add-button *ngIf="isCanteenUser"
+                [text]="'Add New Menu'"
+                (click)="add.emit()"></app-add-button>
+            <app-export-button (click)="export.emit()"></app-export-button>
+        </div>
+    </div>
+    <ng-container *ngIf="!canteenMenus.length && !isLoading">
+        <h6 class="mt-5" translate>No Food Item Data</h6>
+    </ng-container>
+    <div
+        *ngIf="isLoading"
+        class="spinner-border mt-5"
+        style="width: 3rem; height: 3rem;">
+    </div>
+    <ng-container *ngIf="canteenMenus.length > 0 && !isLoading">
+        <div class="table-section mt-5">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col text-center">#</th>
+                        <th translate class="col">Menu Name</th>
+                        <th translate class="col">Published for WAKI app</th>
+                        <th translate class="col">Published for WAKI Business app</th>
+                        <th translate class="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let canteenMenu of canteenMenus | slice: (currentPage - 1) * pageSize : currentPage * pageSize; let i = index">
+                        <tr>
+                            <td class="col align-middle text-center">{{ i + 1}}</td>
+                            <td class="col align-middle">{{ canteenMenu.translations | translation }}</td>
+                            <td class="col align-middle" translate>
+                                {{ canteenMenu.isPublishedForAdultApp | yesNoBoolean }}
+                            </td>
+                            <td class="col align-middle">
+                                {{ canteenMenu.isPublishedForBusinessApp | yesNoBoolean }}
+                            </td>
+                            <td class="col align-middle">
+                                <div class="d-flex justify-content-around">
+                                    <app-edit-button
+                                        [text]="''"
+                                        (click)="edit.emit(canteenMenu)"></app-edit-button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+            <div class="col-12">
+                <div class="d-flex justify-content-end">
+                    <app-pagination
+                        [currentPage]="currentPage"
+                        [maxPage]="maxPage"
+                        [infoText]="infoText"
+                        [pageOptionsShown]="3"
+                        (goToPage)="goToPage($event)"></app-pagination>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>

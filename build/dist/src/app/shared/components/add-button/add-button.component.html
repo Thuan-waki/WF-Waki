@@ -1,0 +1,8 @@
+<button
+    [ngClass]="customClass.length > 0 ? customClass : 'btn btn-secondary'"
+    [disabled]="disabled"
+    (click)="cancel.emit()"
+    translate>
+    <fa-icon *ngIf="icon" [icon]="icon"></fa-icon>
+    {{ text }}
+</button>

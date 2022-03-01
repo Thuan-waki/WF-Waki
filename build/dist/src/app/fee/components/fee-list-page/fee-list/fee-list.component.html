@@ -1,0 +1,107 @@
+<div class="col-12 text-center">
+    <h4 translate>Fees</h4>
+</div>
+<div class="col-12 mt-4">
+    <div class="d-flex justify-content-between">
+        <div class="flex-grow-1">
+            <form [formGroup]="form">
+                <div class="row mt-3">
+                    <div
+                        *ngIf="isAdmin"
+                        class="form-group col-3">
+                        <ng-select
+                            class="h-100"
+                            [items]="canteenOptions"
+                            [clearable]="true"
+                            bindLabel="label"
+                            bindValue="value"
+                            [placeholder]="'Select Canteen' | translate"
+                            formControlName="canteen"
+                            (change)="filterRecord()"></ng-select>
+                    </div>
+                    <div class="col-auto">
+                        <div class="d-flex flex-row justify-content-between gap-2">
+                            <div class="input-group">
+                                <span class="input-group-text" translate>From:</span>
+                                <input
+                                    type="date"
+                                    class="form-control text-end"
+                                    onkeydown="return false"
+                                    formControlName="fromDate"
+                                    (change)="filterRecord()">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text" translate>To:</span>
+                                <input
+                                    type="date"
+                                    class="form-control text-end"
+                                    onkeydown="return false"
+                                    formControlName="toDate"
+                                    (change)="filterRecord()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-12 mt-3">
+    <ng-container *ngIf="!fees?.length && !isLoading">
+        <h6 class="mt-5" translate>No Fees Data</h6>
+    </ng-container>
+    <div
+        *ngIf="isLoading"
+        class="spinner-border mt-5"
+        style="width: 3rem; height: 3rem;">
+    </div>
+    <ng-container *ngIf="(fees || []).length > 0 && !isLoading">
+        <div class="table-section">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th translate class="col-1">Fee ID</th>
+                        <th translate class="col-1 text-end">Date</th>
+                        <th translate class="col-2">Canteen Name</th>
+                        <th translate class="col">Canteen ID</th>
+                        <th translate class="col-2">Fee Type</th>
+                        <th translate class="col-1 text-end">Fee Price</th>
+                        <th translate class="col-1 text-end">VAT</th>
+                        <th translate class="col-1 text-end">Total</th>
+                        <th translate class="col-2 text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let fee of fees">
+                        <tr>
+                            <td>{{ fee.feeId }}</td>
+                            <td class="text-end">{{ fee.createdAt | wakiDate }}</td>
+                            <td>{{ fee.canteen?.translations | translation }}</td>
+                            <td>{{ fee.canteen?.canteenId }}</td>
+                            <td>{{ fee.trType | transactionType }}</td>
+                            <td class="text-end">
+                                {{ fee.total - fee.vat | wakiCurrency: '' }}
+                            </td>
+                            <td class="text-end">{{ fee.vat | wakiCurrency: '' }}</td>
+                            <td class="text-end">{{ fee.total | wakiCurrency: '' }}</td>
+                            <td class="align-middle col-2 text-center">
+                                <div class="d-flex justify-content-center gap-3">
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-secondary fa fa-envelope fw-lighter"
+                                        (click)="email.emit(fee.invoice?.invoiceNo)">
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-secondary fa fa-download"
+                                        (click)="download.emit(fee.invoice?.invoiceNo)">
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </ng-container>
+</div>

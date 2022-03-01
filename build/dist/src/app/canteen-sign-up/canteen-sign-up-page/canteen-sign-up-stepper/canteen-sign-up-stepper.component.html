@@ -1,0 +1,34 @@
+<div class="container p-0">
+    <div
+        id="stepper1"
+        class="bs-stepper">
+        <div class="bs-stepper-header">
+            <div
+                class="step"
+                [class.active]="currentStep === 1">
+                <label class="step-trigger">
+                    <span class="bs-stepper-circle">1</span>
+                    <span class="bs-stepper-label">User</span>
+                </label>
+            </div>
+            <div class="line"></div>
+            <div
+                class="step"
+                [class.active]="currentStep === 2">
+                <label class="step-trigger">
+                    <span class="bs-stepper-circle">2</span>
+                    <span class="bs-stepper-label">OTP</span>
+                </label>
+            </div>
+            <div class="line"></div>
+            <div
+                class="step"
+                [class.active]="currentStep === 3">
+                <label class="step-trigger">
+                    <span class="bs-stepper-circle">3</span>
+                    <span class="bs-stepper-label">Information</span>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

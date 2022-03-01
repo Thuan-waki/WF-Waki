@@ -1,0 +1,111 @@
+<div class="row">
+    <div class="col-12 text-center">
+        <h4 translate>Schools</h4>
+    </div>
+    <div class="col-12">
+        <div class="d-flex justify-content-between">
+            <div class="flex-grow-1">
+                <form [formGroup]="form">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="d-flex align-items-center h-100">
+                                <label for="search" translate>Filter</label>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="input-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    formControlName="search">
+                                <button
+                                    class="btn btn-outline-primary"
+                                    type="button"
+                                    (click)="form.get('search')?.setValue(''); form.get('search')?.updateValueAndValidity()"
+                                    translate>
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex gap-5">
+                <app-add-button [text]="'Add New School'" (click)="newSchool.emit()"></app-add-button>
+                <app-export-button (click)="export.emit()"></app-export-button>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mt-3">
+        <ng-container *ngIf="!schools.length && !isLoading">
+            <h6 class="mt-5" translate>No School Data</h6>
+        </ng-container>
+        <div
+            *ngIf="isLoading"
+            class="spinner-border mt-5"
+            style="width: 3rem; height: 3rem;">
+        </div>
+        <ng-container *ngIf="schools.length > 0 && !isLoading">
+            <div class="table-section">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th translate class="col-1">No.</th>
+                            <th translate class="col-1">Registration Code</th>
+                            <th translate class="col">School</th>
+                            <th translate class="col-1">Email</th>
+                            <th translate class="col-1">Phone</th>
+                            <th translate class="col-1">Mobile No.</th>
+                            <th translate class="col-1">Attendance Service</th>
+                            <th translate class="col-1">Canteen Service</th>
+                            <th translate class="col-1">City</th>
+                            <th translate class="col-1 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let school of schools; let i = index">
+                            <tr>
+                                <td class="align-middle col-1">{{ (i + 1) + ((currentPage - 1) * pageSize) }}</td>
+                                <td class="align-middle col-2">{{ school.schoolRegistrationCode }}</td>
+                                <td class="align-middle col">{{ school.translations | translation }}</td>
+                                <td class="align-middle col-1">{{ school.email }}</td>
+                                <td class="align-middle col-1">{{ school.phone }}</td>
+                                <td class="align-middle col-1">{{ school.mobileNo }}</td>
+                                <td class="align-middle col-1">
+                                    {{ school.hasAttendanceAccess | yesNoBoolean }}
+                                </td>
+                                <td class="align-middle col-1">
+                                    {{ school.hasCanteenAccess | yesNoBoolean }}
+                                </td>
+                                <td class="align-middle col-1">{{ school.city?.translations | translation }}</td>
+                                <td class="align-middle col-1 text-center">
+                                    <div class="d-flex justify-content-around">
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-secondary fa fa-edit fw-lighter"
+                                            (click)="editSchool.emit(school._id)">
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-danger fa fa-trash fw-lighter">
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <div class="col-12">
+                    <div class="d-flex justify-content-end">
+                        <app-pagination
+                            [currentPage]="currentPage"
+                            [maxPage]="maxPage"
+                            [infoText]="infoText"
+                            [pageOptionsShown]="3"
+                            (goToPage)="goToPage($event)"></app-pagination>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

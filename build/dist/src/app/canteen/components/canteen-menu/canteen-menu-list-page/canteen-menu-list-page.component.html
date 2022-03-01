@@ -1,0 +1,15 @@
+<app-canteen-menu-list
+    [canteenMenus]="canteenMenus"
+    [isLoading]="isLoading"
+    [isAdmin]="isAdmin"
+    [isCanteenUser]="isCanteenUser"
+    [schoolOptions]="schoolOptions"
+    [canteenOptions]="canteenOptions"
+    [recordCount]="recordCount"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [selectedCanteenId]="canteenId"
+    (add)="add()"
+    (edit)="edit($event)"
+    (filter)="getCanteenMenus($event)"
+    (export)="exportToExcel()"></app-canteen-menu-list>

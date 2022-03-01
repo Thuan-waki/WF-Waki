@@ -1,0 +1,41 @@
+<app-login-toolbar></app-login-toolbar>
+<div class="sign-up-container mx-auto d-flex flex-column">
+    <div class="flex-fill">
+        <app-canteen-sign-up-stepper [currentStep]="currentStep"></app-canteen-sign-up-stepper>
+        <div class="sign-up-form-container p-0">
+            <div class="card p-3">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="text-primary text-center mb-3">Canteen User Information</h3>
+                    </div>
+                </div>
+                <ng-container *ngIf="currentStep === 1">
+                    <app-canteen-user-form
+                        [form]="form"
+                        [shouldDisableSignUpButton]="shouldDisableSignUpButton"
+                        [isLoading]="isLoading"
+                        (cancel)="cancel()"
+                        (signUp)="signUp()"></app-canteen-user-form>
+                </ng-container>
+                <ng-container *ngIf="currentStep === 2">
+                    <app-canteen-sign-up-otp-form
+                        [form]="otpForm"
+                        [shouldDisableVerifyButton]="shouldDisableVerifyButton"
+                        [isLoading]="isLoading"
+                        (back)="previousStep()"></app-canteen-sign-up-otp-form>
+                </ng-container>
+                <ng-container *ngIf="currentStep === 3">
+                    <app-canteen-info-form
+                        [form]="canteenForm"
+                        [shouldDisableSubmitButton]="shouldDisableSubmitCanteenButton"
+                        [isLoading]="isLoading"
+                        [schoolOptions]="schools"
+                        [countryOptions]="countries"
+                        [cityOptions]="cities"
+                        (back)="previousStep()"
+                        (submitCanteen)="submitCanteen()"></app-canteen-info-form>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

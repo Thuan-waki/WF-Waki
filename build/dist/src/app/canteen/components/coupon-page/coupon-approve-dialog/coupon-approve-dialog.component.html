@@ -1,0 +1,46 @@
+<div class="modal-header">
+    <h5 translate>Approve Coupon</h5>
+    <button
+        type="button"
+        class="btn btn-danger fa fa-times"
+        (click)="close()"></button>
+</div>
+<div class="card-body p3">
+    <form [formGroup]="form">
+        <div class="form-group col-12">
+            <label for="cardId" translate>WAKI Fee Percentage</label>
+            <div class="input-group">
+                <input
+                    type="number"
+                    class="form-control"
+                    formControlName="fee">
+                <label
+                    class="input-group-text">
+                    %
+                </label>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button
+        type="button"
+        class="btn btn-outline-secondary"
+        (click)="close()">
+        Cancel
+    </button>
+    <button
+        type="button"
+        class="btn btn-primary"
+        (click)="approve()"
+        [disabled]="isLoading || shouldDisableApproveButton">
+        <span
+            *ngIf="!isLoading"
+            class="fa fa-check me-2"></span>
+        <span *ngIf="!isLoading" translate>Approve</span>
+        <span
+            *ngIf="isLoading"
+            class="spinner-grow spinner-grow-sm me-2"></span>
+        <span *ngIf="isLoading" translate>Approving...</span>
+    </button>
+</div>

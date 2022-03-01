@@ -1,0 +1,13 @@
+<h5 class="col-12 text-center" translate>
+    {{ editMode ? 'Modify' : 'Create' }} Canteen Menu
+</h5>
+<app-canteen-menu-form
+    [canteenMenu]="canteenMenu"
+    [isLoading]="isLoading"
+    [editMode]="editMode"
+    [foodItemRecordCount]="foodItemRecordCount"
+    [canteenId]="canteenId"
+    [schoolOptions]="schoolOptions"
+    [errorMessage]="errorMessage"
+    (save)="save($event)"
+    (exit)="goToCanteenMenu()"></app-canteen-menu-form>

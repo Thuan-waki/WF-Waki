@@ -1,0 +1,25 @@
+
+<div class="row mb-3">
+    <h5 class="col-12 col-sm-8 text-center" translate>
+        {{ isEditing ? 'Edit' : 'Create' }} User
+    </h5>
+</div>
+<app-user-form
+    [form]="form"
+    [user]="user"
+    [schools]="schools"
+    [isEditing]="isEditing"
+    [isLoading]="isLoading"
+    [shouldDisableSaveButton]="shouldDisableSaveButton"
+    [userFormMode]="userFormMode"
+    [userRoleBeingEdited]="userRoleBeingEdited"
+    [userPermissionsBeingEdited]="userPermissionsBeingEdited"
+    [readonly]="readonly"
+    [school]="school"
+    [canteen]="canteen"
+    [isLookingForSchool]="isLookingForSchool"
+    [isLookingForCanteen]="isLookingForCanteen"
+    (save)="save($event)"
+    (exit)="goToUserList()"
+    (lookupSchool)="lookupSchool($event)"
+    (lookupCanteen)="lookupCanteen($event)"></app-user-form>

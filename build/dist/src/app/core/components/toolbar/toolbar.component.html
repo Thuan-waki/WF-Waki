@@ -1,0 +1,57 @@
+<div class="toolbar-wrapper pl-2 pr-3" [ngClass]="contentClass">
+    <nav class="navbar navbar-light bg-light w-100">
+        <div class="d-flex w-100 justify-content-between">
+            <button 
+                class="btn btn-outline-primary pt-2 side-bar-toggler-button"
+                type="button"
+                (click)="toggleSidebar.emit()">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="d-flex justify-content-end align-items-center">
+                <div class="dropdown">
+                    <a 
+                        class="btn btn-outline-primary border-0 fa fa-bell">
+                    </a>
+                </div>
+                <div class="dropdown">
+                    <a  
+                        class="btn btn-outline-primary border-0"
+                        role="button"
+                        (click)="onChangedLanguage()">
+                        {{ currentLanguage | languageTxt }}
+                    </a>
+                </div>
+                <div class="dropdown">
+                    <a 
+                        class="btn btn-outline-primary dropdown-toggle border-0" 
+                        href="#" 
+                        role="button"
+                        id="dropdownMenuLink" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false">
+                        <span style="margin-right: 1rem;">{{ username }}</span><i class="fa fa-user"></i>
+                    </a>
+                    <ul 
+                        class="dropdown-menu dropdown-menu-{{dropdownClass}}" 
+                        aria-labelledby="dropdownMenuLink">
+                        <li class="">
+                            <a 
+                                class="dropdown-item" 
+                                routerLink="/users/profile">
+                                {{'Profile' | translate}}
+                            </a>
+                        </li>
+                        <hr />
+                        <li class="">
+                            <a 
+                                class="dropdown-item" 
+                                (click)="logout.emit()">
+                                {{'Logout' | translate}}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

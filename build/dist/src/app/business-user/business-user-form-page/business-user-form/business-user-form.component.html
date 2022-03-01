@@ -1,0 +1,258 @@
+<form
+    *ngIf="form"
+    [formGroup]="form">
+    <div class="col-12 col-sm-8">
+        <div class="row">
+            <form formGroupName="translations">
+                <div class="row">
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="fullName" translate>Name in English</label> *
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="en">
+                    </div>
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="fullName" translate>Name in Arabic</label> *
+                        <input
+                            type="text"
+                            dir="rtl"
+                            class="form-control"
+                            formControlName="ar">
+                    </div>
+                </div>
+            </form>
+            <div class="form-group col-12 col-sm-6">
+                <label for="email" translate>Email</label> *
+                <input
+                    type="email"
+                    class="form-control"
+                    formControlName="email">
+            </div>
+            <div class="form-group col-12 col-sm-6">
+                <label for="mobileNo" translate>Mobile Number</label> *
+                <input
+                    type="text"
+                    class="form-control"
+                    formControlName="mobileNo">
+            </div>
+            <ng-container *ngIf="!isEditing">
+                <div class="form-group col-12 col-sm-6">
+                    <label for="password" translate>Password</label> *
+                    <input
+                        type="password"
+                        class="form-control"
+                        formControlName="password">
+                </div>
+                <div class="form-group col-12 col-sm-6">
+                    <label for="confirmPassword" translate>Confirm Password</label> *
+                    <input
+                        type="password"
+                        class="form-control"
+                        formControlName="confirmPassword">
+                    <small
+                        *ngIf="form.get('confirmPassword')?.errors?.mustMatch"
+                        class="text-danger" translate>
+                        Password Confirmation doesn't match Password
+                    </small>
+                </div>
+            </ng-container>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <label translate>Pick User Type:</label>
+                <!-- School -->
+                <div class="col-4 form-group">
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            id="isSchoolUser"
+                            name="userType"
+                            value="school"
+                            formControlName="userType">
+                        <label
+                            for="isSchoolUser"
+                            class="form-check-label fw-bold"
+                            translate>
+                            School
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="viewSchool"
+                            formControlName="viewSchool">
+                        <label
+                            for="viewSchool"
+                            class="form-check-label"
+                            translate>
+                            View School
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="editSchool"
+                            formControlName="editSchool">
+                        <label
+                            for="editSchool"
+                            class="form-check-label"
+                            translate>
+                            Edit School
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="schoolAppUser"
+                            formControlName="schoolAppUser">
+                        <label
+                            for="schoolAppUser"
+                            class="form-check-label"
+                            translate>
+                            School App User
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="isSuperSchool"
+                            formControlName="isSuperSchool">
+                        <label
+                            for="isSuperSchool"
+                            class="form-check-label"
+                            translate>
+                            School Super User
+                        </label>
+                    </div>
+                </div>
+                <div class="col-2"></div>
+                <!-- Canteen -->
+                <div class="col-4 form-group">
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            id="isCanteenUser"
+                            name="userType"
+                            value="canteen"
+                            formControlName="userType">
+                        <label
+                            for="isCanteenUser"
+                            class="form-check-label fw-bold"
+                            translate>
+                            Canteen
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="viewCanteen"
+                            formControlName="viewCanteen">
+                        <label
+                            for="viewCanteen"
+                            class="form-check-label"
+                            translate>
+                            View Canteen
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="editCanteen"
+                            formControlName="editCanteen">
+                        <label
+                            for="editCanteen"
+                            class="form-check-label"
+                            translate>
+                            Edit Canteen
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="canteenAppUser"
+                            formControlName="canteenAppUser">
+                        <label
+                            for="canteenAppUser"
+                            class="form-check-label"
+                            translate>
+                            Canteen App User
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="isSuperCanteen"
+                            formControlName="isSuperCanteen">
+                        <label
+                            for="isSuperCanteen"
+                            class="form-check-label"
+                            translate>
+                            Canteen Super User
+                        </label>
+                    </div>
+                </div>
+                <!-- School/Canteen Input -->
+                <div class="col-12">
+                    <div
+                        class="input-group w-75 mb-3">
+                        <span class="input-group-text" translate>School Registration Code</span>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="schoolRegistrationCode">
+                        <span
+                            *ngIf="!isLookingForSchool && form.get('schoolId')?.value?.length"
+                            class="input-group-text d-flex fa fa-check bg-success text-white"></span>
+                        <span
+                            *ngIf="!isLookingForSchool && !form.get('schoolId')?.value?.length"
+                            class="input-group-text d-flex fa fa-times bg-danger text-white"></span>
+                        <span
+                            *ngIf="isLookingForSchool"
+                            class="input-group-text d-flex align-items-center h-100 px-2">
+                            <span class="spinner-grow spinner-grow-sm"></span>
+                        </span>
+                    </div>
+                    <div
+                        *ngIf="form?.get('userType')?.value === 'canteen'"
+                        class="input-group w-75">
+                        <span class="input-group-text" translate>Canteen ID:</span>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="canteenRegistrationId">
+                        <span
+                            *ngIf="!isLookingForCanteen && form.get('canteenId')?.value?.length"
+                            class="input-group-text d-flex fa fa-check bg-success text-white"></span>
+                        <span
+                            *ngIf="!isLookingForCanteen && !form.get('canteenId')?.value?.length"
+                            class="input-group-text d-flex fa fa-times bg-danger text-white"></span>
+                        <span
+                            *ngIf="isLookingForCanteen"
+                            class="input-group-text d-flex align-items-center h-100 px-2">
+                            <span class="spinner-grow spinner-grow-sm me-2"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="d-flex justify-content-center gap-5">
+                <app-save-button
+                    (click)="save.emit()"
+                    [disabled]="shouldDisableSaveButton"></app-save-button>
+                <app-exit-button (click)="exit.emit()"></app-exit-button>
+            </div>
+        </div>
+    </div>
+</form>

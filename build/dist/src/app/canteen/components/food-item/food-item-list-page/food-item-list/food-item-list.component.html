@@ -1,0 +1,119 @@
+<div class="row">
+    <div class="col-12 text-center">
+        <h4 translate>Food Items</h4>
+    </div>
+    <div class="col-12">
+        <div class="d-flex justify-content-end gap-2">
+            <div class="flex-grow-1">
+                <form [formGroup]="form">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="input-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    [placeholder]="'searching' | translate"
+                                    formControlName="search">
+                                <button
+                                    class="btn btn-outline-primary"
+                                    type="button"
+                                    (click)="form.get('search')?.setValue(''); form.get('search')?.updateValueAndValidity()"
+                                    translate>
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                        <div *ngIf="isAdmin" class="col-auto">
+                            <ng-select
+                                [items]="schoolOptions"
+                                bindLabel="label"
+                                bindValue="value"
+                                class="auto-grow"
+                                [placeholder]="'Select School' | translate"
+                                formControlName="school"
+                                (change)="filterRecord()"></ng-select>
+                        </div>
+                        <div *ngIf="isAdmin" class="form-group col-auto">
+                            <ng-select
+                                class="h-100"
+                                [items]="canteenOptions"
+                                [clearable]="false"
+                                bindLabel="label"
+                                bindValue="value"
+                                [placeholder]="'Select Canteen' | translate"
+                                formControlName="canteen"
+                                (change)="filterRecord()"></ng-select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <app-add-button
+                [text]="'Add New Food Item'"
+                (click)="addFoodItem()"></app-add-button>
+            <app-export-button (click)="exportToExcel()"></app-export-button>
+        </div>
+    </div>
+    <ng-container *ngIf="!foodItems.length && !isLoading">
+        <h6 class="mt-5" translate>No Food Item Data</h6>
+    </ng-container>
+    <div
+        *ngIf="isLoading"
+        class="spinner-border mt-5"
+        style="width: 3rem; height: 3rem;">
+    </div>
+    <ng-container *ngIf="foodItems.length > 0 && !isLoading">
+        <div class="table-section mt-5">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th translate class="col-1 text-center">#</th>
+                        <th translate class="col-2 text-center">Image</th>
+                        <th translate class="col">Name</th>
+                        <th translate class="col-2 text-end">Qty</th>
+                        <th translate class="col-2 text-end">Price</th>
+                        <th translate class="col-2 text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let foodItem of foodItems | slice: (currentPage - 1) * pageSize : currentPage * pageSize; let i = index">
+                        <tr>
+                            <td class="col-1 align-middle text-center">{{ i + 1}}</td>
+                            <td class="col-2 align-middle">
+                                <div class=" d-flex justify-content-center h-100">
+                                    <img
+                                        *ngIf="foodItem.image"
+                                        width="50"
+                                        height="50"
+                                        [src]="imageServerUrl + foodItem.image">
+                                    <div *ngIf="!foodItem.image">(<span translate>No Image</span>)</div>
+                                </div>
+                            </td>
+                            <td class="col align-middle">{{ foodItem.translations | translation }}</td>
+                            <td class="col-2 align-middle text-end">{{ foodItem.availableQuantity}}</td>
+                            <td class="col-2 align-middle text-end">
+                                {{ foodItem.pricePerItem | wakiCurrency }}
+                            </td>
+                            <td class="col-2 align-middle">
+                                <div class="d-flex justify-content-around">
+                                    <app-edit-button
+                                        [text]="''"
+                                        (click)="edit.emit(foodItem)"></app-edit-button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+            <div class="col-12">
+                <div class="d-flex justify-content-end">
+                    <app-pagination
+                        [currentPage]="currentPage"
+                        [maxPage]="maxPage"
+                        [infoText]="infoText"
+                        [pageOptionsShown]="3"
+                        (goToPage)="goToPage($event)"></app-pagination>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>

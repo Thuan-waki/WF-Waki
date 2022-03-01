@@ -1,0 +1,9 @@
+<app-business-user-list
+    [users]="users"
+    [isLoading]="isLoading"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [recordCount]="recordCount"
+    (newUser)="newUser()"
+    (editUser)="editUser($event)"
+    (filter)="getUsers($event)"></app-business-user-list>

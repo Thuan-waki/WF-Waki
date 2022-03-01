@@ -1,0 +1,15 @@
+.form-check {
+    label {
+        padding-top: 0.4em;
+        margin-left: 0.5em;
+        height: 100%;
+    }
+}
+
+input[type="checkbox"] {
+    -ms-transform: scale(1); /* IE */
+    -moz-transform: scale(1); /* FF */
+    -webkit-transform: scale(1); /* Safari and Chrome */
+    -o-transform: scale(1); /* Opera */
+    padding: 10px;
+}

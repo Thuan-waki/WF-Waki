@@ -1,0 +1,13 @@
+<app-food-item-list
+    [foodItems]="foodItems"
+    [isLoading]="isLoading"
+    [isAdmin]="isAdmin"
+    [schoolOptions]="schoolOptions"
+    [canteenOptions]="canteenOptions"
+    [recordCount]="recordCount"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [selectedCanteenId]="canteenId"
+    (add)="add($event)"
+    (edit)="edit($event)"
+    (filter)="getFoodItems($event)"></app-food-item-list>

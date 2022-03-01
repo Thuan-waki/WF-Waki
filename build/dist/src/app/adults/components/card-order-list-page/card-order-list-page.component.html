@@ -1,0 +1,12 @@
+<app-card-order-list
+    [cardOrders]="cardOrders"
+    [schoolOptions]="schoolOptions"
+    [isLoading]="isLoading"
+    [isAdmin]="isAdmin"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [recordCount]="recordCount"
+    (filter)="getCardOrders($event)"
+    (export)="exportToExcel()"
+    (email)="email($event)"
+    (download)="download($event)"></app-card-order-list>

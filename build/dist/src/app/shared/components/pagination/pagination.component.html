@@ -1,0 +1,60 @@
+<div class="d-flex align-items-center">
+    <div class="text-end flex-grow-1 pe-2">
+        <h6 class="m-0">{{ paginationTxt }}</h6>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination m-0">
+            <li
+                class="page-item"
+                [ngClass]="{ 'disabled': currentPage === 1 }">
+                <a
+                    class="page-link"
+                    (click)="goToPage.emit(1)"
+                    translate>
+                    First
+                </a>
+            </li>
+            <li
+                class="page-item"
+                [ngClass]="{ 'disabled': currentPage === 1 }">
+                <a
+                    class="page-link"
+                    (click)="goToPage.emit(currentPage - 1)"
+                    translate>
+                    Previous
+                </a>
+            </li>
+            <ng-container *ngFor="let page of pagesForPagination">
+                <li
+                    class="page-item"
+                    [ngClass]="{ 'active': page === currentPage }">
+                    <a
+                        class="page-link"
+                        (click)="goToPage.emit(page)">
+                        {{ page }}
+                    </a>
+                </li>
+            </ng-container>
+            <li
+                class="page-item"
+                [ngClass]="{ 'disabled': currentPage >= maxPage }">
+                <a
+                    class="page-link"
+                    (click)="goToPage.emit(currentPage + 1)"
+                    translate>
+                    Next
+                </a>
+            </li>
+            <li
+                class="page-item"
+                [ngClass]="{ 'disabled': currentPage === maxPage }">
+                <a
+                    class="page-link"
+                    (click)="goToPage.emit(maxPage)"
+                    translate>
+                    Last
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

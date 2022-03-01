@@ -1,0 +1,115 @@
+<div class="row">
+    <div class="col-12 text-center">
+        <h4 translate>Adults</h4>
+    </div>
+    <div class="col-12">
+        <div class="d-flex justify-content-between">
+            <div class="flex-grow-1">
+                <form [formGroup]="form">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="d-flex align-items-center h-100">
+                                <label for="search" translate>Filter</label>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="input-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    formControlName="search">
+                                <button
+                                    class="btn btn-outline-primary"
+                                    type="button"
+                                    (click)="form.get('search')?.setValue(''); form.get('search')?.updateValueAndValidity()"
+                                     translate>
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <app-export-button (click)="export.emit()"></app-export-button>
+        </div>
+    </div>
+    <div class="col-12">
+        <ng-container *ngIf="!parents.length && !isLoading">
+            <h6 class="mt-5" translate>No Adults Data</h6>
+        </ng-container>
+        <div
+            *ngIf="isLoading"
+            class="spinner-border mt-5"
+            style="width: 3rem; height: 3rem;">
+        </div>
+        <ng-container *ngIf="parents.length > 0 && !isLoading">
+            <div class="table-section">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th translate class="col-1">National ID</th>
+                            <th translate class="col">Adult Name</th>
+                            <th translate class="col-2">Mobile No.</th>
+                            <th translate class="col-2">Email</th>
+                            <th translate class="col-1">Card UID</th>
+                            <th translate class="col-1">Card Serial No</th>
+                            <th translate class="col-1 text-end">Max Amount</th>
+                            <th translate class="col-1 text-end">Avail. Amount</th>
+                            <th translate class="col-1 text-end"># of Dependents</th>
+                            <th translate class="col-1 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let parent of parents">
+                            <tr>
+                                <td class="align-middle col-1">{{ parent.user?.nationalId || ''}}</td>
+                                <td class="align-middle col">
+                                    {{ parent.user?.translations | translation }}
+                                </td>
+                                <td class="align-middle col-1">{{ parent.user?.mobileNo || ''}}</td>
+                                <td class="align-middle col-1">{{ parent.user?.email }}</td>
+                                <td class="align-middle col-1">{{ parent.user?.cardId }}</td>
+                                <td class="align-middle col-1">{{ parent.user?.cardSerialNo }}</td>
+                                <td class="align-middle col-1 text-end">{{ parent.maxAmount | wakiCurrency }}</td>
+                                <td class="align-middle col-1 text-end">
+                                    {{ parent.availableAmount | wakiCurrency }}
+                                </td>
+                                <td class="align-middle col-1 text-end">{{ parent.noOfChildren }}</td>
+                                <td class="align-middle col-1 text-center">
+                                    <div class="d-flex justify-content-around">
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-secondary fa fa-edit fw-lighter"
+                                            (click)="editParent.emit(parent._id)">
+                                        </button>
+                                        <div
+                                            *ngIf="!parent.user" 
+                                            class="parent-status"></div>
+                                        <button
+                                            type="button"
+                                            *ngIf="parent.user"
+                                            class="btn btn-sm btn-{{ parent.user.isValid ? 'success' : 'danger' }} fw-lighter parent-status"
+                                            (click)="editParentStatus(parent)">
+                                            {{ (parent.user.isValid ? 'Active' : 'Deactivate') | translate }}
+                                        </button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <div class="col-12">
+                    <div class="d-flex justify-content-end">
+                        <app-pagination
+                            [currentPage]="currentPage"
+                            [maxPage]="maxPage"
+                            [infoText]="infoText"
+                            [pageOptionsShown]="3"
+                            (goToPage)="goToPage($event)"></app-pagination>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

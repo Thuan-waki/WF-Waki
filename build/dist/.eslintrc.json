@@ -1,0 +1,72 @@
+{
+    "root": true,
+    "ignorePatterns": [
+        "projects/**/*"
+    ],
+    "overrides": [
+        {
+            "files": [
+                "*.ts"
+            ],
+            "parserOptions": {
+                "project": [
+                    "tsconfig.json"
+                ],
+                "createDefaultProgram": true
+            },
+            "extends": [
+                "plugin:@angular-eslint/recommended",
+                "plugin:@angular-eslint/template/process-inline-templates",
+                "eslint:recommended",
+                "plugin:prettier/recommended"
+            ],
+            "rules": {
+                "@angular-eslint/component-selector": [
+                    "error",
+                    {
+                        "type": "element",
+                        "prefix": "app",
+                        "style": "kebab-case"
+                    }
+                ],
+                "@angular-eslint/directive-selector": [
+                    "error",
+                    {
+                        "type": "attribute",
+                        "prefix": "app",
+                        "style": "camelCase"
+                    }
+                ],
+                "no-unused-vars": "off",
+                "prettier/prettier": [
+                    "warn",
+                    {
+                        "printWidth": 120,
+                        "tabWidth": 4,
+                        "code": 160,
+                        "trailingComma": "none"
+                    }
+                ]
+            },
+            "env": {
+                "browser": true,
+                "node": true
+            }
+        },
+        {
+            "files": [
+                "*.html"
+            ],
+            "extends": [
+                "plugin:@angular-eslint/template/recommended"
+            ],
+            "rules": {
+                "prettier/prettier": "off",
+                "no-console": "off"
+            },
+            "plugins": [
+                "only-warn"
+            ]
+        }
+    ]
+}

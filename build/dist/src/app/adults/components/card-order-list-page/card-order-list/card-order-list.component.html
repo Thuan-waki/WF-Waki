@@ -1,0 +1,166 @@
+<div class="row">
+    <div class="col-12 text-center">
+        <h4 translate>Card Orders</h4>
+    </div>
+    <div class="col-12 mt-4">
+        <div class="d-flex justify-content-between">
+            <div class="flex-grow-1">
+                <form [formGroup]="form">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="d-flex align-items-center h-100">
+                                <label for="search" translate>Filter</label>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="input-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    formControlName="search">
+                                <button
+                                    class="btn btn-outline-primary"
+                                    type="button"
+                                    (click)="form.get('search')?.setValue(''); form.get('search')?.updateValueAndValidity()"
+                                    translate>
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                        <div
+                            *ngIf="isAdmin"
+                            class="col-3">
+                            <div class="form-group">
+                                <ng-select
+                                    [items]="schoolOptions"
+                                    bindLabel="label"
+                                    bindValue="value"
+                                    class="w-100"
+                                    [placeholder]="'Select School' | translate"
+                                    formControlName="school"
+                                    (change)="filterRecord()"></ng-select>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="d-flex flex-row justify-content-between gap-2">
+                                <div class="input-group">
+                                    <span class="input-group-text" translate>From:</span>
+                                    <input
+                                        type="date"
+                                        class="form-control text-end"
+                                        onkeydown="return false"
+                                        formControlName="fromDate"
+                                        (change)="filterRecord()">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text" translate>To:</span>
+                                    <input
+                                        type="date"
+                                        class="form-control text-end"
+                                        onkeydown="return false"
+                                        formControlName="toDate"
+                                        (change)="filterRecord()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <app-export-button (click)="export.emit()"></app-export-button>
+        </div>
+    </div>
+    <div class="col-12 mt-3">
+        <ng-container *ngIf="!cardOrders.length && !isLoading">
+            <h6 class="mt-5" translate>No Card Order Data</h6>
+        </ng-container>
+        <div
+            *ngIf="isLoading"
+            class="spinner-border mt-5"
+            style="width: 3rem; height: 3rem;">
+        </div>
+        <ng-container *ngIf="cardOrders.length > 0 && !isLoading">
+            <div class="table-section">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th translate class="col">Card Order ID</th>
+                            <th translate class="col text-end">Date</th>
+                            <th translate class="col">Theme</th>
+                            <th translate class="col">Card Holder Name</th>
+                            <th translate class="col">Card Holder ID</th>
+                            <th translate class="col">Adult</th>
+                            <th translate class="col">Adult ID</th>
+                            <th translate class="col">School</th>
+                            <th translate class="col text-end">VAT</th>
+                            <th translate class="col text-end">Amount</th>
+                            <th translate class="col text-center">Status</th>
+                            <th translate class="col text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let order of cardOrders">
+                            <tr>
+                                <td class="align-middle col">{{ order.orderId }}</td>
+                                <td class="align-middle col text-end">{{ order.orderDate | wakiDate }}</td>
+                                <td class="align-middle col">{{ order.cardColor || ''}}</td>
+                                <td class="align-middle col">
+                                    {{ order.forUser?.translations | translation }}
+                                </td>
+                                <td class="align-middle col">{{ order.forUser?.nationalId || ''}}</td>
+                                <td class="align-middle col">
+                                    {{ order.orderedByParent?.translations | translation }}
+                                </td>
+                                <td class="align-middle col">
+                                    {{ order.orderedByParent?.nationalId || ''}}
+                                </td>
+                                <td class="align-middle col">
+                                    {{ order.school?.translations | translation }}
+                                </td>
+                                <td class="align-middle col text-end">{{ order.vatAmount | wakiCurrency }}</td>
+                                <td class="align-middle col text-end">{{ order.totalAmount | wakiCurrency }}</td>
+                                <td class="align-middle text-center col">
+                                    <ng-container *ngIf="order.orderStatus === 'DELIVERED'">
+                                        <div class="badge bg-primary" translate>Delivered</div>
+                                    </ng-container>
+                                    <ng-container *ngIf="order.orderStatus === 'PENDING'">
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-secondary"
+                                            (click)="approve(order)"
+                                            translate>
+                                            Approve
+                                        </button>
+                                    </ng-container>
+                                </td>
+                                <td class="align-middle col text-center">
+                                    <div class="d-flex justify-content-center gap-3">
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-secondary fa fa-envelope fw-lighter"
+                                            (click)="email.emit(order.invoice?.invoiceNo)">
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-secondary fa fa-download"
+                                            (click)="download.emit(order.invoice?.invoiceNo)">
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <div class="col-12">
+                    <div class="d-flex justify-content-end">
+                        <app-pagination
+                            [currentPage]="currentPage"
+                            [maxPage]="maxPage"
+                            [infoText]="infoText"
+                            [pageOptionsShown]="3"
+                            (goToPage)="goToPage($event)"></app-pagination>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<app-fee-list
+    [fees]="fees"
+    [isLoading]="isLoading"
+    [selectedCanteenId]="selectedCanteenId"
+    [maxPage]="maxPage"
+    [pageSize]="pageSize"
+    [recordCount]="recordCount"
+    [canteenOptions]="canteenOptions"
+    [isAdmin]="isAdmin"
+    (email)="email($event)"
+    (download)="download($event)"
+    (filter)="getFees($event)"></app-fee-list>

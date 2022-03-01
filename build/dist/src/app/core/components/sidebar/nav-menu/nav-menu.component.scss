@@ -1,0 +1,53 @@
+@import "../../../../../assets/scss/variables";
+
+.sidebar-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow: scroll;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    padding: 1rem;
+    color: white;
+    background-color: $primary;
+    width: 220px;
+    height: 100%;
+    font-size: 16px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .menu,
+    .sub-menu {
+        &:hover {
+            cursor: pointer;
+            color: $dark !important;
+            background-color: rgba(255, 255, 255, 0.23);
+        }
+    }
+
+    .active {
+        background-color: rgba(255, 255, 255, 0.23);
+    }
+
+    .menu {
+        padding-left: 20px;
+    }
+
+    .sub-menu {
+        padding-left: 35px;
+    }
+}
+
+.ml-3 {
+    margin-left: 1rem;
+}
+
+.mr-3 {
+    margin-right: 1rem;
+}
