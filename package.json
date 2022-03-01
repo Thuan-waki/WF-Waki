@@ -4,6 +4,7 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve --proxy-config proxy.conf.json",
+        "start-prod": "ng serve --proxy-config proxy.conf.prod.json",
         "ngcc": "ngcc --properties es2015 browser main module --async false --first-only",
         "build": "ng build",
         "build-prod": "ng build --configuration production",
